@@ -26,11 +26,11 @@
                   aria-controls="collapse<%= item.id %>">
             <div class="d-flex justify-content-between w-100 align-items-center">
               <span><%= item.name %></span>
-
+              <span>quantity:<%= item.quantity %></span>
 <%# i think maybe we can just keep price empty when we first add an item to the list
 rather than automatically choose the lowest price among all products since i don't know how to do%>
               <small class="text-muted me-3">
-                <%= item.price ? "¥#{item.price.price_with_tax}" : "Pending" %>
+                <%= item.price ? "Amount: ¥#{item.price.price_with_tax * item.quantity}" : "Pending" %>
               </small>
             </div>
           </button>
@@ -56,7 +56,13 @@ while the real product name, like '明治　おいしい牛乳' should be moved 
                         <p class="mb-1 text-truncate"><%= price.store.name %></p>
                         <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
 
-                        <%= button_to "Add to list", list_item_path(@list, item, item: { price_id: price.id }), method: :patch, class: "btn btn-sm btn-outline-primary w-100 py-0" %>
+                        <% new_quantity = item.quantity + 1 %>
+                        <%= button_to list_item_path(@list, item, item: { quantity: new_quantity, price_id: price.id }),
+                            method: :patch,
+                            class: "btn btn-sm btn-success w-100 py-0",
+                            style: "font-size: 0.7rem;" do %>
+                          Add to list
+                        <% end %>
 
                       </div>
                     </div>
