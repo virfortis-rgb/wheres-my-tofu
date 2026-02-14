@@ -1,9 +1,11 @@
 <h1>Your Lists</h1>
-<p>These are all your lists!</p>
-<ul>
-  <% @lists.each do |list| %>
-    <li>
-      <%= link_to list.name, list_path(list), class: "btn btn-secondary" %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <p>These are all your lists!</p>
+  <ul>
+    <% @lists.each do |list| %>
+      <li class="mb-2">
+        <%= link_to list.name, list_path(list), class: "btn btn-secondary" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
