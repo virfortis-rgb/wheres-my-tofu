@@ -6,7 +6,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @items = @list.items.includes(price: { product: { prices: :store } })
+    @items = @list.items
     @item = Item.new
   end
 

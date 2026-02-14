@@ -1,8 +1,19 @@
 <div class="container my-4">
+  <div class="text-center my-4">
+    <%= form_with url: attach_list_items_path(@list), scope: :item, method: :post, class: "d-flex justify-content-center" do |f| %>
+      <%= f.select :name,
+          options_for_select(Item.select(:name).distinct.order(:name).pluck(:name)),
+          { prompt: "Select an item..." },
+          { class: "form-select me-2", style: "max-width: 400px; border-radius: 20px;" }
+      %>
+      <%= f.submit "+", class: "btn btn-success text-white", style: "border-radius: 20px; min-width: 60px;" %>
+    <% end %>
+  </div>
+
   <div class="list-header border rounded-3 p-3 mb-4 bg-white shadow-sm">
     <h1 class="h2 mb-0"><%= @list.name %></h1>
   </div>
-
+<%# this accordion thing is from bootstrap %>
   <div class="accordion" id="itemsAccordion">
     <% @items.each_with_index do |item, index| %>
       <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
@@ -15,29 +26,45 @@
                   aria-controls="collapse<%= item.id %>">
             <div class="d-flex justify-content-between w-100 align-items-center">
               <span><%= item.name %></span>
-              <small class="text-muted me-3">¥<%= item.price.price_with_tax %></small>
+
+<%# i think maybe we can just keep price empty when we first add an item to the list
+rather than automatically choose the lowest price among all products since i don't know how to do%>
+              <small class="text-muted me-3">
+                <%= item.price ? "¥#{item.price.price_with_tax}" : "Pending" %>
+              </small>
             </div>
           </button>
         </h2>
 
         <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
-             aria-labelledby="heading<%= item.id %>"
-             data-bs-parent="#itemsAccordion">
+            aria-labelledby="heading<%= item.id %>"
+            data-bs-parent="#itemsAccordion">
           <div class="accordion-body bg-light">
             <div class="d-flex overflow-auto py-2 gap-3">
+<%# If we go this way to access product through item, it has to be extremely strict with product names.
+The 'product name' must match the searchable item name exactly,
+while the real product name, like '明治　おいしい牛乳' should be moved to the description field instead.%>
+              <% matching_products = Product.where(name: item.name) %>
+              <% if matching_products.any? %>
+                <% matching_products.each do |product| %>
+                  <% product.prices.each do |price| %>
 
-              <% item.price.product.prices.each do |price| %>
-                <div class="product-card card shadow-sm" style="min-width: 180px;">
-                  <div class="bg-secondary text-white text-center py-3">IMAGE HERE</div>
-                  <div class="card-body p-2">
-                    <p class="mb-1 fw-bold text-truncate"><%= price.product.name %></p>
-                    <p class="mb-1 fw-bold text-truncate"><%= price.product.description %></p>
-                    <p class="mb-1 fw-bold text-truncate"><%= price.store.name %></p>
-                    <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
-                    <button class="btn btn-sm btn-outline-primary w-100 py-0" style="font-size: 0.7rem;">Add to list</button>
-                  </div>
-                </div>
+                    <div class="product-card card shadow-sm" style="min-width: 180px;">
+                      <div class="bg-secondary text-white text-center py-3">IMAGE</div>
+                      <div class="card-body p-2">
+                        <p class="mb-1 small text-truncate"><%= product.description %></p>
+                        <p class="mb-1 text-truncate"><%= price.store.name %></p>
+                        <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
+
+                        <%= button_to "Add to list", list_item_path(@list, item, item: { price_id: price.id }), method: :patch, class: "btn btn-sm btn-outline-primary w-100 py-0" %>
+
+                      </div>
+                    </div>
+
+                  <% end %>
+                <% end %>
               <% end %>
+
             </div>
           </div>
         </div>
@@ -45,11 +72,7 @@
     <% end %>
   </div>
 
-  <div class="text-center my-4">
-    <button class="btn btn-primary rounded-circle shadow" style="width: 50px; height: 50px;">+</button>
-  </div>
-
   <div class="map-container border rounded-3 overflow-hidden" style="height: 300px;">
-    <div id="map" style="width: 100%; height: 100%;" data-controller="map" data-map-markers-value="<%= @markers.to_json %>"></div>
+    <div class="text-center py-5">MAP HERE</div>
   </div>
 </div>

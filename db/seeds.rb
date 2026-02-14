@@ -29,9 +29,9 @@ life = Store.create!(name: "Life Edogawa", address: "Tokyo, Edogawa-ku, 456 Aven
 
 
 puts "Creating products..."
-tofu = Product.create!(name: "相模屋食料 絹 400g", description: "なめらかな食感の絹とうふです")
-milk = Product.create!(name: "明治 おいしい牛乳 900ml", description: "生乳の風味が分かる専門家が品質をチェックしたこだわりの生乳を使用。")
-eggs = Product.create!(name: "クレスト たこたま 赤玉 10個入", description: "千葉県多古町産のたまごです。")
+tofu = Product.create!(name: "Tofu", description: "相模屋食料 絹 400g")
+milk = Product.create!(name: "Milk", description: "明治 おいしい牛乳 900ml")
+eggs = Product.create!(name: "Eggs", description: "クレスト たこたま 赤玉 10個入")
 
 
 puts "Creating prices..."
@@ -41,11 +41,13 @@ p3 = Price.create!(product: milk, store: aeon, price_without_tax: 198, price_wit
 p4 = Price.create!(product: eggs, store: life, price_without_tax: 250, price_with_tax: 270)
 
 
+
 puts "Creating lists..."
 my_list = List.create!(name: "Weekly Grocery", user: user)
 
-puts "Adding items to list..."
+puts "Adding items..."
 Item.create!(name: "Tofu", quantity: 2, list: my_list, price: p2)
 Item.create!(name: "Milk", quantity: 1, list: my_list, price: p3)
+Item.create!(name: "Eggs", quantity: 1, list: my_list, price: p4)
 
 puts "Finished! Created #{User.count} user, #{Store.count} stores, #{Product.count} products, and #{List.count} list."
