@@ -3,10 +3,9 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
   def attach
-    @item = @list.items.new(name: item_params[:name])
-    @item.quantity = 0
-
-    if @item.save
+    @item = @list.items.new(name: params[:query])
+    @item.quantity = 1
+    if @item.save!
       redirect_to list_path(@list), notice: "Item attached."
     else
       redirect_to list_path(@list), alert: "Could not attach item."
@@ -17,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if @item.update!(item_params)
       redirect_to list_path(@list), notice: 'Item was successfully updated.'
     else
       redirect_to list_path(@list), alert: 'Failed to update item.'
@@ -38,6 +37,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = @list.items.find(params[:id])
   end
+
   def item_params
     params.require(:item).permit(:name, :quantity, :price_id)
   end

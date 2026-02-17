@@ -29,9 +29,9 @@ life = Store.create!(name: "Life Edogawa", address: "Tokyo, Edogawa-ku, 456 Aven
 
 
 puts "Creating products..."
-tofu = Product.create!(name: "Tofu", description: "相模屋食料 絹 400g")
-milk = Product.create!(name: "Milk", description: "明治 おいしい牛乳 900ml")
-eggs = Product.create!(name: "Eggs", description: "クレスト たこたま 赤玉 10個入")
+tofu = Product.create!(name: "tofu", description: "相模屋食料 絹 400g")
+milk = Product.create!(name: "milk", description: "明治 おいしい牛乳 900ml")
+eggs = Product.create!(name: "eggs", description: "クレスト たこたま 赤玉 10個入")
 
 
 puts "Creating prices..."
