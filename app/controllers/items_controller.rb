@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def attach
     @item = @list.items.new(name: item_params[:name])
-    @item.quantity = 1
+    @item.quantity = 0
 
     if @item.save
       redirect_to list_path(@list), notice: "Item attached."
@@ -39,6 +39,6 @@ class ItemsController < ApplicationController
     @item = @list.items.find(params[:id])
   end
   def item_params
-    params.require(:item).permit(:name)
+    params.require(:item).permit(:name, :quantity, :price_id)
   end
 end
