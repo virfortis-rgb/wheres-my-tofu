@@ -1,73 +1,77 @@
 <div class="container my-4">
   <div class="text-center my-4">
-    <%= form_with url: attach_list_items_path(@list), scope: :item, method: :post, class: "d-flex justify-content-center" do |f| %>
-      <%= f.select :name,
+  </div>
+  <div class="list-header border rounded-3 p-3 mb-4 bg-white shadow-sm">
+    <h1 class="h2 mb-3"><%= @list.name %></h1>
+    <div class="product-card card shadow-sm mb-3" style="min-width: 180px;">
+      <div class="card-body p-2">
+        <%= form_with url: attach_list_items_path(@list), scope: :item, method: :post, class: "d-flex justify-content-between" do |f| %>
+          <%= f.select :name,
           options_for_select(Item.select(:name).distinct.order(:name).pluck(:name)),
           { prompt: "Select an item..." },
           { class: "form-select me-2", style: "max-width: 400px; border-radius: 20px;" }
       %>
-      <%= f.submit "+", class: "btn btn-success text-white", style: "border-radius: 20px; min-width: 60px;" %>
-    <% end %>
-  </div>
-  <div class="list-header border rounded-3 p-3 mb-4 bg-white shadow-sm">
-    <h1 class="h2 mb-0"><%= @list.name %></h1>
-  </div>
-  <%# this accordion thing is from bootstrap %>
-  <div class="accordion" id="itemsAccordion">
-    <% @items.each_with_index do |item, index| %>
-      <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
-        <h2 class="accordion-header" id="heading<%= item.id %>">
-          <button class="accordion-button collapsed bg-white text-dark" type="button"
+          <%= f.submit "+", class: "btn btn-success text-white", style: "border-radius: 20px; min-width: 60px;" %>
+        <% end %>
+      </div>
+    </div>
+    <%# this accordion thing is from bootstrap %>
+    <div class="accordion" id="itemsAccordion">
+      <% @items.each_with_index do |item, index| %>
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+          <h2 class="accordion-header" id="heading<%= item.id %>">
+            <button class="accordion-button collapsed bg-white text-dark" type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapse<%= item.id %>"
                   aria-expanded="false"
                   aria-controls="collapse<%= item.id %>">
-            <div class="d-flex justify-content-between w-100 align-items-center">
-              <span><%= item.name %></span>
-              <span>quantity:<%= item.quantity %></span>
-              <%# i think maybe we can just keep price empty when we first add an item to the list
+              <div class="d-flex justify-content-between w-100 align-items-center">
+                <span><%= item.name %></span>
+                <span><%= item.quantity %></span>
+                <%# i think maybe we can just keep price empty when we first add an item to the list
 rather than automatically choose the lowest price among all products since i don't know how to do%>
-                <small class="text-muted me-3">
-                  <%= item.price ? "Amount: ¥#{item.price.price_with_tax * item.quantity}" : "Pending" %>
-                </small>
-              </div>
-            </button>
-          </h2>
-          <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
+                  <small class="text-muted me-3">
+                    <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
+                  </small>
+                </div>
+              </button>
+            </h2>
+            <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
             aria-labelledby="heading<%= item.id %>"
             data-bs-parent="#itemsAccordion">
-            <div class="accordion-body bg-light">
-              <div class="d-flex overflow-auto py-2 gap-3">
-                <%# If we go this way to access product through item, it has to be extremely strict with product names.
+              <div class="accordion-body bg-light">
+                <div class="d-flex overflow-auto py-2 gap-3">
+                  <%# If we go this way to access product through item, it has to be extremely strict with product names.
 The 'product name' must match the searchable item name exactly,
 while the real product name, like '明治　おいしい牛乳' should be moved to the description field instead.%>
-                  <% matching_products = Product.where(name: item.name) %>
-                  <% if matching_products.any? %>
-                    <% matching_products.each do |product| %>
-                      <% product.prices.each do |price| %>
-                        <div class="product-card card shadow-sm" style="min-width: 180px;">
-                          <div class="bg-secondary text-white text-center py-3">IMAGE</div>
-                          <div class="card-body p-2">
-                            <p class="mb-1 small text-truncate"><%= product.description %></p>
-                            <p class="mb-1 text-truncate"><%= price.store.name %></p>
-                            <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
-                            <% new_quantity = item.quantity + 1 %>
-                            <%= button_to list_item_path(@list, item, item: { quantity: new_quantity, price_id: price.id }),
+                    <% matching_products = Product.where(name: item.name) %>
+                    <% if matching_products.any? %>
+                      <% matching_products.each do |product| %>
+                        <% product.prices.each do |price| %>
+                          <div class="product-card card shadow-sm" style="min-width: 180px;">
+                            <div class="bg-secondary text-white text-center py-3">IMAGE</div>
+                            <div class="card-body p-2">
+                              <p class="mb-1 small text-truncate"><%= product.description %></p>
+                              <p class="mb-1 text-truncate"><%= price.store.name %></p>
+                              <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
+                              <% new_quantity = item.quantity + 1 %>
+                              <%= button_to list_item_path(@list, item, item: { quantity: new_quantity, price_id: price.id }),
                             method: :patch,
                             class: "btn btn-sm btn-success w-100 py-0",
                             style: "font-size: 0.7rem;" do %>
-                              Add to list
-                            <% end %>
+                                Add to list
+                              <% end %>
+                            </div>
                           </div>
-                        </div>
+                        <% end %>
                       <% end %>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="map-container border rounded-3 overflow-hidden" style="height: 300px;">
         <div class="text-center py-5">MAP HERE</div>
