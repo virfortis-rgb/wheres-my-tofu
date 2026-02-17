@@ -54,23 +54,23 @@ while the real product name, like '明治　おいしい牛乳' should be moved 
                     <% matching_products = Product.where(name: item.name) %>
                     <% if matching_products.present? %>
                       <% matching_products.each do |product| %>
-                        <div class="product-card card shadow-sm" style="min-width: 180px;">
+                        <div class="product-card card shadow-sm">
                           <div class="bg-secondary text-white text-center py-3">IMAGE</div>
                           <div class="card-body p-2">
-                            <p class="mb-1 small text-truncate"><%= product.description %></p>
+                            <p class="small text-truncate"><%= product.description %></p>
                             <% product.prices.each do |price| %>
-                              <p class="mb-1 text-truncate"><%= price.store.name %></p>
-                              <p class="mb-1 text-danger">¥<%= price.price_with_tax %></p>
-                              <%= button_to list_item_path(@list, item, item: { price_id: price.id }),
+                              <p class="text-truncate"><%= price.store.name %></p>
+                              <p class="text-danger">¥<%= price.price_with_tax %></p>
+                              <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
                             method: :patch,
-                            class: "btn btn-sm btn-success w-100 py-0",
-                            style: "font-size: 0.7rem;" do %>
-                                Add to list
-                              <% end %>
+                            class: "btn btn-sm btn-secondary w-100"
+                            %>
                             <% end %>
                           </div>
                         </div>
                       <% end %>
+                    <% else %>
+                      <span>NO PRODUCTS AVAILABLE</span>
                     <% end %>
                   </div>
                 </div>
