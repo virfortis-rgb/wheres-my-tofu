@@ -51,26 +51,21 @@ rather than automatically choose the lowest price among all products since i don
                   <%# If we go this way to access product through item, it has to be extremely strict with product names.
 The 'product name' must match the searchable item name exactly,
 while the real product name, like '明治　おいしい牛乳' should be moved to the description field instead.%>
-                    <% matching_products = Product.where(name: item.name) %>
-                    <% if matching_products.present? %>
-                      <% matching_products.each do |product| %>
-                        <div class="product-card card shadow-sm">
-                          <div class="bg-secondary text-white text-center py-3">IMAGE</div>
-                          <div class="card-body p-2">
-                            <p class="small text-truncate"><%= product.description %></p>
-                            <% product.prices.each do |price| %>
-                              <p class="text-truncate"><%= price.store.name %></p>
-                              <p class="text-danger">¥<%= price.price_with_tax %></p>
-                              <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
+                    <% item.find_products.each do |product| %>
+                      <div class="product-card card shadow-sm">
+                        <div class="bg-secondary text-white text-center py-3">IMAGE</div>
+                        <div class="card-body p-2">
+                          <p class="small text-truncate"><%= product.description %></p>
+                          <% product.prices.each do |price| %>
+                            <p class="text-truncate"><%= price.store.name %></p>
+                            <p class="text-danger">¥<%= price.price_with_tax %></p>
+                            <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
                             method: :patch,
                             class: "btn btn-sm btn-secondary w-100"
                             %>
-                            <% end %>
-                          </div>
+                          <% end %>
                         </div>
-                      <% end %>
-                    <% else %>
-                      <span>NO PRODUCTS AVAILABLE</span>
+                      </div>
                     <% end %>
                   </div>
                 </div>
