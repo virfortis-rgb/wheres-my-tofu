@@ -45,9 +45,10 @@
             aria-labelledby="heading<%= item.id %>"
             data-bs-parent="#itemsAccordion">
             <div class="accordion-body bg-light">
-              <div class="d-flex overflow-x-scroll py-2 gap-3">
-                <% item.find_products.each do |product| %>
-                  <div class="product-card card shadow-sm w-88">
+              <div class="row d-flex overflow-x-scroll py-2 gap-3">
+                <% products = item.find_products %>
+                <% products.each do |product| %>
+                  <div class="col-2 product-card card shadow-sm w-88">
                     <div class="bg-secondary text-white text-center py-3">IMAGE</div>
                     <div class="card-body p-2">
                       <p class="small text-truncate"><%= product.description %></p>
