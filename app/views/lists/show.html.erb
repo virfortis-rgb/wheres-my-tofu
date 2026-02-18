@@ -35,46 +35,38 @@
               <div class="d-flex justify-content-between w-100 align-items-center">
                 <span><%= item.name.capitalize %></span>
                 <span><%= item.quantity %> TODO </span>
-                <%# i think maybe we can just keep price empty when we first add an item to the list
-rather than automatically choose the lowest price among all products since i don't know how to do%>
-                  <small class="text-muted me-3">
-                    <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
-                  </small>
-                </div>
-              </button>
-            </h2>
-            <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
+                <small class="text-muted me-3">
+                  <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
+                </small>
+              </div>
+            </button>
+          </h2>
+          <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
             aria-labelledby="heading<%= item.id %>"
             data-bs-parent="#itemsAccordion">
-              <div class="accordion-body bg-light">
-                <div class="d-flex overflow-auto py-2 gap-3">
-                  <%# If we go this way to access product through item, it has to be extremely strict with product names.
-The 'product name' must match the searchable item name exactly,
-while the real product name, like '明治　おいしい牛乳' should be moved to the description field instead.%>
-                    <% item.find_products.each do |product| %>
-                      <div class="product-card card shadow-sm">
-                        <div class="bg-secondary text-white text-center py-3">IMAGE</div>
-                        <div class="card-body p-2">
-                          <p class="small text-truncate"><%= product.description %></p>
-                          <% product.prices.each do |price| %>
-                            <p class="text-truncate"><%= price.store.name %></p>
-                            <p class="text-danger">¥<%= price.price_with_tax %></p>
-                            <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
+            <div class="accordion-body bg-light">
+              <div class="d-flex overflow-auto py-2 gap-3">
+                <% item.find_products.each do |product| %>
+                  <div class="product-card card shadow-sm">
+                    <div class="bg-secondary text-white text-center py-3">IMAGE</div>
+                    <div class="card-body p-2">
+                      <p class="small text-truncate"><%= product.description %></p>
+                      <% product.prices.each do |price| %>
+                        <p class="text-truncate"><%= price.store.name %></p>
+                        <p class="text-danger">¥<%= price.price_with_tax %></p>
+                        <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
                             method: :patch,
                             class: "btn btn-sm btn-secondary w-100"
                             %>
-                          <% end %>
-                        </div>
-                      </div>
-                    <% end %>
+                      <% end %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
               </div>
             </div>
-          <% end %>
+          </div>
         </div>
-      </div>
-      <div class="map-container border rounded-3 overflow-hidden" style="height: 300px;">
-        <div class="text-center py-5">MAP HERE</div>
-      </div>
+      <% end %>
     </div>
+  </div>
+</div>
