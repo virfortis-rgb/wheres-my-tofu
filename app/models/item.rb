@@ -7,6 +7,6 @@ class Item < ApplicationRecord
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
 
   def find_products
-    products = Product.where("name ILIKE ?", "%#{keyword}%")
+    Product.where("name ILIKE ?", "%#{keyword}%")
   end
 end
