@@ -1,3 +1,73 @@
-<h1><%= @list.name %></h1>
-<p>Created at: <%= @list.created_at %></p>
-<p>Updated at: <%= @list.updated_at %></p>
+<div class="container my-4">
+  <div class="text-center my-4">
+  </div>
+  <div class="list-header border rounded-3 p-3 mb-4 bg-white shadow-sm">
+    <h1 class="h2 mb-3"><%= @list.name %></h1>
+    <div class="product-card card shadow-sm mb-3" style="min-width: 180px;">
+      <div class="card-body p-2">
+        <%= form_with url: attach_list_items_path(@list),
+                      scope: :item,
+                      method: :post,
+                      class: "d-flex justify-content-between" do %>
+          <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
+          <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Add an item"
+            %>
+          <%= submit_tag "+",
+              name: "",
+              class: "btn btn-secondary"
+          %>
+        <% end %>
+      </div>
+    </div>
+    <%# this accordion thing is from bootstrap %>
+    <div class="accordion" id="itemsAccordion">
+      <% @items.each do |item| %>
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+          <h2 class="accordion-header" id="heading<%= item.id %>">
+            <button class="accordion-button collapsed bg-white text-dark" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse<%= item.id %>"
+                  aria-expanded="false"
+                  aria-controls="collapse<%= item.id %>">
+              <div class="d-flex justify-content-between w-100 align-items-center">
+                <span><%= item.name.capitalize %></span>
+                <span><%= item.quantity %> TODO </span>
+                <small class="text-muted me-3">
+                  <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
+                </small>
+              </div>
+            </button>
+          </h2>
+          <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
+            aria-labelledby="heading<%= item.id %>"
+            data-bs-parent="#itemsAccordion">
+            <div class="accordion-body bg-light">
+              <div class="row d-flex overflow-x-scroll py-2 gap-3">
+                <% products = item.find_products %>
+                <% products.each do |product| %>
+                  <div class="col-2 product-card card shadow-sm w-88">
+                    <div class="bg-secondary text-white text-center py-3">IMAGE</div>
+                    <div class="card-body p-2">
+                      <p class="small text-truncate"><%= product.description %></p>
+                      <% product.prices.each do |price| %>
+                        <p class="text-truncate"><%= price.store.name %></p>
+                        <p class="text-danger">¥<%= price.price_with_tax %></p>
+                        <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
+                            method: :patch,
+                            class: "btn btn-sm btn-secondary w-100"
+                            %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

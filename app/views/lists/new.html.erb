@@ -1,2 +1,22 @@
-<h1>Lists#new</h1>
-<p>Find me in app/views/lists/new.html.erb</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4" style="border-radius: 15px;">
+        <h2 class="mb-4">Add a List</h2> <%= form_with model: @list, local: true do |f| %>
+
+          <div class="mb-3">
+            <%= f.label :name, "List Name", class: "form-label" %>
+            <%= f.text_field :name,
+                class: "form-control",
+                placeholder: "e.g. Weekly Groceries",
+                style: "border-radius: 10px;" %>
+          </div>
+          <div class="d-grid gap-2">
+            <%= f.submit "Save List", class: "btn btn-primary shadow-sm" %>
+            <%= link_to "Cancel", lists_path, class: "btn btn-light" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
