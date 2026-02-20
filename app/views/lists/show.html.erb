@@ -1,2 +1,113 @@
-<h1>Lists#show</h1>
-<p>Find me in app/views/lists/show.html.erb</p>
+<div class="show-list-page">
+
+  <%# ── HEADER ── %>
+  <div class="show-list-header px-4 pt-4 pb-3">
+    <%= link_to lists_path, class: "back-link" do %>
+      <i class="fa-solid fa-chevron-left me-1"></i>Back
+    <% end %>
+    <h1 class="show-list-title mt-3">🛒 <%= @list.name %></h1>
+  </div>
+
+  <%# ── ADD ITEM FORM ── %>
+  <div class="px-4 mb-3">
+    <%= form_with url: attach_list_items_path(@list),
+                  scope: :item,
+                  method: :post,
+                  class: "add-item-form" do %>
+      <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
+      <%= text_field_tag :query,
+          params[:query],
+          class: "add-item-input",
+          placeholder: "Add an item…" %>
+      <%= submit_tag "+",
+          name: "",
+          class: "add-item-btn" %>
+    <% end %>
+  </div>
+
+  <%# ── ITEMS ── %>
+  <div class="lists-body px-4 pb-5">
+    <% if @items.any? %>
+      <div class="accordion" id="itemsAccordion">
+        <% @items.each do |item| %>
+          <div class="list-card flex-column p-0 overflow-hidden">
+
+            <%# Row %>
+            <div class="show-item-row">
+
+              <%# Clickable area toggles accordion %>
+              <button class="show-item-btn collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse<%= item.id %>"
+                      aria-expanded="false"
+                      aria-controls="collapse<%= item.id %>">
+                <%# Left: name %>
+                <div class="item-col-left">
+                  <span class="item-label"><%= item.name.capitalize %></span>
+                </div>
+
+                <%# Centre: quantity %>
+                <div class="item-col-mid">
+                  <span class="item-label">× <%= item.quantity %></span>
+                </div>
+
+                <%# Price %>
+                <div class="item-col-price">
+                  <span class="item-price-label">
+                    <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
+                  </span>
+                  <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
+                </div>
+              </button>
+
+              <%# Delete — outside the button so it fires correctly %>
+              <%= button_to list_item_path(@list, item),
+                  method: :delete,
+                  class: "btn-delete item-delete",
+                  form: { data: { turbo_confirm: "Remove this item?" } } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+
+            </div>
+
+            <%# Accordion body — product price cards %>
+            <div id="collapse<%= item.id %>"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#itemsAccordion">
+              <div class="show-accordion-body">
+                <% products = item.find_products %>
+                <% if products.any? %>
+                  <div class="product-scroll">
+                    <% products.each do |product| %>
+                      <% product.prices.each do |price| %>
+                        <div class="product-price-card">
+                          <div class="product-image-placeholder">🏪</div>
+                          <p class="product-store"><%= price.store.name %></p>
+                          <p class="product-desc"><%= product.description %></p>
+                          <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+                          <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
+                              method: :patch,
+                              class: "btn-select-price" %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <p class="no-products-msg">No matching products found.</p>
+                <% end %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="lists-empty text-center py-5">
+        <div class="empty-icon">🥡</div>
+        <p class="mt-3 text-muted">No items yet.<br>Add your first one above!</p>
+      </div>
+    <% end %>
+  </div>
+
+</div>

@@ -1,2 +1,85 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# Landing page %>
+<div class="landing-page">
+
+  <%# ── HERO ── %>
+  <section class="hero-section d-flex flex-column align-items-center justify-content-center text-center px-4">
+
+    <%# Floating grocery background items %>
+    <div class="floating-groceries" aria-hidden="true">
+      <span class="grocery g1">🥬</span>
+      <span class="grocery g2">🥕</span>
+      <span class="grocery g3">🍎</span>
+      <span class="grocery g4">🧅</span>
+      <span class="grocery g5">🥦</span>
+      <span class="grocery g6">🍋</span>
+      <span class="grocery g7">🍅</span>
+      <span class="grocery g8">🥑</span>
+      <span class="grocery g9">🧀</span>
+      <span class="grocery g10">🛒</span>
+      <span class="grocery g11">🍇</span>
+      <span class="grocery g12">🥚</span>
+    </div>
+
+    <%# Hero content %>
+    <div class="hero-content">
+      <div class="hero-icon mb-3">🥬</div>
+      <h1 class="hero-title">Where's My Tofu?</h1>
+      <p class="hero-subtitle">Your smart grocery companion.<br>Build lists, compare prices, shop smarter.</p>
+      <div class="d-flex flex-column gap-3 w-100 hero-cta mt-4">
+        <% if user_signed_in? %>
+          <%= link_to "Go to My Lists", lists_index_path, class: "btn btn-success btn-lg fw-bold" %>
+        <% else %>
+          <%= link_to "Get Started — it's free", new_user_registration_path, class: "btn btn-success btn-lg fw-bold" %>
+          <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-success btn-lg" %>
+        <% end %>
+      </div>
+    </div>
+
+  </section>
+
+  <%# ── FEATURES ── %>
+  <section class="features-section px-4 py-5">
+    <h2 class="text-center fw-bold mb-4 features-heading">Everything you need at the store</h2>
+
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div>
+        <h5 class="fw-bold mb-1">Create Shopping Lists</h5>
+        <p class="text-muted mb-0">Organize your groceries into lists for any occasion — weekly shop, party prep, or a quick run.</p>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💴</div>
+      <div>
+        <h5 class="fw-bold mb-1">Compare Prices</h5>
+        <p class="text-muted mb-0">See prices across nearby stores so you always know where to get the best deal.</p>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div>
+        <h5 class="fw-bold mb-1">Never Forget a Thing</h5>
+        <p class="text-muted mb-0">Add items on the go, manage quantities, and keep your list synced wherever you are.</p>
+      </div>
+    </div>
+  </section>
+
+  <%# ── CTA BANNER ── %>
+  <section class="cta-banner text-center px-4 py-5">
+    <h2 class="fw-bold mb-2">Ready to shop smarter?</h2>
+    <p class="mb-4 text-muted">Join and start building your first list in seconds.</p>
+    <% if user_signed_in? %>
+      <%= link_to "Go to My Lists", lists_index_path, class: "btn btn-primary btn-lg px-5" %>
+    <% else %>
+      <%= link_to "Create a Free Account", new_user_registration_path, class: "btn btn-primary btn-lg px-5" %>
+    <% end %>
+  </section>
+
+  <%# ── FOOTER ── %>
+  <footer class="landing-footer text-center px-4 py-3">
+    <small class="text-muted">© <%= Time.current.year %> Where's My Tofu · Made with ❤️</small>
+  </footer>
+
+</div>

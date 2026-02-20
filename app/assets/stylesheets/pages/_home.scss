@@ -1,1 +1,156 @@
-// Specific CSS for your home-page
+// Landing page styles
+
+.landing-page {
+  background: white;
+}
+
+// ── HERO ──────────────────────────────────────────
+.hero-section {
+  position: relative;
+  min-height: 100svh;
+  background: white;
+  overflow: hidden;
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+
+// Floating groceries background
+.floating-groceries {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grocery {
+  position: absolute;
+  font-size: 3.5rem;
+  opacity: 0.65;
+  animation: floatUp linear infinite;
+  user-select: none;
+
+  // Each item gets a unique start position, size, speed, and delay
+  &.g1  { left:  8%;  font-size: 4.5rem; animation-duration: 12s; animation-delay:  0s;   bottom: -80px; }
+  &.g2  { left: 20%;  font-size: 3.2rem; animation-duration:  9s; animation-delay: -3s;   bottom: -80px; }
+  &.g3  { left: 33%;  font-size: 4rem;   animation-duration: 14s; animation-delay: -6s;   bottom: -80px; }
+  &.g4  { left: 47%;  font-size: 3.5rem; animation-duration: 11s; animation-delay: -1s;   bottom: -80px; }
+  &.g5  { left: 60%;  font-size: 4.2rem; animation-duration: 13s; animation-delay: -8s;   bottom: -80px; }
+  &.g6  { left: 73%;  font-size: 3rem;   animation-duration:  8s; animation-delay: -4s;   bottom: -80px; }
+  &.g7  { left: 85%;  font-size: 3.8rem; animation-duration: 10s; animation-delay: -2s;   bottom: -80px; }
+  &.g8  { left: 14%;  font-size: 3.4rem; animation-duration: 15s; animation-delay: -9s;   bottom: -80px; }
+  &.g9  { left: 40%;  font-size: 4rem;   animation-duration: 11s; animation-delay: -5s;   bottom: -80px; }
+  &.g10 { left: 55%;  font-size: 3.6rem; animation-duration: 16s; animation-delay: -7s;   bottom: -80px; }
+  &.g11 { left: 78%;  font-size: 3.8rem; animation-duration: 10s; animation-delay: -11s;  bottom: -80px; }
+  &.g12 { left: 92%;  font-size: 3.2rem; animation-duration: 13s; animation-delay: -3.5s; bottom: -80px; }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.65;
+  }
+  90% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+// Hero content sits above the floating layer
+.hero-content {
+  position: relative;
+  z-index: 1;
+
+  .hero-icon {
+    font-size: 4rem;
+  }
+
+  .hero-title {
+    font-family: $headers-font;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: $gray;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+// ── FEATURES ──────────────────────────────────────
+.features-section {
+  max-width: 480px;
+  margin: 0 auto;
+  background: white;
+
+  .features-heading {
+    font-family: $headers-font;
+    font-size: 1.4rem;
+    color: $gray;
+  }
+}
+
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #daf9eb;
+  box-shadow: 0 5px 10px rgba(26, 192, 117, 0.08);
+
+  .feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  h5 {
+    font-family: $headers-font;
+    font-size: 1rem;
+    color: $gray;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+// ── CTA BANNER ────────────────────────────────────
+.cta-banner {
+  background: #f0fdf7;
+  border-top: 1px solid #d1fae5;
+  border-bottom: 1px solid #d1fae5;
+
+  h2 {
+    font-family: $headers-font;
+    font-size: 1.5rem;
+    color: $gray;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+// ── FOOTER ────────────────────────────────────────
+.landing-footer {
+  background: white;
+  border-top: 1px solid #f0f0f0;
+}
