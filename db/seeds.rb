@@ -358,6 +358,58 @@ prices = [
       "latitude": 34.6219,
       "longitude": 135.4923
     }
+  },
+  {
+    "product": {
+      "name": "S&B フレッシュハーブ スペアミント 1パック",
+      "description": "S&B フレッシュハーブ スペアミント 1パック",
+      "keyword": "mint"
+    },
+    "store": {
+      "name": "ライフ 玉出東店",
+      "address": "大阪府大阪市西成区玉出東1丁目7-31",
+      "latitude": 34.6219,
+      "longitude": 135.4923
+    }
+  },
+  {
+    "product": {
+      "name": "和歌山県産 ペパーミント 1袋",
+      "description": "和歌山県産 ペパーミント 1袋",
+      "keyword": "mint"
+    },
+    "store": {
+      "name": "イズミヤ 花園店",
+      "address": "大阪府大阪市西成区花園北1丁目2-12",
+      "latitude": 34.6421,
+      "longitude": 135.4965
+    }
+  },
+  {
+    "product": {
+      "name": "国産 牛豚合挽き肉 (解凍) 300g",
+      "description": "国産 牛豚合挽き肉 (解凍) 300g",
+      "keyword": "mince"
+    },
+    "store": {
+      "name": "スーパー玉出 天下茶屋店",
+      "address": "大阪府大阪市西成区天下茶屋3丁目2-18",
+      "latitude": 34.636,
+      "longitude": 135.4948
+    }
+  },
+  {
+    "product": {
+      "name": "宮崎県産 鶏ももひき肉 200g",
+      "description": "宮崎県産 鶏ももひき肉 200g",
+      "keyword": "mince"
+    },
+    "store": {
+      "name": "ライフ 玉出東店",
+      "address": "大阪府大阪市西成区玉出東1丁目7-31",
+      "latitude": 34.6219,
+      "longitude": 135.4923
+    }
   }
 ]
 
