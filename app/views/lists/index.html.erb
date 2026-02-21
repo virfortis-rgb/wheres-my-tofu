@@ -1,27 +1,45 @@
-<div class="container">
-  <h1>My Lists</h1>
-  <%= link_to "Create a new list", new_list_path, class: "btn btn-secondary shadow-sm mb-3" %>
-  <div class="row m-3">
-    <div class="col-md-8"> <% @lists.each do |list| %>
-        <div class="card shadow-sm mb-3" style="border-radius: 12px; border: 1px solid #eee;">
-          <div class="card-body d-flex justify-content-between align-items-center">
+<div class="lists-page">
+
+  <%# ── HEADER ── %>
+  <div class="lists-header px-4 pt-4 pb-3">
+    <h1 class="lists-title">My Lists</h1>
+    <p class="lists-subtitle">Your grocery lists, all in one place.</p>
+    <%= link_to new_list_path, class: "btn btn-success btn-new-list w-100 mt-2" do %>
+      <i class="fa-solid fa-plus me-2"></i>Create a New List
+    <% end %>
+  </div>
+
+  <%# ── LIST CARDS ── %>
+  <div class="lists-body px-4 py-3">
+    <% if @lists.any? %>
+      <% @lists.each do |list| %>
+        <div class="list-card">
+          <div class="list-card-left">
+            <div class="list-emoji">🛒</div>
             <div>
-              <h5 class="mb-1">
-                <%= link_to list.name, list_path(list), class: "text-decoration-none fw-bold text-dark" %>
-              </h5>
-              <small class="text-muted">
-                Created at: <%= list.created_at%>
-              </small>
+              <%= link_to list.name, list_path(list), class: "list-name" %>
+              <div class="list-meta">
+                <i class="fa-regular fa-clock me-1"></i>
+                <%= list.created_at.strftime("%b %d, %Y") %>
+              </div>
             </div>
-            <div>
-              <%= button_to "Delete", list_path(list),
-                method: :delete,
-                class: "btn btn-sm btn-outline-danger",
-                style: "border-radius: 8px;" %>
-            </div>
+          </div>
+          <div class="list-card-right">
+            <%= link_to list_path(list), class: "btn-go" do %>
+              <i class="fa-solid fa-chevron-right"></i>
+            <% end %>
+            <%= button_to list_path(list), method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Delete this list?" } } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
           </div>
         </div>
       <% end %>
-    </div>
+    <% else %>
+      <div class="lists-empty text-center py-5">
+        <div class="empty-icon">🛒</div>
+        <p class="mt-3 text-muted">No lists yet.<br>Create your first one above!</p>
+      </div>
+    <% end %>
   </div>
+
 </div>

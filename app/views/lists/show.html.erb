@@ -1,73 +1,113 @@
-<div class="container my-4">
-  <div class="text-center my-4">
+<div class="show-list-page">
+
+  <%# ── HEADER ── %>
+  <div class="show-list-header px-4 pt-4 pb-3">
+    <%= link_to lists_path, class: "back-link" do %>
+      <i class="fa-solid fa-chevron-left me-1"></i>Back
+    <% end %>
+    <h1 class="show-list-title mt-3">🛒 <%= @list.name %></h1>
   </div>
-  <div class="list-header border rounded-3 p-3 mb-4 bg-white shadow-sm">
-    <h1 class="h2 mb-3"><%= @list.name %></h1>
-    <div class="product-card card shadow-sm mb-3" style="min-width: 180px;">
-      <div class="card-body p-2">
-        <%= form_with url: attach_list_items_path(@list),
-                      scope: :item,
-                      method: :post,
-                      class: "d-flex justify-content-between" do %>
-          <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
-          <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: "Add an item"
-            %>
-          <%= submit_tag "+",
-              name: "",
-              class: "btn btn-secondary"
-          %>
-        <% end %>
-      </div>
-    </div>
-    <%# this accordion thing is from bootstrap %>
-    <div class="accordion" id="itemsAccordion">
-      <% @items.each do |item| %>
-        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
-          <h2 class="accordion-header" id="heading<%= item.id %>">
-            <button class="accordion-button collapsed bg-white text-dark" type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse<%= item.id %>"
-                  aria-expanded="false"
-                  aria-controls="collapse<%= item.id %>">
-              <div class="d-flex justify-content-between w-100 align-items-center">
-                <span><%= item.name.capitalize %></span>
-                <span><%= item.quantity %> TODO </span>
-                <small class="text-muted me-3">
-                  <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
-                </small>
-              </div>
-            </button>
-          </h2>
-          <div id="collapse<%= item.id %>" class="accordion-collapse collapse"
-            aria-labelledby="heading<%= item.id %>"
-            data-bs-parent="#itemsAccordion">
-            <div class="accordion-body bg-light">
-              <div class="row d-flex overflow-x-scroll py-2 gap-3">
+
+  <%# ── ADD ITEM FORM ── %>
+  <div class="px-4 mb-3">
+    <%= form_with url: attach_list_items_path(@list),
+                  scope: :item,
+                  method: :post,
+                  class: "add-item-form" do %>
+      <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
+      <%= text_field_tag :query,
+          params[:query],
+          class: "add-item-input",
+          placeholder: "Add an item…" %>
+      <%= submit_tag "+",
+          name: "",
+          class: "add-item-btn" %>
+    <% end %>
+  </div>
+
+  <%# ── ITEMS ── %>
+  <div class="lists-body px-4 pb-5">
+    <% if @items.any? %>
+      <div class="accordion" id="itemsAccordion">
+        <% @items.each do |item| %>
+          <div class="list-card flex-column p-0 overflow-hidden">
+
+            <%# Row %>
+            <div class="show-item-row">
+
+              <%# Clickable area toggles accordion %>
+              <button class="show-item-btn collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse<%= item.id %>"
+                      aria-expanded="false"
+                      aria-controls="collapse<%= item.id %>">
+                <%# Left: name %>
+                <div class="item-col-left">
+                  <span class="item-label"><%= item.name.capitalize %></span>
+                </div>
+
+                <%# Centre: quantity %>
+                <div class="item-col-mid">
+                  <span class="item-label">× <%= item.quantity %></span>
+                </div>
+
+                <%# Price %>
+                <div class="item-col-price">
+                  <span class="item-price-label">
+                    <%= item.price ? "¥#{item.price.price_with_tax * item.quantity}" : "¥ --" %>
+                  </span>
+                  <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
+                </div>
+              </button>
+
+              <%# Delete — outside the button so it fires correctly %>
+              <%= button_to list_item_path(@list, item),
+                  method: :delete,
+                  class: "btn-delete item-delete",
+                  form: { data: { turbo_confirm: "Remove this item?" } } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+
+            </div>
+
+            <%# Accordion body — product price cards %>
+            <div id="collapse<%= item.id %>"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#itemsAccordion">
+              <div class="show-accordion-body">
                 <% products = item.find_products %>
-                <% products.each do |product| %>
-                  <div class="col-2 product-card card shadow-sm w-88">
-                    <div class="bg-secondary text-white text-center py-3">IMAGE</div>
-                    <div class="card-body p-2">
-                      <p class="small text-truncate"><%= product.description %></p>
+                <% if products.any? %>
+                  <div class="product-scroll">
+                    <% products.each do |product| %>
                       <% product.prices.each do |price| %>
-                        <p class="text-truncate"><%= price.store.name %></p>
-                        <p class="text-danger">¥<%= price.price_with_tax %></p>
-                        <%= button_to "Add to List", list_item_path(@list, item, item: { price_id: price.id }),
-                            method: :patch,
-                            class: "btn btn-sm btn-secondary w-100"
-                            %>
+                        <div class="product-price-card">
+                          <div class="product-image-placeholder">🏪</div>
+                          <p class="product-store"><%= price.store.name %></p>
+                          <p class="product-desc"><%= product.description %></p>
+                          <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+                          <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
+                              method: :patch,
+                              class: "btn-select-price" %>
+                        </div>
                       <% end %>
-                    </div>
+                    <% end %>
                   </div>
+                <% else %>
+                  <p class="no-products-msg">No matching products found.</p>
                 <% end %>
               </div>
             </div>
+
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="lists-empty text-center py-5">
+        <div class="empty-icon">🥡</div>
+        <p class="mt-3 text-muted">No items yet.<br>Add your first one above!</p>
+      </div>
+    <% end %>
   </div>
+
 </div>
