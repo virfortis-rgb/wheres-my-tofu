@@ -22,6 +22,25 @@
           class: "add-item-btn" %>
     <% end %>
   </div>
+  <%# ── MAP ── %>
+  <% if @stores.present? && @items.present? %>
+    <div class="px-4 mb-3">
+      <div id="map"
+           style="height: 300px; border-radius: 12px;"
+           data-controller="map"
+           data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
+           data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>">
+      </div>
+    </div>
+    <% else %>
+    <div class="px-4 mb-3">
+      <div id="map"
+           style="height: 300px; border-radius: 12px;"
+           data-controller="map"
+           data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>">
+        </div>>
+    </div>
+  <% end %>
   <%# ── ITEMS ── %>
   <div class="lists-body px-4 pb-5">
     <% if @items.any? %>

@@ -13,10 +13,10 @@ prices = [
     keyword: "milk"
    },
   store: {
-    name: "Ito Yokado Kameari",
-    address: "Tokyo, Katsushika-ku, 456 Street",
-    latitude: 35.77,
-    longitude: 139.85
+    name: "Ito Yokado Shinjuku",
+    address: "1-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6905,
+    longitude: 139.6992
    }
   },
 
@@ -26,10 +26,10 @@ prices = [
     keyword: "butter"
    },
   store: {
-    name: "Seiyu Shinjuku",
-    address: "Tokyo, Shinjuku-ku, 789 Street",
-    latitude: 35.69,
-    longitude: 139.70
+    name: "Seiyu Shinjuku South",
+    address: "2-3 Yoyogi, Shibuya-ku, Tokyo",
+    latitude: 35.6882,
+    longitude: 139.7005
    }
   },
 
@@ -39,10 +39,10 @@ prices = [
     keyword: "rice"
    },
   store: {
-    name: "Life Setagaya",
-    address: "Tokyo, Setagaya-ku, 321 Street",
-    latitude: 35.65,
-    longitude: 139.65
+    name: "Life Shinjuku East",
+    address: "3-5 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6893,
+    longitude: 139.7038
    }
   },
 
@@ -52,10 +52,10 @@ prices = [
     keyword: "soy sauce"
    },
   store: {
-    name: "Maruetsu Nakano",
-    address: "Tokyo, Nakano-ku, 654 Street",
-    latitude: 35.71,
-    longitude: 139.66
+    name: "Maruetsu Shinjuku",
+    address: "1-8 Kabukicho, Shinjuku-ku, Tokyo",
+    latitude: 35.6925,
+    longitude: 139.7018
    }
   },
 
@@ -65,10 +65,10 @@ prices = [
     keyword: "dashi"
    },
   store: {
-    name: "OK Store Machida",
-    address: "Tokyo, Machida, 987 Street",
-    latitude: 35.54,
-    longitude: 139.45
+    name: "OK Store Shinjuku",
+    address: "4-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6912,
+    longitude: 139.6975
    }
   },
 
@@ -78,10 +78,10 @@ prices = [
     keyword: "yogurt"
    },
   store: {
-    name: "Summit Shinagawa",
-    address: "Tokyo, Shinagawa-ku, 159 Street",
-    latitude: 35.62,
-    longitude: 139.73
+    name: "Summit Takashimaya Times Square",
+    address: "5-24 Sendagaya, Shibuya-ku, Tokyo",
+    latitude: 35.6877,
+    longitude: 139.7025
    }
   },
 
@@ -91,10 +91,10 @@ prices = [
     keyword: "sausage"
    },
   store: {
-    name: "Inageya Mitaka",
-    address: "Tokyo, Mitaka, 753 Street",
-    latitude: 35.68,
-    longitude: 139.56
+    name: "Inageya Shinjuku West",
+    address: "2-6 Nishi-Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6918,
+    longitude: 139.6963
    }
   },
 
@@ -104,10 +104,10 @@ prices = [
     keyword: "bread"
    },
   store: {
-    name: "York Foods Kiba",
-    address: "Tokyo, Koto-ku, 852 Street",
-    latitude: 35.67,
-    longitude: 139.80
+    name: "York Foods Shinjuku",
+    address: "2-10 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6900,
+    longitude: 139.7050
    }
   },
 
@@ -117,10 +117,10 @@ prices = [
     keyword: "chips"
    },
   store: {
-    name: "Don Quijote Akihabara",
-    address: "Tokyo, Chiyoda-ku, 951 Street",
-    latitude: 35.70,
-    longitude: 139.77
+    name: "Don Quijote Shinjuku",
+    address: "1-16 Kabukicho, Shinjuku-ku, Tokyo",
+    latitude: 35.6932,
+    longitude: 139.7007
    }
   },
 
@@ -130,10 +130,10 @@ prices = [
     keyword: "tea"
    },
   store: {
-    name: "My Basket Ueno",
-    address: "Tokyo, Taito-ku, 357 Street",
-    latitude: 35.71,
-    longitude: 139.78
+    name: "My Basket Shinjuku-sanchome",
+    address: "3-18 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6888,
+    longitude: 139.7062
    }
   },
 
@@ -143,10 +143,10 @@ prices = [
     keyword: "water"
    },
   store: {
-    name: "Hanamasa Shibuya",
-    address: "Tokyo, Shibuya-ku, 258 Street",
-    latitude: 35.66,
-    longitude: 139.70
+    name: "Hanamasa Shinjuku",
+    address: "1-20 Nishi-Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6898,
+    longitude: 139.6980
    }
   },
 
@@ -156,10 +156,10 @@ prices = [
     keyword: "coffee"
    },
   store: {
-    name: "Peacock Store Ebisu",
-    address: "Tokyo, Shibuya-ku, 147 Street",
-    latitude: 35.65,
-    longitude: 139.71
+    name: "Peacock Store Shinjuku",
+    address: "5-10 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6875,
+    longitude: 139.7040
    }
   },
 
@@ -169,10 +169,10 @@ prices = [
     keyword: "instant noodles"
    },
   store: {
-    name: "Seijo Ishii Futako",
-    address: "Tokyo, Setagaya-ku, 369 Street",
-    latitude: 35.61,
-    longitude: 139.63
+    name: "Seijo Ishii Shinjuku South Gate",
+    address: "1-1 Yoyogi, Shibuya-ku, Tokyo",
+    latitude: 35.6868,
+    longitude: 139.7013
    }
   },
 
@@ -182,10 +182,10 @@ prices = [
     keyword: "furikake"
    },
   store: {
-    name: "Olympic Tachikawa",
-    address: "Tokyo, Tachikawa, 789 Street",
-    latitude: 35.70,
-    longitude: 139.41
+    name: "Olympic Shinjuku",
+    address: "2-15 Nishi-Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6922,
+    longitude: 139.6948
    }
   },
 
@@ -195,10 +195,10 @@ prices = [
     keyword: "curry"
    },
   store: {
-    name: "Yaoko Higashimurayama",
-    address: "Tokyo, Higashimurayama, 456 Street",
-    latitude: 35.75,
-    longitude: 139.47
+    name: "Yaoko Shinjuku",
+    address: "4-1 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6880,
+    longitude: 139.7055
    }
   },
 
@@ -208,10 +208,10 @@ prices = [
     keyword: "eggs"
    },
   store: {
-    name: "AEON Shinagawa Seaside",
-    address: "Tokyo, Shinagawa-ku, 852 Street",
-    latitude: 35.61,
-    longitude: 139.75
+    name: "AEON Shinjuku",
+    address: "3-28 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6910,
+    longitude: 139.7030
    }
   },
 
@@ -221,10 +221,10 @@ prices = [
     keyword: "potatoes"
    },
   store: {
-    name: "Coop Nerima",
-    address: "Tokyo, Nerima-ku, 741 Street",
-    latitude: 35.74,
-    longitude: 139.65
+    name: "Coop Shinjuku North",
+    address: "2-5 Hyakunincho, Shinjuku-ku, Tokyo",
+    latitude: 35.6940,
+    longitude: 139.6995
    }
   },
 
@@ -234,10 +234,10 @@ prices = [
     keyword: "pork"
    },
   store: {
-    name: "Belc Adachi",
-    address: "Tokyo, Adachi-ku, 963 Street",
-    latitude: 35.78,
-    longitude: 139.80
+    name: "Belc Shinjuku",
+    address: "1-5 Okubo, Shinjuku-ku, Tokyo",
+    latitude: 35.6935,
+    longitude: 139.7028
    }
   },
 
@@ -247,10 +247,10 @@ prices = [
     keyword: "cigarettes"
    },
   store: {
-    name: "FamilyMart Ikebukuro",
-    address: "Tokyo, Toshima-ku, 258 Street",
-    latitude: 35.73,
-    longitude: 139.71
+    name: "FamilyMart Shinjuku Higashi",
+    address: "1-2 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6895,
+    longitude: 139.7022
    }
   },
 
@@ -260,10 +260,10 @@ prices = [
     keyword: "chocolate"
    },
   store: {
-    name: "Mini Stop Odaiba",
-    address: "Tokyo, Minato-ku, 159 Street",
-    latitude: 35.63,
-    longitude: 139.78
+    name: "Mini Stop Shinjuku",
+    address: "6-8 Shinjuku, Shinjuku-ku, Tokyo",
+    latitude: 35.6870,
+    longitude: 139.7048
    }
   }
 ]
@@ -272,5 +272,5 @@ prices.each_with_index do |price, index|
   product = Product.create!(name: price[:product][:name], description: price[:product][:description], keyword: price[:product][:keyword])
   store = Store.create!(name: price[:store][:name], address: price[:store][:address], latitude: price[:store][:latitude], longitude: price[:store][:longitude])
   Price.create!(product: product, store: store, price_without_tax: 250, price_with_tax: 270)
-  puts "Created #{index + 1 } product(s)"
+  puts "Created #{index + 1} product(s)"
 end
