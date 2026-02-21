@@ -10,3 +10,12 @@ class Item < ApplicationRecord
     Product.where("keyword ILIKE ?", "%#{keyword}%")
   end
 end
+
+
+    # sql_subquery = <<~SQL
+    #   movies.title ILIKE :query
+    #   OR movies.synopsis ILIKE :query
+    #   OR directors.first_name ILIKE :query
+    #   OR directors.last_name ILIKE :query
+    # SQL
+    # @movies = @movies.joins(:director).where(sql_subquery, query: "%#{params[:query]}%")

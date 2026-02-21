@@ -5,19 +5,6 @@ Price.destroy_all
 Product.destroy_all
 Store.destroy_all
 
-# prices = [
-#   {product: {
-#     name: "日清フーズ フラワー 薄力小麦粉 1kg",
-#     description: "日清フーズ フラワー 薄力小麦粉 1kg"
-#     },
-#   store: {
-#     name: "AEON Edogawa",
-#     address: "Tokyo, Edogawa-ku, 123 Street",
-#     latitude: 35.68,
-#     longitude: 139.85
-#     }
-#   }
-# ]
 
 prices = [
   {product: {
