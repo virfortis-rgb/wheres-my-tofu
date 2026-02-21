@@ -5,19 +5,6 @@ Price.destroy_all
 Product.destroy_all
 Store.destroy_all
 
-# prices = [
-#   {product: {
-#     name: "日清フーズ フラワー 薄力小麦粉 1kg",
-#     description: "日清フーズ フラワー 薄力小麦粉 1kg"
-#     },
-#   store: {
-#     name: "AEON Edogawa",
-#     address: "Tokyo, Edogawa-ku, 123 Street",
-#     latitude: 35.68,
-#     longitude: 139.85
-#     }
-#   }
-# ]
 
 prices = [
   {product: {
@@ -282,7 +269,7 @@ prices = [
 ]
 
 prices.each_with_index do |price, index|
-  product = Product.create!(name: price[:product][:name], description: price[:product][:description])
+  product = Product.create!(name: price[:product][:name], description: price[:product][:description], keyword: price[:product][:keyword])
   store = Store.create!(name: price[:store][:name], address: price[:store][:address], latitude: price[:store][:latitude], longitude: price[:store][:longitude])
   Price.create!(product: product, store: store, price_without_tax: 250, price_with_tax: 270)
   puts "Created #{index + 1 } product(s)"
