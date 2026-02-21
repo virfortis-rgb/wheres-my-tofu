@@ -1,14 +1,14 @@
 // Landing page styles
 
 .landing-page {
-  background: white;
+  background: #F2EEE3;
 }
 
 // ── HERO ──────────────────────────────────────────
 .hero-section {
   position: relative;
   min-height: 100svh;
-  background: white;
+  background: #F2EEE3;
   overflow: hidden;
   padding-top: 5rem;
   padding-bottom: 4rem;
@@ -95,7 +95,9 @@
 .features-section {
   max-width: 480px;
   margin: 0 auto;
+  margin-bottom: 2rem;
   background: white;
+  border-radius: 16px;
 
   .features-heading {
     font-family: $headers-font;
@@ -134,7 +136,7 @@
 
 // ── CTA BANNER ────────────────────────────────────
 .cta-banner {
-  background: #edf8f0;
+  background: #F2EEE3;
   border-top: 1px solid #cce8d4;
   border-bottom: 1px solid #cce8d4;
 
