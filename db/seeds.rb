@@ -282,7 +282,7 @@ prices = [
 ]
 
 prices.each_with_index do |price, index|
-  product = Product.create!(name: price[:product][:name], description: price[:product][:description])
+  product = Product.create!(name: price[:product][:name], description: price[:product][:description], keyword: price[:product][:keyword])
   store = Store.create!(name: price[:store][:name], address: price[:store][:address], latitude: price[:store][:latitude], longitude: price[:store][:longitude])
   Price.create!(product: product, store: store, price_without_tax: 250, price_with_tax: 270)
   puts "Created #{index + 1 } product(s)"
