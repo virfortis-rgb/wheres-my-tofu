@@ -8,6 +8,9 @@ class ListsController < ApplicationController
   def show
     @items = @list.items
     @item = Item.new
+    product_ids = @items.flat_map { |item| item.find_products.ids }
+    store_ids = Price.where(product_id: product_ids).distinct.pluck(:store_id)
+    @stores = Store.where(id: store_ids)
   end
 
   def new

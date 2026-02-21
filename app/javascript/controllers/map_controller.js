@@ -26,7 +26,7 @@ export default class extends Controller {
         `<strong>${store.name}</strong><br><span style="font-size:0.8rem;color:#666">${store.address}</span>`
       )
 
-      new mapboxgl.Marker({ color: "#1EDD88" })
+      new mapboxgl.Marker({ color: "#339551" })
         .setLngLat([store.longitude, store.latitude])
         .setPopup(popup)
         .addTo(map)

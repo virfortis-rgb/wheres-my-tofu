@@ -1,14 +1,14 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
-  border-bottom: 2px solid #1EDD88;
+  border-bottom: 2px solid $basil;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   .navbar-brand {
-    color: #1EDD88 !important;
+    color: $basil !important;
 
     &:hover {
-      color: #0bbf6e !important;
+      color: $dark-green !important;
     }
   }
 
@@ -17,7 +17,7 @@
     font-weight: 700;
     font-size: 1.1rem;
     vertical-align: middle;
-    color: #1EDD88;
+    color: $basil;
   }
 
   .nav-link {
@@ -25,27 +25,27 @@
     font-weight: 500;
 
     &:hover, &.active {
-      color: #1EDD88 !important;
+      color: $basil !important;
     }
   }
 
   .navbar-toggler {
-    border-color: #1EDD88;
+    border-color: $basil;
 
     .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231EDD88' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23266533' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
   }
 
   .user-avatar-btn {
     display: flex;
     align-items: center;
-    color: #1EDD88;
+    color: $basil;
     font-size: 2rem;
     line-height: 1;
 
     &:hover {
-      color: #0bbf6e;
+      color: $dark-green;
     }
   }
 
@@ -55,8 +55,8 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 
     .dropdown-item:hover {
-      background: #f0fdf7;
-      color: #0bbf6e;
+      background: #edf8f0;
+      color: $dark-green;
     }
   }
 }

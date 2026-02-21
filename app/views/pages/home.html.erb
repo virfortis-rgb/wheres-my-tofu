@@ -27,7 +27,7 @@
       <p class="hero-subtitle">Your smart grocery companion.<br>Build lists, compare prices, shop smarter.</p>
       <div class="d-flex flex-column gap-3 w-100 hero-cta mt-4">
         <% if user_signed_in? %>
-          <%= link_to "Go to My Lists", lists_index_path, class: "btn btn-success btn-lg fw-bold" %>
+          <%= link_to "Go to My Lists", lists_index_path, class: "btn btn-primary btn-lg fw-bold" %>
         <% else %>
           <%= link_to "Get Started — it's free", new_user_registration_path, class: "btn btn-success btn-lg fw-bold" %>
           <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-success btn-lg" %>

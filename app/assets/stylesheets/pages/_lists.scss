@@ -2,7 +2,7 @@
 
 .lists-page {
   min-height: 100svh;
-  background: linear-gradient(180deg, #e8faf2 0%, #f7fffe 60%, white 100%);
+  background: linear-gradient(180deg, #e8f5ec 0%, #f4fbf5 60%, white 100%);
 }
 
 // ── HEADER ──────────────────────────────────────────
@@ -22,15 +22,17 @@
   }
 
   .btn-new-list {
-    background-color: #1EDD88;
-    border-color: #1EDD88;
+    background-color: $basil;
+    border-color: $basil;
+    color: white;
     font-weight: 600;
     border-radius: 12px;
     padding: 0.7rem;
 
     &:hover, &:active {
-      background-color: #0bbf6e;
-      border-color: #0bbf6e;
+      background-color: $dark-green;
+      border-color: $dark-green;
+      color: white;
     }
   }
 }
@@ -44,8 +46,8 @@
   border-radius: 16px;
   padding: 1rem 1.1rem;
   margin-bottom: 0.85rem;
-  border: 1.5px solid #d1fae5;
-  box-shadow: 0 2px 10px rgba(30, 221, 136, 0.08);
+  border: 1.5px solid #cce8d4;
+  box-shadow: 0 2px 10px rgba(51, 149, 81, 0.08);
 
   .list-card-left {
     display: flex;
@@ -72,7 +74,7 @@
     max-width: 180px;
 
     &:hover {
-      color: #1EDD88;
+      color: $green;
     }
   }
 
@@ -95,14 +97,14 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: #f0fdf7;
+    background: #edf8f0;
     border-radius: 50%;
-    color: #1EDD88;
+    color: $basil;
     text-decoration: none;
     font-size: 0.85rem;
 
     &:hover {
-      background: #1EDD88;
+      background: $basil;
       color: white;
     }
   }
@@ -131,16 +133,16 @@
 // ── NEW LIST PAGE ───────────────────────────────────
 .new-list-page {
   min-height: 100svh;
-  background: linear-gradient(180deg, #e8faf2 0%, #f7fffe 60%, white 100%);
+  background: linear-gradient(180deg, #e8f5ec 0%, #f4fbf5 60%, white 100%);
 
   .back-link {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #1EDD88;
+    color: $basil;
     text-decoration: none;
 
     &:hover {
-      color: #0bbf6e;
+      color: $dark-green;
     }
   }
 
@@ -162,8 +164,8 @@
   background: white;
   border-radius: 20px;
   padding: 1.75rem 1.5rem;
-  border: 1.5px solid #d1fae5;
-  box-shadow: 0 4px 16px rgba(30, 221, 136, 0.1);
+  border: 1.5px solid #cce8d4;
+  box-shadow: 0 4px 16px rgba(51, 149, 81, 0.1);
 
   .new-list-icon {
     font-size: 2.5rem;
@@ -182,18 +184,18 @@
 
   .new-list-input {
     width: 100%;
-    border: 1.5px solid #d1fae5;
+    border: 1.5px solid #cce8d4;
     border-radius: 12px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     color: $gray;
-    background: #f9fffe;
+    background: #f4fbf5;
     outline: none;
     transition: border-color 0.2s;
 
     &:focus {
-      border-color: #1EDD88;
-      box-shadow: 0 0 0 3px rgba(30, 221, 136, 0.15);
+      border-color: $basil;
+      box-shadow: 0 0 0 3px rgba(38, 101, 51, 0.15);
     }
 
     &::placeholder {
@@ -202,15 +204,17 @@
   }
 
   .btn-save-list {
-    background-color: #1EDD88;
-    border-color: #1EDD88;
+    background-color: $basil;
+    border-color: $basil;
+    color: white;
     border-radius: 12px;
     font-weight: 600;
     padding: 0.7rem;
 
     &:hover, &:active {
-      background-color: #0bbf6e;
-      border-color: #0bbf6e;
+      background-color: $dark-green;
+      border-color: $dark-green;
+      color: white;
     }
   }
 
@@ -232,17 +236,17 @@
 // ── SHOW LIST PAGE ──────────────────────────────────
 .show-list-page {
   min-height: 100svh;
-  background: linear-gradient(180deg, #e8faf2 0%, #f7fffe 60%, white 100%);
+  background: linear-gradient(180deg, #e8f5ec 0%, #f4fbf5 60%, white 100%);
 }
 
 .show-list-header {
   .back-link {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #1EDD88;
+    color: $basil;
     text-decoration: none;
 
-    &:hover { color: #0bbf6e; }
+    &:hover { color: $dark-green; }
   }
 
   .show-list-title {
@@ -319,14 +323,14 @@
   font-family: $headers-font;
   font-size: 1rem;
   font-weight: 700;
-  color: #1EDD88;
+  color: $green;
   min-width: 56px;
   text-align: right;
 }
 
 .show-chevron {
   font-size: 0.75rem;
-  color: #1EDD88;
+  color: $green;
   transition: transform 0.2s;
 }
 
@@ -337,7 +341,7 @@
 
   .add-item-input {
     flex: 1;
-    border: 1.5px solid #d1fae5;
+    border: 1.5px solid #cce8d4;
     border-radius: 12px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
@@ -347,8 +351,8 @@
     transition: border-color 0.2s;
 
     &:focus {
-      border-color: #1EDD88;
-      box-shadow: 0 0 0 3px rgba(30, 221, 136, 0.15);
+      border-color: $basil;
+      box-shadow: 0 0 0 3px rgba(38, 101, 51, 0.15);
     }
 
     &::placeholder { color: #bbb; }
@@ -358,7 +362,7 @@
     width: 48px;
     height: 48px;
     flex-shrink: 0;
-    background: #1EDD88;
+    background: $basil;
     border: none;
     border-radius: 12px;
     color: white;
@@ -367,7 +371,7 @@
     line-height: 1;
     cursor: pointer;
 
-    &:hover { background: #0bbf6e; }
+    &:hover { background: $dark-green; }
   }
 }
 
@@ -376,8 +380,8 @@
   background: white;
   border-radius: 16px;
   margin-bottom: 0.75rem;
-  border: 1.5px solid #d1fae5;
-  box-shadow: 0 2px 8px rgba(30, 221, 136, 0.07);
+  border: 1.5px solid #cce8d4;
+  box-shadow: 0 2px 8px rgba(51, 149, 81, 0.07);
   overflow: hidden;
 }
 
@@ -405,7 +409,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #1EDD88;
+    background: $green;
     flex-shrink: 0;
   }
 
@@ -435,7 +439,7 @@
   .item-price {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #1EDD88;
+    color: $green;
     min-width: 44px;
     text-align: right;
   }
@@ -473,8 +477,8 @@
 
 // Product price cards
 .show-accordion-body {
-  background: #f7fffe;
-  border-top: 1px solid #e8faf2;
+  background: #f4fbf5;
+  border-top: 1px solid #e8f5ec;
   padding: 0.75rem 1rem;
 }
 
@@ -485,7 +489,7 @@
   padding-bottom: 0.5rem;
 
   &::-webkit-scrollbar { height: 4px; }
-  &::-webkit-scrollbar-thumb { background: #d1fae5; border-radius: 4px; }
+  &::-webkit-scrollbar-thumb { background: #cce8d4; border-radius: 4px; }
 }
 
 .product-price-card {
@@ -493,7 +497,7 @@
   width: 130px;
   background: white;
   border-radius: 12px;
-  border: 1.5px solid #d1fae5;
+  border: 1.5px solid #cce8d4;
   padding: 0.65rem;
   text-align: center;
 
@@ -521,13 +525,13 @@
   .product-price-tag {
     font-size: 0.9rem;
     font-weight: 700;
-    color: #1EDD88;
+    color: $green;
     margin-bottom: 0.4rem;
   }
 
   .btn-select-price {
     width: 100%;
-    background: #1EDD88;
+    background: $basil;
     border: none;
     border-radius: 8px;
     color: white;
@@ -536,7 +540,7 @@
     padding: 0.3rem 0;
     cursor: pointer;
 
-    &:hover { background: #0bbf6e; }
+    &:hover { background: $dark-green; }
   }
 }
 

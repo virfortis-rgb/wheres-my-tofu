@@ -112,8 +112,8 @@
   border-radius: 16px;
   padding: 1.25rem;
   margin-bottom: 1rem;
-  border: 1.5px solid #daf9eb;
-  box-shadow: 0 5px 10px rgba(26, 192, 117, 0.08);
+  border: 1.5px solid #cce8d4;
+  box-shadow: 0 5px 10px rgba(51, 149, 81, 0.08);
 
   .feature-icon {
     font-size: 2rem;
@@ -134,9 +134,9 @@
 
 // ── CTA BANNER ────────────────────────────────────
 .cta-banner {
-  background: #f0fdf7;
-  border-top: 1px solid #d1fae5;
-  border-bottom: 1px solid #d1fae5;
+  background: #edf8f0;
+  border-top: 1px solid #cce8d4;
+  border-bottom: 1px solid #cce8d4;
 
   h2 {
     font-family: $headers-font;
