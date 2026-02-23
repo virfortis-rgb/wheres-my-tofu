@@ -10,9 +10,9 @@ class RetrieveProductInfoFromChirashiJob < ApplicationJob
       "エースワン": 258215
     }
     shufoo_base_url = "https://www.shufoo.net/pntweb/shopDetail/#{shop_id}/"
+    # nokogiri it to get img url
 
-
-    # feed those chirashis to ruby_llm to parse into JSON readable by the DB, sleep between each chirashi
+    # feed those chirashis images urls to ruby_llm to parse into JSON readable by the DB, sleep between each chirashi
     # Product.find_or_create_by! as well as Store.find_or_create_by!
     # update price
 
