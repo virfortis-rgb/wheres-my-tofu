@@ -74,3 +74,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# DB
+gem "json"
+gem "open-uri"
