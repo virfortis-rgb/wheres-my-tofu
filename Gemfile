@@ -78,3 +78,6 @@ end
 # DB
 gem "addressable"
 gem "open-uri"
+
+# ruby_llm
+gem "ruby_llm"
