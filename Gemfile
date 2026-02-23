@@ -76,5 +76,5 @@ group :test do
 end
 
 # DB
-gem "nokogiri"
+gem "addressable"
 gem "open-uri"
