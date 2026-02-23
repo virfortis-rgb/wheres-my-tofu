@@ -13,11 +13,13 @@ class RetrieveProductInfoFromChirashiJob < ApplicationJob
 
     shop_ids.values.each do |shop_id|
       shufoo_base_url = "https://www.shufoo.net/pntweb/shopDetail/#{shop_id}/"
-      doc = Nokogiri::HTML(URI.open(shufoo_base_url))
-      chirashi_image_urls << doc.css('sd_cl_item_thumb img').map { |img| img.attribute('url').value }
-    end
+      uri = Addressable::URI.parse(shufoo_base_url).display_uri.to_s
 
-    chirashi_image_urls.each { |c| puts c }
+      doc = Nokogiri::HTML.parse(uri)
+      doc.search('.sd_cl_item_thumb img').map do |img| # all css selectors on this page return nil
+        chirashi_image_urls << img[url]
+      end
+    end
 
     # feed those chirashis images urls to ruby_llm to parse into JSON readable by the DB, sleep between each chirashi
     # Product.find_or_create_by! as well as Store.find_or_create_by!
