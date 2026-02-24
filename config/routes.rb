@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'scans/new'
-  get 'scans/create'
   get 'lists/index'
 
   get 'lists/new'
