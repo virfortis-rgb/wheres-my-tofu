@@ -4,11 +4,12 @@ class ScansController < ApplicationController
   end
 
   def create
+    @scan = Scan.find(scan_params)
   end
 
   private
 
   def scan_params
-    params.require(:scan).permit
+    params.require(:scan).permit(flyers: [])
   end
 end
