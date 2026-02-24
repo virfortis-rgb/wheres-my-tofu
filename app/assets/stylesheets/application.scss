@@ -10,3 +10,8 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/navbar";
+
+body {
+  padding-bottom: 72px;
+}

@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+
     <%= javascript_importmap_tags %>
   </head>
-  <body><%= render "shared/navbar" %>
+
+  <body>
     <%= render "shared/flashes" %>
+
     <%= yield %>
-    <%= render "shared/footer" unless content_for?(:suppress_footer) %>
+
+    <%= render "shared/navbar" %>
+
+    <%# Optional: remove this if using bottom tabs instead of footer %>
+    <%# <%= render "shared/footer" unless content_for?(:suppress_footer) %>
   </body>
 </html>

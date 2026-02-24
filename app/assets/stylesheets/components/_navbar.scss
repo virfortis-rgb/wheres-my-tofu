@@ -1,78 +1,73 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-  border-bottom: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  position: relative;
+/* app/assets/stylesheets/components/_navbar.scss */
 
-  &::after {
-    content: '';
+/* App-like bottom tab bar */
+.bottom-tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 72px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: white;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+
+  /* soft top highlight (matches your prior navbar vibe) */
+  &::before {
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    top: 0;
     height: 8px;
-    background: linear-gradient(to bottom, rgba(38, 101, 51, 0.3), #F2EEE3);
+    background: linear-gradient(to top, rgba(38, 101, 51, 0.18), #F2EEE3);
     pointer-events: none;
   }
+}
 
-  .navbar-brand {
-    color: $basil !important;
+.bottom-tabs .tab {
+  flex: 1;
+  min-width: 64px;
 
-    &:hover {
-      color: $dark-green !important;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
-  .navbar-brand-name {
-    font-family: $headers-font;
-    font-weight: 700;
-    font-size: 1.1rem;
-    vertical-align: middle;
-    color: $basil;
-  }
+  text-decoration: none;
+  color: $gray;
 
-  .nav-link {
-    color: $gray !important;
-    font-weight: 500;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
 
-    &:hover, &.active {
-      color: $basil !important;
-    }
-  }
-
-  .navbar-toggler {
-    border-color: $basil;
-
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23266533' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-  }
-
-  .user-avatar-btn {
-    display: flex;
-    align-items: center;
-    color: $basil;
-    font-size: 2rem;
+  i {
+    font-size: 1.25rem;
     line-height: 1;
-
-    &:hover {
-      color: $dark-green;
-    }
   }
 
-  .dropdown-menu {
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  &:hover {
+    color: $dark-green;
+  }
 
-    .dropdown-item:hover {
-      background: #edf8f0;
-      color: $dark-green;
+  &.active {
+    color: $basil;
+
+    i {
+      transform: translateY(-1px);
     }
   }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/* Keep page content above the fixed bar */
+body {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
