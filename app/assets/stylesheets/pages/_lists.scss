@@ -479,28 +479,28 @@
 .show-accordion-body {
   background: #f4fbf5;
   border-top: 1px solid #e8f5ec;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
 }
 
 /* store groups box*/
 .store-scroll {
-display: flex;
+  display: flex;
   gap: 1rem;
   overflow-x: auto;
-  padding-bottom: 12px;
+  padding: 0 1rem 12px 1rem;
   width: 100%;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
 }
 
 .store-group-box {
-flex-shrink: 0;
-  width: 85%;
-  max-width: 380px;
-  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 85vw;
+  max-width: 340px;
+  scroll-snap-align: center;
 
   border: 2px solid #e5e7eb;
   border-radius: 12px;
-  padding: 16px;
+  padding: 12px;
   background-color: #fafafa;
   margin-bottom: 0;
   display: flex;
@@ -622,6 +622,7 @@ flex-shrink: 0;
   background: #266533;
   color: white;
   box-shadow: 0 4px 12px rgba(6, 63, 24, 0.2);
+  border-radius: 16px;
 
   .total-label {
     font-weight: 600;
