@@ -482,11 +482,44 @@
   padding: 0.75rem 1rem;
 }
 
+/* store groups box*/
+.store-scroll {
+display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  width: 100%;
+  scroll-snap-type: x mandatory;
+}
+
+.store-group-box {
+flex-shrink: 0;
+  width: 85%;
+  max-width: 380px;
+  scroll-snap-align: start;
+
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #fafafa;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* store group header */
+.store-group-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 .product-scroll {
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
+  width: 100%;
 
   &::-webkit-scrollbar { height: 4px; }
   &::-webkit-scrollbar-thumb { background: #cce8d4; border-radius: 4px; }
@@ -500,6 +533,7 @@
   border: 1.5px solid #cce8d4;
   padding: 0.65rem;
   text-align: center;
+  position: relative;
 
   .product-image-placeholder {
     font-size: 1.8rem;
@@ -509,7 +543,7 @@
   .product-store {
     font-size: 0.75rem;
     font-weight: 600;
-    color: $gray;
+    color: #666;
     margin-bottom: 0.1rem;
     white-space: nowrap;
     overflow: hidden;
@@ -525,13 +559,13 @@
   .product-price-tag {
     font-size: 0.9rem;
     font-weight: 700;
-    color: $green;
+    color: #266533;
     margin-bottom: 0.4rem;
   }
 
   .btn-select-price {
     width: 100%;
-    background: $basil;
+    background: #339551;
     border: none;
     border-radius: 8px;
     color: white;
@@ -540,8 +574,28 @@
     padding: 0.3rem 0;
     cursor: pointer;
 
-    &:hover { background: $dark-green; }
+    &:hover { background: #266533; }
   }
+}
+
+.product-price-card.best-price-card {
+  border: 2px solid #f16838;
+}
+
+.best-price-label {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  color: #f16838;
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.product-price-card.selected-border {
+  border: 2px solid #266533;
+  box-shadow: 0 4px 12px rgba(241, 104, 56, 0.15);
+  position: relative;
 }
 
 .no-products-msg {
@@ -560,5 +614,23 @@
   p {
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+}
+
+//total price----------------------------------
+.list-total-card {
+  background: #266533;
+  color: white;
+  box-shadow: 0 4px 12px rgba(6, 63, 24, 0.2);
+
+  .total-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .total-price {
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
   }
 }
