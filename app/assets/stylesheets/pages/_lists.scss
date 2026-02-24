@@ -489,14 +489,14 @@
   overflow-x: auto;
   padding: 0 1rem 12px 1rem;
   width: 100%;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
 }
 
 .store-group-box {
   flex-shrink: 0;
-  width: 85vw;
-  max-width: 340px;
-  scroll-snap-align: center;
+  width: 280px;
+  max-width: 85%;
+  scroll-snap-align: start;
 
   border: 2px solid #e5e7eb;
   border-radius: 12px;
