@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'lists/index'
-
   get 'lists/new'
   get 'lists/show'
+  get 'scans/new'
   devise_for :users
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
