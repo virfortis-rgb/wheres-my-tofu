@@ -66,7 +66,7 @@
                 </div>
                 <%# Price %>
                 <div class="item-col-price">
-                  <span class="item-price-label">
+                  <span id="item_<%= item.id %>_price" class="item-price-label">
                     <%= item.display_total_price %>
                   </span>
                   <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
@@ -84,38 +84,8 @@
             <div id="collapse<%= item.id %>"
                 class="accordion-collapse collapse"
                 data-bs-parent="#itemsAccordion">
-              <div class="show-accordion-body">
-                <% grouped_prices = item.prices_grouped_by_store %>
-                  <% if grouped_prices.any? %>
-                    <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
-                    <div class="store-scroll">
-                      <% grouped_prices.each do |store, prices| %>
-                        <div class="store-group-box">
-                          <div class="store-group-header">
-                            <strong><%= store.name %></strong>
-                          </div>
-                          <div class="product-scroll">
-                            <% prices.each do |price| %>
-                              <% is_best_price = price.price_with_tax == lowest_price_val %>
-                              <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
-                                <% if is_best_price %>
-                                  <span class="best-price-label">Best Price</span>
-                                <% end %>
-                                <div class="product-image-placeholder">🥬</div>
-                                <p class="product-desc"><%= price.product.description %></p>
-                                <p class="product-price-tag">¥<%= price.price_with_tax %></p>
-                                <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
-                                    method: :patch,
-                                    class: "btn-select-price" %>
-                              </div>
-                            <% end %>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
-                  <% else %>
-                  <p class="no-products-msg">No products found.</p>
-                <% end %>
+              <div id="item_<%= item.id %>_prices_body" class="show-accordion-body">
+                <%= render "items/prices_body", item: item, list: @list %>
               </div>
             </div>
           </div>
@@ -124,7 +94,7 @@
       <div class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-center">
         <span class="total-label">Total</span>
         <% list_total = @items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
-        <span class="total-price">¥<%= list_total %></span>
+        <span id="list_total" class="total-price">¥<%= list_total %></span>
       </div>
     <% else %>
       <div class="lists-empty text-center py-5">
