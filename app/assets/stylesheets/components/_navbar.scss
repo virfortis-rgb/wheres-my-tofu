@@ -1,78 +1,176 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-  border-bottom: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  position: relative;
+/* app/assets/stylesheets/components/_navbar.scss */
 
-  &::after {
-    content: '';
+/* ========== Mobile default: fixed bottom tabs ========== */
+.bottom-tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 72px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: white;
+
+  display: flex;
+  align-items: center;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+
+  &::before {
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    top: 0;
     height: 8px;
-    background: linear-gradient(to bottom, rgba(38, 101, 51, 0.3), #F2EEE3);
+    background: linear-gradient(to top, rgba(38, 101, 51, 0.18), #F2EEE3);
     pointer-events: none;
   }
+}
 
-  .navbar-brand {
-    color: $basil !important;
+/* Brand hidden on mobile */
+.nav-brand {
+  display: none;
+}
 
-    &:hover {
-      color: $dark-green !important;
-    }
-  }
+/* Tabs row (mobile: full width) */
+.nav-links {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
 
-  .navbar-brand-name {
-    font-family: $headers-font;
-    font-weight: 700;
-    font-size: 1.1rem;
-    vertical-align: middle;
-    color: $basil;
-  }
+/* Each tab (mobile) */
+.nav-links .bottom-tab {
+  flex: 1;
+  min-width: 64px;
 
-  .nav-link {
-    color: $gray !important;
-    font-weight: 500;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
-    &:hover, &.active {
-      color: $basil !important;
-    }
-  }
+  padding: 6px 8px;
 
-  .navbar-toggler {
-    border-color: $basil;
+  text-decoration: none;
+  color: $gray;
 
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23266533' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-  }
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
 
-  .user-avatar-btn {
-    display: flex;
-    align-items: center;
-    color: $basil;
-    font-size: 2rem;
+  white-space: nowrap;
+
+  i {
+    font-size: 1.25rem;
     line-height: 1;
-
-    &:hover {
-      color: $dark-green;
-    }
   }
 
-  .dropdown-menu {
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  &:hover {
+    color: $dark-green;
+  }
 
-    .dropdown-item:hover {
-      background: #edf8f0;
-      color: $dark-green;
+  &.active {
+    color: $basil;
+
+    i {
+      transform: translateY(-1px);
     }
   }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/* Keep content above the fixed bottom tabs */
+.app-content {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+/* ========== Desktop: top navbar layout (fixed overlap/jumble) ========== */
+@media (min-width: 768px) {
+  .bottom-tabs {
+    position: relative;
+    bottom: auto;
+
+    height: 64px;
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes brand left, links right */
+
+    border-top: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    &::before {
+      top: auto;
+      bottom: 0;
+      height: 8px;
+      background: linear-gradient(to bottom, rgba(38, 101, 51, 0.18), #F2EEE3);
+    }
+  }
+
+  .nav-brand {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    white-space: nowrap;
+    text-decoration: none;
+
+    font-weight: 700;
+    font-family: $headers-font;
+    color: $basil;
+    font-size: 1.1rem;
+
+    &:hover {
+      color: $dark-green;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: auto;
+    margin-left: auto;
+    flex-wrap: nowrap; /* Forces links to stay in one line */
+  }
+
+  .nav-links .bottom-tab {
+    /* Critical Fix: Stop shrinking and force width to content */
+    flex: 0 0 auto;
+    width: max-content;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: row; /* Icon next to text */
+    align-items: center;
+
+    padding: 8px 12px;
+    margin-left: 16px; /* Clean spacing between links */
+
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  /* Space out icon from text */
+  .nav-links .bottom-tab i {
+    font-size: 1.1rem;
+    margin-right: 8px;
+    margin-bottom: 0; /* Reset mobile vertical centering */
+  }
+
+  .app-content {
+    padding-bottom: 0;
+  }
 }
