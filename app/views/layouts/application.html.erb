@@ -14,14 +14,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render "shared/flashes" %>
+ <body>
+  <%= render "shared/flashes" %>
 
+  <%= render "shared/navbar" %>
+
+  <main class="app-content">
     <%= yield %>
-
-    <%= render "shared/navbar" %>
-
-    <%# Optional: remove this if using bottom tabs instead of footer %>
-    <%# <%= render "shared/footer" unless content_for?(:suppress_footer) %>
-  </body>
+  </main>
+  <%= render "shared/footer" unless content_for?(:suppress_footer) %>
+</body>
 </html>
