@@ -6,7 +6,10 @@ class ItemsController < ApplicationController
     @item = @list.items.new(name: params[:query], keyword: params[:query].downcase, quantity: 1)
     # @item.quantity = 1
     if @item.save!
-      redirect_to list_path(@list), notice: "Item added."
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to list_path(@list), notice: "Item added." }
+      end
     else
       redirect_to list_path(@list), alert: "Could not add item."
     end
@@ -15,13 +18,16 @@ class ItemsController < ApplicationController
   def show
   end
 
-  def update
-    if @item.update!(item_params)
-      redirect_to list_path(@list), notice: 'Item was successfully updated.'
-    else
-      redirect_to list_path(@list), alert: 'Failed to update item.'
+def update
+  if @item.update(item_params)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
     end
+  else
+    redirect_to list_path(@list), alert: 'Failed to update item.'
   end
+end
 
   def destroy
     @item.destroy
