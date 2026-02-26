@@ -1,0 +1,43 @@
+<div class="list-card flex-column align-items-stretch p-0 overflow-hidden">
+  <%# Row %>
+  <div class="show-item-row">
+    <%# Clickable area toggles accordion %>
+    <button class="show-item-btn collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse<%= item.id %>"
+            aria-expanded="false"
+            aria-controls="collapse<%= item.id %>">
+      <%# Left: name %>
+      <div class="item-col-left">
+        <span class="item-label"><%= item.name.capitalize %></span>
+      </div>
+      <%# Centre: quantity %>
+      <div class="item-col-mid">
+        <span class="item-label">× <%= item.quantity %></span>
+      </div>
+      <%# Price %>
+      <div class="item-col-price">
+        <span id="item_<%= item.id %>_price" class="item-price-label">
+          <%= item.display_total_price %>
+        </span>
+        <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
+      </div>
+    </button>
+    <%# Delete — outside the button so it fires correctly %>
+    <%= button_to list_item_path(@list, item),
+        method: :delete,
+        class: "btn-delete item-delete",
+        form: { data: { turbo_confirm: "Remove this item?" } } do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+  </div>
+  <%# Accordion body — product price cards %>
+  <div id="collapse<%= item.id %>"
+      class="accordion-collapse collapse"
+      data-bs-parent="#itemsAccordion">
+    <div id="item_<%= item.id %>_prices_body" class="show-accordion-body">
+      <%= render "items/prices_body", item: item, list: @list %>
+    </div>
+  </div>
+</div>
