@@ -1,36 +1,41 @@
-<nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      🥬 <span class="navbar-brand-name">Where's My Tofu</span>
+<nav class="bottom-tabs" aria-label="Primary">
+
+  <!-- Brand (hidden on mobile, visible on desktop) -->
+  <div class="nav-brand">
+    <%= link_to root_path, class: "brand-link" do %>
+      🥬 <span>Where's My Tofu</span>
     <% end %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Lists", lists_index_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="user-avatar-btn" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa-solid fa-circle-user"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+
+    <%= link_to root_path,
+        class: "bottom-tab #{'active' if current_page?(root_path)}" do %>
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    <% end %>
+
+    <%= link_to lists_index_path,
+        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
+      <i class="fa-solid fa-list"></i>
+      <span>Lists</span>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to destroy_user_session_path,
+          data: { turbo_method: :delete },
+          class: "bottom-tab" do %>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path,
+          class: "bottom-tab #{'active' if current_page?(new_user_session_path)}" do %>
+        <i class="fa-solid fa-user"></i>
+        <span>Login</span>
+      <% end %>
+    <% end %>
+
   </div>
 </nav>
