@@ -576,7 +576,15 @@
 
     &:hover { background: #266533; }
   }
+
+  .btn-select-price.selected {
+  background-color: #266533 !important;
+  color: white !important;
+  cursor: not-allowed;
+  pointer-events: none;
 }
+}
+
 
 .product-price-card.best-price-card {
   border: 2px solid #f16838;
