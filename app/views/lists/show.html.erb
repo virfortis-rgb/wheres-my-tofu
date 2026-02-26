@@ -116,22 +116,29 @@
     <% end %>
   </div>
   <%# ── MAP ── %>
-  <% if @stores.present? && @items.present? %>
-    <div class="px-4 mb-3">
-      <div id="map"
-           style="height: 300px; border-radius: 12px;"
-           data-controller="map"
-           data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
-           data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>">
+  <div class="px-4 mb-5">
+    <div class="map-card">
+      <div class="map-card-header">
+        <span>🗺️</span>
+        <span class="map-card-title">Shopping Route</span>
+        <% if @stores.present? %>
+          <span class="map-card-badge"><%= @stores.length %> <%= @stores.length == 1 ? "stop" : "stops" %></span>
+        <% end %>
       </div>
+      <% if @stores.present? && @items.present? %>
+        <div id="map"
+             style="height: 280px;"
+             data-controller="map"
+             data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
+             data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>">
+        </div>
+      <% else %>
+        <div id="map"
+             style="height: 280px;"
+             data-controller="map"
+             data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>">
+        </div>
+      <% end %>
     </div>
-  <% else %>
-    <div class="px-4 mb-3">
-      <div id="map"
-           style="height: 300px; border-radius: 12px;"
-           data-controller="map"
-           data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>">
-      </div>
-    </div>
-  <% end %>
+  </div>
 </div>
