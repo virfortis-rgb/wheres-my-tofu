@@ -22,25 +22,6 @@
           class: "add-item-btn" %>
     <% end %>
   </div>
-  <%# ── MAP ── %>
-  <% if @stores.present? && @items.present? %>
-    <div class="px-4 mb-3">
-      <div id="map"
-          style="height: 300px; border-radius: 12px;"
-          data-controller="map"
-          data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
-          data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>">
-      </div>
-    </div>
-    <% else %>
-    <div class="px-4 mb-3">
-      <div id="map"
-          style="height: 300px; border-radius: 12px;"
-          data-controller="map"
-          data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>">
-      </div>
-    </div>
-  <% end %>
   <%# ── ITEMS ── %>
   <div class="lists-body px-4 pb-5">
     <% if @items.any? %>
@@ -86,34 +67,34 @@
                 data-bs-parent="#itemsAccordion">
               <div class="show-accordion-body">
                 <% grouped_prices = item.prices_grouped_by_store %>
-                  <% if grouped_prices.any? %>
-                    <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
-                    <div class="store-scroll">
-                      <% grouped_prices.each do |store, prices| %>
-                        <div class="store-group-box">
-                          <div class="store-group-header">
-                            <strong><%= store.name %></strong>
-                          </div>
-                          <div class="product-scroll">
-                            <% prices.each do |price| %>
-                              <% is_best_price = price.price_with_tax == lowest_price_val %>
-                              <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
-                                <% if is_best_price %>
-                                  <span class="best-price-label">Best Price</span>
-                                <% end %>
-                                <div class="product-image-placeholder">🥬</div>
-                                <p class="product-desc"><%= price.product.description %></p>
-                                <p class="product-price-tag">¥<%= price.price_with_tax %></p>
-                                <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
+                <% if grouped_prices.any? %>
+                  <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
+                  <div class="store-scroll">
+                    <% grouped_prices.each do |store, prices| %>
+                      <div class="store-group-box">
+                        <div class="store-group-header">
+                          <strong><%= store.name %></strong>
+                        </div>
+                        <div class="product-scroll">
+                          <% prices.each do |price| %>
+                            <% is_best_price = price.price_with_tax == lowest_price_val %>
+                            <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
+                              <% if is_best_price %>
+                                <span class="best-price-label">Best Price</span>
+                              <% end %>
+                              <div class="product-image-placeholder">🥬</div>
+                              <p class="product-desc"><%= price.product.description %></p>
+                              <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+                              <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
                                     method: :patch,
                                     class: "btn-select-price" %>
-                              </div>
-                            <% end %>
-                          </div>
+                            </div>
+                          <% end %>
                         </div>
-                      <% end %>
-                    </div>
-                  <% else %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% else %>
                   <p class="no-products-msg">No products found.</p>
                 <% end %>
               </div>
