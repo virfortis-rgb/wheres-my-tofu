@@ -17,9 +17,13 @@
                 <div class="product-image-placeholder">🥬</div>
                 <p class="product-desc"><%= price.product.description %></p>
                 <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+                <% if item.price_id == price.id %>
+                  <button class="btn-select-price selected" disabled>Selected</button>
+                  <% else %>
                 <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
                     method: :patch,
                     class: "btn-select-price" %>
+                <% end %>
               </div>
             <% end %>
           </div>
