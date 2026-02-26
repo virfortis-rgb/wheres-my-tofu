@@ -24,16 +24,17 @@ class AddFlyerDataToDbJob < ApplicationJob
     def process_scan(file)
       if file.content_type == "application/pdf"
         chat = RubyLLM.chat(model: "gemini-2.0-flash")
-        chat.with_instructions(SYSTEM_PROMPT)
-        @response = chat.ask(scan.content, with: { pdf: scan.file.url})
+        chat.with_tool(flyer_reader_tool)
+        # chat.with_instructions(SYSTEM_PROMPT)
+        chat.ask(scan.content, with: { pdf: scan.file.url})
         sleep(45)
       elsif flyer.image?
         chat = RubyLLM.chat(model: 'gpt-4o')
-        chat.with_instructions(SYSTEM_PROMPT)
-        @response = chat.ask(scan.content, with: { pdf: scan.file.url})
+        chat.with_tool(flyer_reader_tool)
+        # chat.with_instructions(SYSTEM_PROMPT)
+        chat.ask(scan.content, with: { pdf: scan.file.url})
         sleep(45)
       end
-      puts @response
     end
   end
 end
