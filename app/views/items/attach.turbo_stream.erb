@@ -1,0 +1,18 @@
+<%= turbo_stream.append "itemsAccordion" do %>
+  <%= render "items/item", item: @item, list: @list %>
+<% end %>
+
+<%= turbo_stream.remove "empty-state" %>
+
+<%= turbo_stream.replace "new_item_form" do %>
+  <%= form_with url: attach_list_items_path(@list),
+                scope: :item,
+                method: :post,
+                id: "new_item_form",
+                class: "add-item-form" do %>
+    <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
+
+    <%= text_field_tag :query, "", class: "add-item-input", placeholder: "Add an item…" %>
+    <%= submit_tag "+", class: "add-item-btn" %>
+  <% end %>
+<% end %>
