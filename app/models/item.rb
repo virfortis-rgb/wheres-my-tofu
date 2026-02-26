@@ -15,7 +15,7 @@ class Item < ApplicationRecord
                   .where(product_id: product_ids)
                   .order(price_with_tax: :asc)
 
-    prices.group_by(&:store)
+    prices.group_by(&:store) #prices.group_by { |price| price.store }
   end
 
   def auto_assign_lowest_price
