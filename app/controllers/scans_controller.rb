@@ -7,7 +7,8 @@ class ScansController < ApplicationController
     @scan = Scan.new(scan_params)
     if @scan.save!
       AddFlyerDataToDbJob.perform_later(@scan)
-      # render "scans/:id", notice: "Added products to the DB. Please double check!"
+      flash[:notice] = "Retrieving informtion from the flyer."
+      redirect_to root_path, notice: "Added products to the DB. Please double check!"
     else
       render :new, status: :unprocessable_entity
     end
