@@ -6,9 +6,9 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.new(scan_params)
     if @scan.save!
-      AddFlyerDataToDbJob.perform_later(@scan), notice: "Flyer Data has been added to the DataBase!"
+      AddFlyerDataToDbJob.perform_later(@scan)
       # render "scans/:id", notice: "Added products to the DB. Please double check!"
-
+    else
       render :new, status: :unprocessable_entity
     end
   end
@@ -16,6 +16,6 @@ class ScansController < ApplicationController
   private
 
   def scan_params
-    params.require(:scan).permit(flyers: [])
+    params.require(:scan).permit(:content, :file)
   end
 end
