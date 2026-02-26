@@ -1,7 +1,7 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(scan)
     # set the llm
     # give scan to llm
     # get json back

@@ -6,7 +6,7 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.find(scan_params)
     if @scan.flyer.attached?
-      AddFlyerDataToDbJob.perform_later(@scan), flas[:notice] = "Flyer Data has been added to the DataBase!"
+      AddFlyerDataToDbJob.perform_later(@scan), notice: "Flyer Data has been added to the DataBase!"
       # render "shared/scan", notice: "Added products to the DB. Please double check!"
     else
       render :new, status: :unprocessable_entity
