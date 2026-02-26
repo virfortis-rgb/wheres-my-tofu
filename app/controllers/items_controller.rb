@@ -3,8 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
   def attach
-    @item = @list.items.new(name: params[:query], keyword: params[:query].downcase)
-    @item.quantity = 1
+    @item = @list.items.new(name: params[:query], keyword: params[:query].downcase, quantity: 1)
+    # @item.quantity = 1
     if @item.save!
       redirect_to list_path(@list), notice: "Item added."
     else
