@@ -4,11 +4,11 @@ class ScansController < ApplicationController
   end
 
   def create
-    @scan = Scan.find(scan_params)
-    if @scan.flyer.attached?
+    @scan = Scan.new(scan_params)
+    if @scan.save!
       AddFlyerDataToDbJob.perform_later(@scan), notice: "Flyer Data has been added to the DataBase!"
-      # render "shared/scan", notice: "Added products to the DB. Please double check!"
-    else
+      # render "scans/:id", notice: "Added products to the DB. Please double check!"
+
       render :new, status: :unprocessable_entity
     end
   end

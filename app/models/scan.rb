@@ -1,3 +1,3 @@
 class Scan < ApplicationRecord
-  has_one_attached :flyers
+  has_many_attached :flyers
 end

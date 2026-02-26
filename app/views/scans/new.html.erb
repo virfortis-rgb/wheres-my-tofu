@@ -2,7 +2,7 @@
   <h2>Add a new flyer to the DB</h2>
   <div class="container">
     <%= simple_form_for(@scan) do |f| %>
-      <%= f.input :flyer, as: :file, input_html: { multiple: true} %>
+      <%= f.input :flyers, as: :file, input_html: { multiple: true} %>
       <%= f.submit %>
     <% end %>
   </div>
