@@ -9,6 +9,7 @@ class ListsController < ApplicationController
     @items = @list.items
     @item = Item.new
     @stores = @items.filter_map { |item| item.price.store if item.price.present? }.uniq
+    @all_selected = @items.any? && @items.all? { |item| item.price_id.present? }
   end
 
   def new

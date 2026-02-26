@@ -130,7 +130,8 @@
              style="height: 280px;"
              data-controller="map"
              data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
-             data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>">
+             data-map-stores-value="<%= @stores.each { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>"
+             data-map-all-selected-value="<%= @all_selected %>">
         </div>
       <% else %>
         <div id="map"
