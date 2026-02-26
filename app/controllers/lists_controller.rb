@@ -8,7 +8,7 @@ class ListsController < ApplicationController
   def show
     @items = @list.items
     @item = Item.new
-    @stores = @items.filter_map { |item| item.price.store if item.price.present? }
+    @stores = @items.filter_map { |item| item.price.store if item.price.present? }.uniq
   end
 
   def new
