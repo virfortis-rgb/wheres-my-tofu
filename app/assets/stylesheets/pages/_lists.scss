@@ -617,6 +617,41 @@
   }
 }
 
+// ── MAP CARD ─────────────────────────────────────
+.map-card {
+  background: white;
+  border-radius: 16px;
+  border: 3px solid $basil;
+  box-shadow: 0 4px 16px rgba(51, 149, 81, 0.12);
+  overflow: hidden;
+}
+
+.map-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #f4fbf5 0%, #edf8f0 100%);
+  border-bottom: 1.5px solid $basil;
+
+  .map-card-title {
+    font-family: $headers-font;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: $gray;
+    flex: 1;
+  }
+
+  .map-card-badge {
+    background: $basil;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+  }
+}
+
 //total price----------------------------------
 .list-total-card {
   background: #266533;
