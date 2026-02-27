@@ -17,5 +17,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :scans, only: [:new, :create]
+  resources :scans, only: [:new, :show, :create]
 end

@@ -5,34 +5,25 @@ class AddFlyerDataToDbJob < ApplicationJob
 
   def perform(scan)
     if scan.file.attached?
-      process_scan(scan.file) # TODOturn into task
-      # scanned_products.each_with_index do |product, index|
-      #   single_product = Product.find_or_create_by!(name: product[:product][:name], description: product[:product][:description], keyword: product[:product][:keyword])
-      #   store = Store.find_or_create_by!(name: product[:store][:name], address: product[:store][:address], latitude: price[:store][:latitude], longitude: product[:store][:longitude])
-      #   Price.create!(
-      #     product: single_product,
-      #     store: store,
-      #     price_without_tax: product[:prices][:price_without_tax],
-      #     price_with_tax: product[:prices][:price_with_tax]
-      #   )
-      #   index == 0 ? p "Created 1 product" : p "Created #{index + 1} products"
-      # end
+      process_scan(scan.flyer)
     end
 
     private
 
-    def process_scan(file)
-      if file.content_type == "application/pdf"
+    def process_scan(flyer)
+      if flyer.content_type == "application/pdf"
         chat = RubyLLM.chat(model: "gemini-2.0-flash")
         chat.with_tool(flyer_reader_tool)
         # chat.with_instructions(SYSTEM_PROMPT)
-        chat.ask(scan.content, with: { pdf: scan.file.url})
+        chat.ask(scan.content, with: { pdf: flyer.url})
+        puts "processing scan ..."
         sleep(45)
       elsif flyer.image?
         chat = RubyLLM.chat(model: 'gpt-4o')
         chat.with_tool(flyer_reader_tool)
         # chat.with_instructions(SYSTEM_PROMPT)
-        chat.ask(scan.content, with: { pdf: scan.file.url})
+        chat.ask(scan.content, with: { pdf: flyer.url})
+        puts "processing scan ..."
         sleep(45)
       end
     end
