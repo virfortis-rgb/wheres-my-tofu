@@ -9,11 +9,11 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
-    @scan.flyer.attach(params[:scan][:flyer] )
+    @scan.flyer.attach(params[:scan][:flyer])
     if @scan.save!
       flash[:notice] = "Retrieving informtion from the flyer."
       AddFlyerDataToDbJob.perform_later(@scan)
-      render :show, notice: "Added products to the DB. Please double check!"
+      redirect_to :show, notice: "Added products to the DB. Please double check!"
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,7 +1,5 @@
-class FlyerReaderTool < RubyLLM::FlyerReaderTool
-  description: <<~ TXT
-    Use this tool to extract products, stores, and prices from a flyer.
-  TXT
+class FlyerReaderTool < RubyLLM::Tool
+  description "Use this tool to extract products, stores, and prices from a flyer."
 
   param :product_name, desc: "The name of the product"
   param :product_decsription, desc: "The description of this product"
@@ -46,7 +44,7 @@ class FlyerReaderTool < RubyLLM::FlyerReaderTool
       store_id: price_store_id,
       product_id: price_product_id,
       price_without_tax: price_without_tax,
-      price_with_tax: price_wit_tax
+      price_with_tax: price_with_tax
     )
     if price.save
       { success: true, price_id: price.id}
