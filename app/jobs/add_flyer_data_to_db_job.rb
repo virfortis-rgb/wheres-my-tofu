@@ -17,13 +17,11 @@ class AddFlyerDataToDbJob < ApplicationJob
       # chat.with_instructions(SYSTEM_PROMPT)
       chat.ask(SYSTEM_PROMPT, with: { pdf: flyer.url})
       puts "processing scan ..."
-      sleep(45)
     elsif flyer.image?
       chat = RubyLLM.chat(model: 'gpt-4o').with_tool(FlyerReaderTool)
       # chat.with_instructions(SYSTEM_PROMPT)
       chat.ask(SYSTEM_PROMPT, with: { pdf: flyer.url})
       puts "processing scan ..."
-      sleep(45)
     end
   end
 end

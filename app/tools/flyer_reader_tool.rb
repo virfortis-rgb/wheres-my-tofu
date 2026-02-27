@@ -1,10 +1,12 @@
 class FlyerReaderTool < RubyLLM::Tool
-  description "Use this tool to extract products, stores, and prices from a flyer."
+  description "Use this tool to extract products, stores, and prices from a flyer and add it to the DB.
+              If the product, store, or price does not already exist, create them."
 
   param :product_name, desc: "The name of the product"
   param :product_decsription, desc: "The description of this product"
   param :product_keyword, desc: "One keyword to define this product"
 
+    # TODO User has to specify store, when uploading image
   param :store_name, desc: "The name of the store"
   param :store_address, desc: "The address of the store"
   param :store_longitude, desc: "The longitude of the store"
