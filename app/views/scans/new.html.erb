@@ -2,6 +2,7 @@
   <h2>Add a new flyer to the DB</h2>
   <div class="container">
     <%= simple_form_for @scan do |f| %>
+      <%= f.input :store, collection: @stores.map { |s| s.name } %>
       <%= f.input :flyer, as: :file, label: "Upload a file (pdf or image): " %>
       <%= f.submit %>
     <% end %>

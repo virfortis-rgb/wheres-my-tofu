@@ -7,10 +7,10 @@ class FlyerReaderTool < RubyLLM::Tool
   param :product_keyword, desc: "One keyword to define this product"
 
     # TODO User has to specify store, when uploading image
-  param :store_name, desc: "The name of the store"
-  param :store_address, desc: "The address of the store"
-  param :store_longitude, desc: "The longitude of the store"
-  param :store_latitude, desc: "The latitude of the store"
+  # param :store_name, desc: "The name of the store"
+  # param :store_address, desc: "The address of the store"
+  # param :store_longitude, desc: "The longitude of the store"
+  # param :store_latitude, desc: "The latitude of the store"
 
   param :price_store_id, desc: "The store_id of the store"
   param :price_product_id, desc: "The product_id of the relevant product"

@@ -1,6 +1,8 @@
 class ScansController < ApplicationController
   def new
     @scan = Scan.new
+    # @store = Store.find(params[:id])
+    @stores = Store.all # confine to user's stores
   end
 
   def show
@@ -10,6 +12,7 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.new(scan_params)
     @scan.flyer.attach(params[:scan][:flyer])
+    @store = Store.find(params[:id])
     if @scan.save!
       flash[:notice] = "Retrieving informtion from the flyer."
       AddFlyerDataToDbJob.perform_later(@scan)
@@ -22,6 +25,6 @@ class ScansController < ApplicationController
   private
 
   def scan_params
-    params.require(:scan).permit(:flyer)
+    params.require(:scan, :store).permit(:flyer, :store)
   end
 end
