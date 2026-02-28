@@ -6,6 +6,7 @@ class ScansController < ApplicationController
 
   def show
     @scan = Scan.find(params[:id])
+    @prices = @scan.store.prices
   end
 
   def create

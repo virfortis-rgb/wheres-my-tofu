@@ -9,8 +9,8 @@
   <div class="container">
     <%= @scan.store.name %>
     <ul class="list-group list-group-flush ">
-      <% ["Cheese", "tofu", "chicken", "bananas"].each do |product| %>
-        <li class="list-group-item"><%= product %></li>
+      <% @prices.each do |price| %>
+        <li class="list-group-item"><%= "#{price.product.name} ￥#{price.price_with_tax}" %></li>
       <% end %>
     </ul>
   </div>
