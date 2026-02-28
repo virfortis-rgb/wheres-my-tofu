@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_28_021241) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_28_025438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_021241) do
   create_table "scans", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id", null: false
+    t.index ["store_id"], name: "index_scans_on_store_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -235,6 +237,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_021241) do
   add_foreign_key "lists", "users"
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "stores"
+  add_foreign_key "scans", "stores"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
