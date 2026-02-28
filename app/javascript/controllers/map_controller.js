@@ -3,8 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
     token: String,
-    stores: Array,
-    allSelected: Boolean
+    stores: Array
   }
 
   connect() {
@@ -13,11 +12,9 @@ export default class extends Controller {
 
     const map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/standard",
+      style: "mapbox://styles/mapbox/streets-v12",
       center: [135.4547, 34.6776],
       zoom: 12,
-      pitch: 60,
-      bearing: 0,
       interactive: true
     })
 
@@ -29,7 +26,7 @@ export default class extends Controller {
       bounds.extend([this.storesValue[0].longitude, this.storesValue[0].latitude])
       map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
     } else if (this.storesValue.length > 1) {
-      map.on('load', () => this.optimizeRouteAndAnimate(map, this.allSelectedValue))
+      map.on('load', () => this.optimizeRoute(map))
     }
   }
 
@@ -61,7 +58,7 @@ export default class extends Controller {
       .addTo(map)
   }
 
-  async optimizeRouteAndAnimate(map, shouldAnimate) {
+  async optimizeRoute(map) {
     const mapboxgl = window.mapboxgl
     const coords = this.storesValue
       .map(s => `${s.longitude},${s.latitude}`)
@@ -78,7 +75,6 @@ export default class extends Controller {
       if (!data.trips || data.trips.length === 0) return
 
       // Remap stores into the optimized visit order
-      // data.waypoints[i] = input store i, .waypoint_index = its position in optimized trip
       const optimizedStores = new Array(this.storesValue.length)
       data.waypoints.forEach((wp, inputIndex) => {
         optimizedStores[wp.waypoint_index] = this.storesValue[inputIndex]
@@ -113,69 +109,8 @@ export default class extends Controller {
         layout: { 'line-join': 'round', 'line-cap': 'round' },
         paint: { 'line-color': '#266533', 'line-width': 4, 'line-opacity': 0.9 }
       })
-
-      if (shouldAnimate) {
-        setTimeout(() => this.animateCamera(map, geometry.coordinates, bounds), 1200)
-      }
     } catch (e) {
       console.error('Route optimization failed:', e)
     }
-  }
-
-  animateCamera(map, routeCoords, bounds) {
-    const turf = window.turf
-    if (!turf) return
-
-    const mapboxgl = window.mapboxgl
-    const animationDuration = 20000
-    const cameraAltitude = 350
-
-    const routeLine = turf.lineString(routeCoords)
-    const routeDistance = turf.lineDistance(routeLine)
-
-    let start
-    let animationId
-
-    const stopAnimation = () => {
-      if (animationId) cancelAnimationFrame(animationId)
-      map.off('mousedown', stopAnimation)
-      map.off('touchstart', stopAnimation)
-    }
-    map.on('mousedown', stopAnimation)
-    map.on('touchstart', stopAnimation)
-
-    const showOverview = () => {
-      map.fitBounds(bounds, {
-        padding: 80,
-        maxZoom: 15,
-        pitch: 0,
-        bearing: 0,
-        duration: 2500
-      })
-    }
-
-    const frame = (time) => {
-      if (!start) start = time
-      const phase = Math.min((time - start) / animationDuration, 1)
-
-      const along = turf.along(routeLine, routeDistance * phase).geometry.coordinates
-      const lookAhead = turf.along(routeLine, routeDistance * Math.min(phase + 0.015, 1)).geometry.coordinates
-
-      const camera = map.getFreeCameraOptions()
-      camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
-        { lng: along[0], lat: along[1] },
-        cameraAltitude
-      )
-      camera.lookAtPoint({ lng: lookAhead[0], lat: lookAhead[1] })
-      map.setFreeCameraOptions(camera)
-
-      if (phase < 1) {
-        animationId = window.requestAnimationFrame(frame)
-      } else {
-        setTimeout(showOverview, 600)
-      }
-    }
-
-    animationId = window.requestAnimationFrame(frame)
   }
 }
