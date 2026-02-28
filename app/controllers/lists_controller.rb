@@ -6,9 +6,8 @@ class ListsController < ApplicationController
   end
 
   def show
-    @items = @list.items
+    @items = @list.items.includes(price: :store)
     @item = Item.new
-    @stores = @list.stores.distinct
   end
 
   def new

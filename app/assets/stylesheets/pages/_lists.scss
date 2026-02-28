@@ -258,24 +258,34 @@
   }
 }
 
-// Outer row: toggle button + delete side by side
+// ── TWO-LINE LAYOUT START ──
+
+// Outer wrapper becomes a vertical column
 .show-item-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
-// Accordion toggle — three-column grid, takes all remaining space
+// Line 1: Top Bar
+.item-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+// Accordion toggle button (Line 1 Clickable area)
 .show-item-btn {
   flex: 1;
   min-width: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem 0.75rem 1rem 1.1rem;
+  padding: 1rem 0.5rem 0.25rem 1.1rem; // Less bottom padding to keep Line 2 close
   background: transparent;
   border: none;
   cursor: pointer;
-  text-align: left;
 
   &:focus { outline: none; }
 
@@ -284,31 +294,29 @@
   }
 }
 
-// Delete button sits outside the toggle button
-.item-delete {
-  flex-shrink: 0;
-  margin-right: 0.75rem;
-}
-
-.item-col-left {
+// Use flex: 1 to evenly distribute 3 sections: Left, Center, Right
+.item-label-container {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  min-width: 0;
   justify-content: flex-start;
+  min-width: 0; // Essential for text truncation
 }
 
-.item-col-mid {
-  text-align: center;
-  padding: 0 0.5rem;
-}
-
-.item-col-price {
+.item-qty-container {
+  flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
 }
 
+.price-dropdown-group {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// Text styling for Top Bar
 .item-label {
   font-family: $headers-font;
   font-size: 1rem;
@@ -317,6 +325,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.item-quantity {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
 }
 
 .item-price-label {
@@ -333,6 +348,38 @@
   color: $green;
   transition: transform 0.2s;
 }
+
+// Delete Button Area
+.item-delete-wrapper {
+  flex-shrink: 0;
+  padding: 1rem 0.75rem 0.25rem 0;
+}
+
+.item-delete {
+  flex-shrink: 0;
+}
+
+// Line 2: Bottom Bar (Description)
+.item-bottom-line {
+  width: 100%;
+  padding: 0 1.1rem 1rem 1.1rem; // Only bottom/side paddings
+  cursor: pointer;
+  text-align: left;
+
+  &:focus { outline: none; }
+}
+
+.item-product-name {
+  display: block; // Ensures the text ellipsis applies to full width
+  font-size: 0.85rem;
+  color: #bebebe;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+// ── TWO-LINE LAYOUT END ──
 
 // Add item form
 .add-item-form {
