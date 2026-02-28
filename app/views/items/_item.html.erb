@@ -9,11 +9,13 @@
             aria-expanded="false"
             aria-controls="collapse<%= item.id %>">
       <%# Left: name %>
-      <div class="item-col-left">
+      <div class="item-col-main-info">
         <span class="item-label"><%= item.name.capitalize %></span>
+        <span id="item_<%= item.id %>_description" class="item-product-name">
+          <%= item.price&.product&.description %>
       </div>
       <%# Centre: quantity %>
-      <div class="item-col-mid">
+      <div class="item-col-quantity">
         <span class="item-label">× <%= item.quantity %></span>
       </div>
       <%# Price %>

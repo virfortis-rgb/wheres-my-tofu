@@ -15,3 +15,9 @@
   <% list_total = @list.items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
   <span id="list_total" class="total-price">¥<%= list_total %></span>
 <% end %>
+
+<%= turbo_stream.replace "item_#{@item.id}_description" do %>
+  <span id="item_<%= @item.id %>_description" class="item-product-name">
+    <%= @item.price&.product&.description %>
+  </span>
+<% end %>

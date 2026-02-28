@@ -262,6 +262,7 @@
 .show-item-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 // Accordion toggle — three-column grid, takes all remaining space
@@ -290,15 +291,29 @@
   margin-right: 0.75rem;
 }
 
-.item-col-left {
+.item-col-main-info {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
   min-width: 0;
-  justify-content: flex-start;
+
+  .item-label {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .item-product-name {
+    font-size: 0.85rem;
+    color: #bebebe;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-.item-col-mid {
+.item-col-quantity {
   text-align: center;
   padding: 0 0.5rem;
 }
@@ -317,6 +332,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.item-label.product-name {
+  font-size: 0.8rem;
+  font-weight: 100;
+  color: #d3d3d3;
 }
 
 .item-price-label {
