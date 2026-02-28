@@ -1,7 +1,17 @@
-<div class="container">
-  <p>You just scanned this:</p>
+<div class="container mt-3">
+  <p>You just scanned this flyer:</p>
+  <div class="container mb-3">
+    <%= link_to 'Check it out here', @scan.flyer.url, target: "_blank" %>
+  </div>
+  <div class="container mb-3">
+    <%= cl_image_tag @scan.flyer.key, height: 300, width: 400, crop: :fill %>
+  </div>
   <div class="container">
-    <p><%= @scan %></p>
-    <p><%= @scan.flyer.url %></p>
+    <%= @scan.store.name %>
+    <ul class="list-group list-group-flush ">
+      <% ["Cheese", "tofu", "chicken", "bananas"].each do |product| %>
+        <li class="list-group-item"><%= product %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
