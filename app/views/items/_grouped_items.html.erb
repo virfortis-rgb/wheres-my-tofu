@@ -2,7 +2,7 @@
   <% items.group_by { |item| item.price&.store }.each do |store, items| %>
     <div class="store-group-container mb-4">
       <h5 class="store-group-title mb-3 px-1 text-muted">
-        <%= store.name %>
+        <%= store&.name || "No Store Assigned" %>
       </h5>
       <% items.each do |item| %>
         <%= render "items/item", item: item, list: @list %>

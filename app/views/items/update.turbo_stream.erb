@@ -27,9 +27,3 @@
     <%= render partial: "items/grouped_items", locals: { items: @list.items, list: @list } %>
   </div>
 <% end %>
-
-<%= turbo_stream.replace "grouped-items-container" do %>
-  <div id="grouped-items-container">
-    <%= render partial: "items/grouped_items", locals: { items: @list.items, list: @list } %>
-  </div>
-<% end %>

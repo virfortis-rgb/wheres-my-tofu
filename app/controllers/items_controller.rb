@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
   def attach
     @item = @list.items.new(name: params[:query], keyword: params[:query].downcase, quantity: 1)
     # @item.quantity = 1
-    @items = @list.items.includes(price: :store)
     if @item.save!
       respond_to do |format|
         format.turbo_stream
@@ -21,6 +20,7 @@ class ItemsController < ApplicationController
 
 def update
   if @item.update(item_params)
+    @stores = @list.items.map { |item| item.price&.store }.uniq
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
