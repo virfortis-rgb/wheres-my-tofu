@@ -12,7 +12,7 @@
       <% @prices.each do |price| %>
         <li class="list-group-item">
           <%= "#{price.product.name} ￥#{price.price_with_tax}" %>
-          <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs-toggle: "modal", bs-target: "#editModal#{price.id}"} %>
+          <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
         </li>
         <%= render "prices/edit", price: price, scan_id: @scan.id %>
       <% end %>
