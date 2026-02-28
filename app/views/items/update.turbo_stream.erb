@@ -1,0 +1,17 @@
+<%= turbo_stream.replace "item_#{@item.id}_price" do %>
+  <span id="item_<%= @item.id %>_price" class="item-price-label">
+    <%= @item.display_total_price %>
+  </span>
+<% end %>
+
+
+<%= turbo_stream.replace "item_#{@item.id}_prices_body" do %>
+  <div id="item_<%= @item.id %>_prices_body" class="show-accordion-body">
+    <%= render "items/prices_body", item: @item, list: @list %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "list_total" do %>
+  <% list_total = @list.items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
+  <span id="list_total" class="total-price">¥<%= list_total %></span>
+<% end %>
