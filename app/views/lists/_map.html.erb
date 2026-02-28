@@ -1,0 +1,26 @@
+<div id="map-container" class="map-card">
+  <div class="map-card-header">
+    <span>🗺️</span>
+    <span class="map-card-title">Shopping Route</span>
+    <%# ask active_stores to list directly %>
+    <% if list.active_stores.present? %>
+      <span class="map-card-badge"><%= list.active_stores.length %> <%= list.active_stores.length == 1 ? "stop" : "stops" %></span>
+    <% end %>
+  </div>
+
+  <% if list.active_stores.present? && list.items.present? %>
+    <div id="map"
+        style="height: 280px;"
+        data-controller="map"
+        data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>"
+        data-map-stores-value="<%= list.active_stores.map { |s| { name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude } }.to_json %>"
+        data-map-all-selected-value="<%= list.all_items_selected? %>">
+    </div>
+  <% else %>
+    <div id="map"
+        style="height: 280px;"
+        data-controller="map"
+        data-map-token-value="<%= ENV['MAPBOX_TOKEN'] %>">
+    </div>
+  <% end %>
+</div>

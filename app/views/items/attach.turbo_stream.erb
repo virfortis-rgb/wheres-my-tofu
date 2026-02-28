@@ -1,20 +1,26 @@
+<%# update whole list %>
 <%= turbo_stream.replace "grouped-items-container" do %>
-  <div id="grouped-items-container">
-    <%= render partial: "items/grouped_items", locals: { items: @list.items, list: @list } %>
+  <div class="list-grouped-card mb-4" id="grouped-items-container">
+    <%= render "items/grouped_items", items: @list.items, list: @list %>
   </div>
 <% end %>
 
-<%= turbo_stream.remove "empty-state" %>
+<%# update total  %>
+<%= turbo_stream.replace "list_total" do %>
+  <% list_total = @list.items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
+  <span id="list_total" class="total-price">¥<%= list_total %></span>
+<% end %>
 
+<%# 3. empty input field %>
 <%= turbo_stream.replace "new_item_form" do %>
-  <%= form_with url: attach_list_items_path(@list),
-                scope: :item,
-                method: :post,
-                id: "new_item_form",
-                class: "add-item-form" do %>
+  <%= form_with url: attach_list_items_path(@list), scope: :item, method: :post, id: "new_item_form", class: "add-item-form" do %>
     <%= label_tag :query, "Add an Item", class: "visually-hidden" %>
-
     <%= text_field_tag :query, "", class: "add-item-input", placeholder: "Add an item…" %>
     <%= submit_tag "+", class: "add-item-btn" %>
   <% end %>
+<% end %>
+
+<%# 4. update pin on the map %>
+<%= turbo_stream.replace "map-container" do %>
+  <%= render partial: "lists/map", locals: { list: @list } %>
 <% end %>

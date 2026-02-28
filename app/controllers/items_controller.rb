@@ -19,16 +19,15 @@ class ItemsController < ApplicationController
   end
 
 def update
-  if @item.update(item_params)
-    @stores = @list.items.map { |item| item.price&.store }.uniq
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
+    if @item.update(item_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
+      end
+    else
+      redirect_to list_path(@list), alert: 'Failed to update item.'
     end
-  else
-    redirect_to list_path(@list), alert: 'Failed to update item.'
   end
-end
 
   def destroy
     @item.destroy
