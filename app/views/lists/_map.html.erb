@@ -2,7 +2,7 @@
   <div class="map-card-header">
     <span>🗺️</span>
     <span class="map-card-title">Shopping Route</span>
-    <%# ask active_stores to list directly %>
+    <%# fetch active_stores from list directly %>
     <% if list.active_stores.present? %>
       <span class="map-card-badge"><%= list.active_stores.length %> <%= list.active_stores.length == 1 ? "stop" : "stops" %></span>
     <% end %>

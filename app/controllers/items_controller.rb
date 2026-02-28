@@ -27,7 +27,7 @@ def update
     else
       redirect_to list_path(@list), alert: 'Failed to update item.'
     end
-  end
+end
 
   def destroy
     @item.destroy
