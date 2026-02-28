@@ -7,7 +7,7 @@ class List < ApplicationRecord
   validates :name, presence: :true
 
   def active_stores
-    items.filter_map { |item| item.price&.store }.uniq
+    stores.distinct
   end
 
   def all_items_selected?

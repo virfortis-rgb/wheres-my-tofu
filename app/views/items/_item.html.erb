@@ -1,39 +1,64 @@
 <div class="list-card flex-column align-items-stretch p-0 overflow-hidden">
-  <%# Row %>
+  <%# Row Wrapper for 2-line layout %>
   <div class="show-item-row">
-    <%# Clickable area toggles accordion %>
-    <button class="show-item-btn collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse<%= item.id %>"
-            aria-expanded="false"
-            aria-controls="collapse<%= item.id %>">
-      <%# Left: name %>
-      <div class="item-col-main-info">
-        <span class="item-label"><%= item.name.capitalize %></span>
-        <span id="item_<%= item.id %>_description" class="item-product-name">
-          <%= item.price&.product&.description %>
+
+    <%# ── LINE 1: Top Bar (Name, Qty, Price, Delete) ── %>
+    <div class="item-top-line">
+
+      <%# Clickable Button Area (Takes up remaining space) %>
+      <button class="show-item-btn collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse<%= item.id %>"
+              aria-expanded="false"
+              aria-controls="collapse<%= item.id %>">
+
+        <%# Left: Name %>
+        <div class="item-label-container">
+          <span class="item-label"><%= item.name.capitalize %></span>
+        </div>
+
+        <%# Center: Quantity %>
+        <div class="item-qty-container">
+          <span class="item-quantity">x <%= item.quantity %></span>
+        </div>
+
+        <%# Right: Price & Chevron %>
+        <div class="price-dropdown-group">
+          <span id="item_<%= item.id %>_price" class="item-price-label">
+            <%= item.display_total_price %>
+          </span>
+          <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
+        </div>
+      </button>
+
+      <%# Delete Form (Outside button) %>
+      <div class="item-delete-wrapper">
+        <%= button_to list_item_path(@list, item),
+            method: :delete,
+            class: "btn-delete item-delete",
+            form: { data: { turbo_confirm: "Remove this item?" } } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       </div>
-      <%# Centre: quantity %>
-      <div class="item-col-quantity">
-        <span class="item-label">× <%= item.quantity %></span>
-      </div>
-      <%# Price %>
-      <div class="item-col-price">
-        <span id="item_<%= item.id %>_price" class="item-price-label">
-          <%= item.display_total_price %>
-        </span>
-        <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
-      </div>
-    </button>
-    <%# Delete — outside the button so it fires correctly %>
-    <%= button_to list_item_path(@list, item),
-        method: :delete,
-        class: "btn-delete item-delete",
-        form: { data: { turbo_confirm: "Remove this item?" } } do %>
-      <i class="fa-solid fa-trash"></i>
-    <% end %>
+    </div>
+
+    <%# ── LINE 2: Bottom Bar (Description) ── %>
+    <%# Made clickable to expand accordion as well %>
+    <div class="item-bottom-line collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse<%= item.id %>"
+        aria-expanded="false"
+        aria-controls="collapse<%= item.id %>"
+        role="button"
+        tabindex="0">
+      <span id="item_<%= item.id %>_description" class="item-product-name">
+        <%= item.price&.product&.description %>
+      </span>
+    </div>
+
   </div>
+
   <%# Accordion body — product price cards %>
   <div id="collapse<%= item.id %>"
       class="accordion-collapse collapse"
