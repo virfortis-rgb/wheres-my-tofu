@@ -12,34 +12,9 @@
       <% @prices.each do |price| %>
         <li class="list-group-item">
           <%= "#{price.product.name} ￥#{price.price_with_tax}" %>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<% price.id %>">
-            Launch demo modal
-          </button>
-          <div class="modal fade" id="editModal<% price.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Check and Edit</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <%= simple_form_for price do |f|%>
-                    <%= simple_form_for price.product, url: "#", html: {id: price.product.id} do |pf| %>
-                      <%= pf.input :name, label: "Product Name" %>
-                      <%= pf.input :description, label: "Description" %>
-                    <% end %>
-                    <%= f.input :price_without_tax, label: "Price without tax" %>
-                    <%= f.input :price_with_tax %>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <%= f.submit "Save Changes", class: "btn btn-primary" %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs-toggle: "modal", bs-target: "#editModal#{price.id}"} %>
         </li>
+        <%= render "prices/edit", price: price, scan_id: @scan.id %>
       <% end %>
     </ul>
   </div>
