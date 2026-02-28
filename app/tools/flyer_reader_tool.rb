@@ -1,6 +1,6 @@
 class FlyerReaderTool < RubyLLM::Tool
   description "Use this tool to extract products and prices from a flyer and add it to the DB.
-              If the product or price does not already exist, create them."
+              If the product or price does not already exist in the DB, create them."
 
   param :product_name, desc: "商品名"
   param :product_description, desc: "商品説明文"

@@ -11,8 +11,6 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
-    # @scan.flyer.attach(params[:scan][:flyer])
-    # @scan.store = Store.find(params[:scan][:store])
     if @scan.save
       flash[:notice] = "Retrieving informtion from the flyer."
       AddFlyerDataToDbJob.perform_later(@scan)
