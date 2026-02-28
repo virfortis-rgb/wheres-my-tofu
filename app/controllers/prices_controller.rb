@@ -2,13 +2,14 @@ class PricesController < ApplicationController
 
   def update
     @price = Price.find(params[:id])
-    if params[:price][:product_attributes]
-      @price.product.update(
-        name: params[:price][:product_attributes][:name],
-        description: params[:price][:product_attributes][:description]
-      )
-    end
+    # if params[:price][:product]
+    #   @price.product.update(
+    #     name: params[:price][:product][:name],
+    #     description: params[:price][:product][:description]
+    #   )
+    # end
     if @price.update(price_params)
+      # TODO for some reason not actually saving to DB!
       redirect_to scan_path(params[:scan_id]), notice: "Updated!"
     else
       redirect_to scan_path(params[:scan_id]), alert: "Failed to update!"
@@ -21,8 +22,6 @@ class PricesController < ApplicationController
   private
 
   def price_params
-    params.require(:price).permit(:price_with_tax, :price_without_tax)
+    params.require(:price).permit(:price_with_tax, :price_without_tax, product: [:id, :name, :description])
   end
 end
-
-# , product: [:id, :name, :description]
