@@ -2,6 +2,7 @@ class ScansController < ApplicationController
   def new
     @scan = Scan.new
     @stores = Store.all # confine to user's stores
+    @scans = Scan.all.order(created_at: :desc)
   end
 
   def show

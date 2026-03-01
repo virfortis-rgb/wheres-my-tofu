@@ -1,4 +1,7 @@
 <div class="container mt-3">
+  <%= link_to new_scan_path, class: "back-link" do %>
+    <i class="fa-solid fa-chevron-left me-1"></i>Back
+  <% end %>
   <p>You just scanned this flyer:</p>
   <div class="container mb-3">
     <%= link_to 'Check it out here', @scan.flyer.url, target: "_blank" %>

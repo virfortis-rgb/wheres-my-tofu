@@ -1,12 +1,20 @@
-<div class="container">
-  <h2>Add a new flyer to the DB</h2>
-  <div class="container">
+<div class="container mt-3">
+  <h2>Upload a Flyer</h2>
+  <div class="container mb-5">
     <%= simple_form_for @scan do |f| %>
       <%= f.input :store_id, collection: @stores, label_method: :name %>
       <%= f.input :flyer, as: :file, label: "Upload a file (pdf or image): " %>
       <%= f.submit %>
     <% end %>
   </div>
-  <div class="container">
+  <div class="container mb-3">
+    <h3>Uploaded Flyers</h3>
+    <ul class="list-group">
+      <%= @scans.each_with_index do |scan, index| %>
+        <li class="list-group-item">
+          <%= link_to "#{index + 1}. Flyer for #{scan.store.name}", scan_path(scan) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
