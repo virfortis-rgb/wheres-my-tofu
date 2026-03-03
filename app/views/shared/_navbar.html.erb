@@ -1,11 +1,9 @@
 <nav class="bottom-tabs" aria-label="Primary">
-  <!-- Brand (hidden on mobile, visible on desktop) -->
   <div class="nav-brand">
     <%= link_to root_path, class: "brand-link" do %>
       🥬 <span>Where's My Tofu</span>
     <% end %>
   </div>
-  <!-- Navigation Links -->
   <div class="nav-links">
     <%= link_to root_path,
         class: "bottom-tab #{'active' if current_page?(root_path)}" do %>
@@ -17,6 +15,11 @@
         class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
         <i class="fa-solid fa-list"></i>
         <span>Lists</span>
+      <% end %>
+      <%= link_to  new_scan_path,
+        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
+        <i class="fa-solid fa-plus"></i>
+        <span>Add a Flyer</span>
       <% end %>
       <%= link_to destroy_user_session_path,
           data: { turbo_method: :delete },
