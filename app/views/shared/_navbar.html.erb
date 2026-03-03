@@ -12,19 +12,6 @@
       <i class="fa-solid fa-house"></i>
       <span>Home</span>
     <% end %>
-<<<<<<< HEAD
-    <%= link_to lists_index_path,
-        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
-      <i class="fa-solid fa-list"></i>
-      <span>Lists</span>
-    <% end %>
-    <%= link_to scans_new_path,
-        class: "bottom-tab #{'active' if current_page?(scans_new_path)}" do %>
-      <i class="fa-solid fa-plus"></i>
-      <span>Upload a Flyer</span>
-    <% end %>
-=======
->>>>>>> master
     <% if user_signed_in? %>
       <%= link_to lists_index_path,
         class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
