@@ -13,11 +13,16 @@
     <%= @scan.store.name %>
     <ul class="list-group list-group-flush ">
       <% @prices.each do |price| %>
-        <li class="list-group-item">
+        <li class="list-group-item d-flex justify-content-between">
           <%= "#{price.product.name} ￥#{price.price_with_tax}" %>
-          <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
+          <div class="d-flex gap-2">
+            <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
+            <%= render "prices/edit", price: price, scan_id: @scan.id %>
+            <%= button_to price, method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Delete this product?" } } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
         </li>
-        <%= render "prices/edit", price: price, scan_id: @scan.id %>
       <% end %>
     </ul>
   </div>

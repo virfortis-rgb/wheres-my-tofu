@@ -10,6 +10,8 @@ class PricesController < ApplicationController
   end
 
   def destroy
+    @price.destroy
+    redirect_to scan_path(params[:id]), notice: 'The Product was successfully deleted.'
   end
 
   private
