@@ -1,5 +1,5 @@
 class ScansController < ApplicationController
-  before_action :set_scan, only: [:show]
+  before_action :set_scan, only: [:show, :destroy]
 
   def new
     @scan = Scan.new
@@ -20,6 +20,11 @@ class ScansController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @scan.destroy
+    redirect_to new_scan_path, notice: 'Flyer was successfully deleted.'
   end
 
   private

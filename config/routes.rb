@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :scans, only: [:new, :show, :create]
+  resources :scans, only: [:new, :show, :create, :destroy]
   resources :prices, only: [:update, :destroy]
 end

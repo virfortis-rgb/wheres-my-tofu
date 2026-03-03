@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= simple_fields_for :product, price.product do |pf| %>
+          <%= f.simple_fields_for :product_attributes, price.product do |pf| %>
             <%= pf.hidden_field :id %>
             <%= pf.input :name, label: "Product Name" %>
             <%= pf.input :description, label: "Description" %>
