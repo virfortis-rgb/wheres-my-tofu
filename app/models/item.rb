@@ -28,6 +28,6 @@ class Item < ApplicationRecord
 
   def display_total_price
     return "¥ --" unless price
-    "¥#{(price.price_with_tax * quantity)}"
+    "¥%.1f" % (price.price_with_tax * quantity)
   end
 end
