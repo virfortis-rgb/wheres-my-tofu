@@ -55,6 +55,14 @@
       <span id="item_<%= item.id %>_description" class="item-product-name">
         <%= item.price&.product&.description %>
       </span>
+      <span>
+        <% potential_savings = item.savings_if_cheapest %>
+        <% if potential_savings > 0 %>
+          <div style="font-size: 0.75rem; color: #f16838; margin-top: 2px;">
+            Pick the best price to save ¥<%= "%.1f" % potential_savings %>
+          </div>
+        <% end %>
+      </span>
     </div>
 
   </div>

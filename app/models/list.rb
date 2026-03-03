@@ -13,4 +13,8 @@ class List < ApplicationRecord
   def all_items_selected?
     items.any? && items.all? { |item| item.price_id.present? }
   end
+
+  def total_potential_savings
+    items.sum { |item| item.savings_if_cheapest || 0 }
+  end
 end

@@ -30,4 +30,12 @@ class Item < ApplicationRecord
     return "¥ --" unless price
     "¥%.1f" % (price.price_with_tax * quantity)
   end
+
+  def savings_if_cheapest
+    product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q", q: "%#{keyword}%").pluck(:id)
+    lowest_price_record = Price.where(product_id: product_ids).order(price_with_tax: :asc).first
+    return 0 if price_id.nil? || lowest_price_record.nil?
+    return 0 if price.price_with_tax <= lowest_price_record.price_with_tax
+    (price.price_with_tax - lowest_price_record.price_with_tax) * quantity
+  end
 end
