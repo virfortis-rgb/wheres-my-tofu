@@ -1,4 +1,6 @@
 class ScansController < ApplicationController
+  before_action :set_scan, only: [:show]
+
   def new
     @scan = Scan.new
     @stores = Store.all # confine to user's stores
@@ -6,7 +8,6 @@ class ScansController < ApplicationController
   end
 
   def show
-    @scan = Scan.find(params[:id])
     @prices = @scan.store.prices
   end
 
@@ -22,6 +23,10 @@ class ScansController < ApplicationController
   end
 
   private
+
+  def set_scan
+    @scan = Scan.find(params[:id])
+  end
 
   def scan_params
     params.require(:scan).permit(:flyer, :store_id)
