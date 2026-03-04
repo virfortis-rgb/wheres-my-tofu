@@ -39,6 +39,7 @@
 
 // ── LIST CARDS ──────────────────────────────────────
 .list-card {
+  position:relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -527,6 +528,18 @@
   background: #f4fbf5;
   border-top: 1px solid #e8f5ec;
   padding: 0.75rem 0;
+}
+
+.potential-saving-outside{
+  background: #f16838;
+  color: $white;
+  border-radius: 25px;
+  position:absolute;
+  padding: 2px 10px;
+  right: 50px;
+  top: 50px;
+  display: inline-block;
+  font-size: 8px;
 }
 
 /* store groups box*/
