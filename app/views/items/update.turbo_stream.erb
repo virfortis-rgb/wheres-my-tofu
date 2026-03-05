@@ -6,10 +6,7 @@
 <% end %>
 
 <%# update total  %>
-<%= turbo_stream.replace "list_total" do %>
-  <% list_total = @list.items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
-  <span id="list_total" class="total-price">¥<%= list_total %></span>
-<% end %>
+<%= turbo_stream.replace "list_total_card", partial: "lists/total", locals: { list: @list, items: @list.items } %>
 
 <%# 3. update map %>
 <%= turbo_stream.replace "map-container" do %>
