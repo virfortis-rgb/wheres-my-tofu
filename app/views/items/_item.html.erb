@@ -55,6 +55,14 @@
       <span id="item_<%= item.id %>_description" class="item-product-name">
         <%= item.price&.product&.description %>
       </span>
+      <span>
+        <% potential_saving = item.savings_if_cheapest %>
+        <% if potential_saving > 0 %>
+          <div class="potential-saving-outside">
+            Save up to <b> ¥<%= "%.1f" % potential_saving %> </b>
+          </div>
+        <% end %>
+      </span>
     </div>
 
   </div>
