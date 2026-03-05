@@ -1,38 +1,82 @@
-<nav class="bottom-tabs" aria-label="Primary">
+<%# ── TOP HEADER: always visible at the top of every page ── %>
+<header class="top-header">
+
+  <%# Brand (left) %>
   <div class="nav-brand">
     <%= link_to root_path, class: "brand-link" do %>
       🥬 <span>Where's My Tofu</span>
     <% end %>
   </div>
-  <div class="nav-links">
+
+  <%# Desktop-only nav links (hidden on mobile, shown ≥ 768 px) %>
+  <nav class="header-links" aria-label="Primary navigation">
     <%= link_to root_path,
-        class: "bottom-tab #{'active' if current_page?(root_path)}" do %>
+        class: "header-tab #{'active' if current_page?(root_path)}" do %>
       <i class="fa-solid fa-house"></i>
       <span>Home</span>
     <% end %>
     <% if user_signed_in? %>
       <%= link_to lists_index_path,
-        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
+          class: "header-tab #{'active' if current_page?(lists_index_path)}" do %>
         <i class="fa-solid fa-list"></i>
         <span>Lists</span>
       <% end %>
-      <%= link_to  new_scan_path,
-        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
+      <%= link_to new_scan_path,
+          class: "header-tab #{'active' if current_page?(new_scan_path)}" do %>
         <i class="fa-solid fa-plus"></i>
         <span>Add a Flyer</span>
       <% end %>
-      <%= link_to destroy_user_session_path,
-          data: { turbo_method: :delete },
-          class: "bottom-tab" do %>
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Logout</span>
-      <% end %>
-    <% else %>
-      <%= link_to new_user_session_path,
-          class: "bottom-tab #{'active' if current_page?(new_user_session_path)}" do %>
-        <i class="fa-solid fa-user"></i>
-        <span>Login</span>
-      <% end %>
     <% end %>
+  </nav>
+
+  <%# User icon + dropdown (top right, always visible on all screen sizes) %>
+  <div class="user-menu" data-controller="dropdown">
+    <button class="user-btn"
+            data-action="click->dropdown#toggle"
+            aria-label="Account menu"
+            aria-haspopup="true">
+      <i class="fa-solid fa-circle-user"></i>
+    </button>
+
+    <div class="user-dropdown" data-dropdown-target="menu" role="menu">
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path,
+            data: { turbo_method: :delete },
+            class: "dropdown-item",
+            role: "menuitem" do %>
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path,
+            class: "dropdown-item",
+            role: "menuitem" do %>
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+
+</header>
+
+<%# ── MOBILE BOTTOM TABS: nav links only, hidden on desktop ── %>
+<nav class="bottom-tabs" aria-label="Mobile navigation">
+  <%= link_to root_path,
+      class: "bottom-tab #{'active' if current_page?(root_path)}" do %>
+    <span class="tab-icon"><i class="fa-solid fa-house"></i></span>
+    <span class="tab-label">Home</span>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to lists_index_path,
+        class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
+      <span class="tab-icon"><i class="fa-solid fa-list"></i></span>
+      <span class="tab-label">Lists</span>
+    <% end %>
+    <%= link_to new_scan_path,
+        class: "bottom-tab #{'active' if current_page?(new_scan_path)}" do %>
+      <span class="tab-icon"><i class="fa-solid fa-plus"></i></span>
+      <span class="tab-label">Add a Flyer</span>
+    <% end %>
+  <% end %>
 </nav>
