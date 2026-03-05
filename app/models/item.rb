@@ -9,25 +9,36 @@ class Item < ApplicationRecord
 
 
   def prices_grouped_by_store
-    product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q", q: "%#{keyword}%").pluck(:id)
-
     prices = Price.includes(:store, :product)
-                  .where(product_id: product_ids)
+                  .where(product_id: matching_product_ids)
                   .order(price_with_tax: :asc)
 
     prices.group_by(&:store)
   end
 
   def auto_assign_lowest_price
-    product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q", q: "%#{keyword}%").pluck(:id)
-    return if product_ids.empty?
-
-    lowest = Price.where(product_id: product_ids).order(price_with_tax: :asc).first
-    self.price = lowest if lowest
+    if lowest_available_price
+      self.price = lowest_available_price
+    end
   end
 
   def display_total_price
     return "¥ --" unless price
-    "¥#{(price.price_with_tax * quantity)}"
+    "¥%.1f" % (price.price_with_tax * quantity)
+  end
+
+  def savings_if_cheapest
+    return 0 if price_id.nil? || price.price_with_tax <= lowest_available_price.price_with_tax
+    (price.price_with_tax - lowest_available_price.price_with_tax) * quantity
+  end
+
+  private
+
+  def matching_product_ids
+    @matching_product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q", q: "%#{keyword}%").pluck(:id)
+  end
+
+  def lowest_available_price
+    @lowest_available_price = Price.where(product_id: matching_product_ids).order(price_with_tax: :asc).first
   end
 end

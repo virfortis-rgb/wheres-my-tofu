@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   get 'lists/index'
-
   get 'lists/new'
-  get 'lists/show'
+  get 'scans/show'
   devise_for :users
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
@@ -16,4 +15,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :scans, only: [:new, :show, :create, :destroy]
+  resources :prices, only: [:update, :destroy]
 end
