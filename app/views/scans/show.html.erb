@@ -14,7 +14,7 @@
     <ul class="list-group list-group-flush ">
       <% @prices.each do |price| %>
         <li class="list-group-item d-flex justify-content-between">
-          <%= "#{price.product.name} ￥#{price.price_with_tax}" %>
+          <%= "#{price.product.name} ￥#{price.price_without_tax}  ￥#{price.price_with_tax}(税込) image:#{price.product.image_url}" %>
           <div class="d-flex gap-2">
             <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
             <%= render "prices/edit", price: price, scan_id: @scan.id %>
