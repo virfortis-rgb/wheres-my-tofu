@@ -1,0 +1,15 @@
+<div class="accordion" id="itemsAccordion">
+  <% items.group_by { |item| item.price&.store }.each do |store, items| %>
+    <div class="store-group-container">
+      <div class="store-group-header">
+        <h5 class="store-group-title">
+          <%= store&.name || "No Store Available" %>
+        </h5>
+      </div>
+
+      <% items.each do |item| %>
+        <%= render "items/item", item: item, list: @list %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

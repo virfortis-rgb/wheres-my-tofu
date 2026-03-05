@@ -2,13 +2,18 @@
   <%# ── HEADER ── %>
   <div class="show-list-header px-4 pt-4 pb-3">
     <%= link_to lists_path, class: "back-link" do %>
-      <i class="fa-solid fa-chevron-left me-1"></i>Back
+      <i class="fa-solid fa-chevron-left me-1"></i> Back
     <% end %>
   </div>
-  <div class="container bg-white border border-success-subtle rounded-5 mb-5">
-    <h1 class="show-list-title my-3">🛒 <%= @list.name.capitalize %></h1>
+
+  <div class="container bg-white border border-success-subtle rounded-5 mb-5 shadow-sm">
+    <div class="text-center pt-4">
+      <%= image_tag("Tofu Logo.png", height: 50, class: "logo mb-2") %>
+      <h1 class="show-list-title"><%= @list.name.capitalize %></h1>
+    </div>
+
     <%# ── ADD ITEM FORM ── %>
-    <div class="px-4 mb-3">
+    <div class="px-3 px-md-4 mb-4 mt-3">
       <%= form_with url: attach_list_items_path(@list),
                   scope: :item,
                   method: :post,
@@ -24,18 +29,25 @@
           class: "add-item-btn" %>
       <% end %>
     </div>
-    <%# ── ITEMS ── %>
-    <div class="lists-body px-4 pb-5">
-      <div class="list-grouped-card mb-4" id="grouped-items-container"> <%#  we can add some style here%>
-        <%= render "items/grouped_items", items: @items, list: @list %>
-        <% if @items.empty? %>
+
+    <%# ── ITEMS SECTION ── %>
+    <div class="lists-body px-3 px-md-4 pb-5">
+      <div id="grouped-items-container">
+        <% if @items.any? %>
+          <%# This renders the dotted store boxes defined in your SCSS %>
+          <%= render "items/grouped_items", items: @items, list: @list %>
+        <% else %>
           <div id="empty-state" class="lists-empty text-center py-5">
-            <div class="empty-icon">TODO add WMT logo</div>
+            <div class="empty-icon">
+              <%= image_tag("Tofu Logo.png", height: 75, class: "logo opacity-50") %>
+            </div>
             <p class="mt-3 text-muted">You haven't added anything yet.<br>
               Add your first one above!</p>
           </div>
         <% end %>
       </div>
+
+      <%# ── TOTAL PRICE CARD ── %>
       <div class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-center">
         <span class="total-label">Total</span>
         <% list_total = @items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
@@ -43,6 +55,7 @@
       </div>
     </div>
   </div>
+
   <%# ── MAP ── %>
   <div class="px-4 mb-5">
     <%= render partial: "lists/map", locals: { list: @list } %>

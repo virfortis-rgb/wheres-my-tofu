@@ -1,4 +1,56 @@
-// Lists index page
+// ── STORE GROUP CONTAINER ─────────────────────
+.store-group-container {
+  display: block !important;
+  border: 1.0px dashed rgba(38, 101, 51, 0.317); // Your brand green
+  border-radius: 20px;         // Slightly rounder for a modern mobile feel
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(51, 149, 81, 0.06);
+
+  // Mobile-first spacing
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+
+  .store-group-title {
+    font-family: $headers-font;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: $basil;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px dashed rgba(38, 101, 51, 0.1);
+    padding-bottom: 0.6rem;
+
+    // Optional: Store Emoji
+    &::before {
+      content: "🛒";
+      font-size: 1rem;
+    }
+  }
+
+  // Clean up nested items inside the dotted container
+  .show-accordion-item {
+    border: 1.5px solid #e8f5ec;
+    box-shadow: none; // Cleaner look when nested
+    margin-bottom: 0.6rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .store-group-container {
+    padding: 1.5rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// ── EXISTING LISTS SCSS ──────────────────────────────
 
 .lists-page {
   min-height: 100svh;
@@ -73,9 +125,7 @@
     text-overflow: ellipsis;
     max-width: 180px;
 
-    &:hover {
-      color: $green;
-    }
+    &:hover { color: $green; }
   }
 
   .list-meta {
@@ -101,7 +151,6 @@
     border-radius: 50%;
     color: $basil;
     text-decoration: none;
-    font-size: 0.85rem;
 
     &:hover {
       background: $basil;
@@ -119,9 +168,7 @@
     border: none;
     border-radius: 50%;
     color: #e55;
-    font-size: 0.8rem;
     cursor: pointer;
-    padding: 0;
 
     &:hover {
       background: #e55;
@@ -140,10 +187,7 @@
     font-weight: 600;
     color: $basil;
     text-decoration: none;
-
-    &:hover {
-      color: $dark-green;
-    }
+    &:hover { color: $dark-green; }
   }
 
   .new-list-title {
@@ -151,12 +195,6 @@
     font-size: 1.8rem;
     font-weight: 700;
     color: $gray;
-    margin-bottom: 0.15rem;
-  }
-
-  .new-list-subtitle {
-    font-size: 0.9rem;
-    color: #6c757d;
   }
 }
 
@@ -167,39 +205,16 @@
   border: 1.5px solid #cce8d4;
   box-shadow: 0 4px 16px rgba(51, 149, 81, 0.1);
 
-  .new-list-icon {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 1.25rem;
-  }
-
-  .new-list-label {
-    font-family: $headers-font;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: $gray;
-    display: block;
-    margin-bottom: 0.4rem;
-  }
-
   .new-list-input {
     width: 100%;
     border: 1.5px solid #cce8d4;
     border-radius: 12px;
     padding: 0.75rem 1rem;
-    font-size: 1rem;
-    color: $gray;
     background: #f4fbf5;
     outline: none;
-    transition: border-color 0.2s;
-
     &:focus {
       border-color: $basil;
       box-shadow: 0 0 0 3px rgba(38, 101, 51, 0.15);
-    }
-
-    &::placeholder {
-      color: #bbb;
     }
   }
 
@@ -210,26 +225,7 @@
     border-radius: 12px;
     font-weight: 600;
     padding: 0.7rem;
-
-    &:hover, &:active {
-      background-color: $dark-green;
-      border-color: $dark-green;
-      color: white;
-    }
-  }
-
-  .btn-cancel-list {
-    background: #f5f5f5;
-    border: none;
-    border-radius: 12px;
-    font-weight: 500;
-    color: #888;
-    padding: 0.7rem;
-
-    &:hover {
-      background: #eee;
-      color: $gray;
-    }
+    &:hover { background-color: $dark-green; }
   }
 }
 
@@ -240,34 +236,21 @@
 }
 
 .show-list-header {
-  .back-link {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: $basil;
-    text-decoration: none;
-
-    &:hover { color: $dark-green; }
-  }
-
   .show-list-title {
     font-family: $headers-font;
     font-size: 1.8rem;
     font-weight: 700;
     color: $gray;
-    margin-bottom: 0;
   }
 }
 
 // ── TWO-LINE LAYOUT START ──
-
-// Outer wrapper becomes a vertical column
 .show-item-row {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-// Line 1: Top Bar
 .item-top-line {
   display: flex;
   justify-content: space-between;
@@ -275,62 +258,24 @@
   width: 100%;
 }
 
-// Accordion toggle button (Line 1 Clickable area)
 .show-item-btn {
   flex: 1;
-  min-width: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0.5rem 0.25rem 1.1rem; // Less bottom padding to keep Line 2 close
+  padding: 1rem 0.5rem 0.25rem 1.1rem;
   background: transparent;
   border: none;
-  cursor: pointer;
-
-  &:focus { outline: none; }
-
-  &:not(.collapsed) .show-chevron {
-    transform: rotate(180deg);
-  }
+  &:not(.collapsed) .show-chevron { transform: rotate(180deg); }
 }
 
-// Use flex: 1 to evenly distribute 3 sections: Left, Center, Right
-.item-label-container {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  min-width: 0; // Essential for text truncation
-}
-
-.item-qty-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.price-dropdown-group {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-// Text styling for Top Bar
 .item-label {
   font-family: $headers-font;
   font-size: 1rem;
   font-weight: 700;
   color: $gray;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.item-quantity {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #555;
   white-space: nowrap;
 }
 
@@ -339,90 +284,45 @@
   font-size: 1rem;
   font-weight: 700;
   color: $green;
-  min-width: 56px;
   text-align: right;
 }
 
-.show-chevron {
-  font-size: 0.75rem;
-  color: $green;
-  transition: transform 0.2s;
-}
-
-// Delete Button Area
-.item-delete-wrapper {
-  flex-shrink: 0;
-  padding: 1rem 0.75rem 0.25rem 0;
-}
-
-.item-delete {
-  flex-shrink: 0;
-}
-
-// Line 2: Bottom Bar (Description)
 .item-bottom-line {
   width: 100%;
-  padding: 0 1.1rem 1rem 1.1rem; // Only bottom/side paddings
-  cursor: pointer;
-  text-align: left;
-
-  &:focus { outline: none; }
+  padding: 0 1.1rem 1rem 1.1rem;
 }
 
 .item-product-name {
-  display: block; // Ensures the text ellipsis applies to full width
   font-size: 0.75rem;
   color: #bebebe;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  display: block;
 }
 
-// ── TWO-LINE LAYOUT END ──
-
-// Add item form
+// ── ADD ITEM FORM ──
 .add-item-form {
   display: flex;
   gap: 0.5rem;
-
   .add-item-input {
     flex: 1;
     border: 1.5px solid #cce8d4;
     border-radius: 12px;
     padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background: white;
-    color: $gray;
-    outline: none;
-    transition: border-color 0.2s;
-
-    &:focus {
-      border-color: $basil;
-      box-shadow: 0 0 0 3px rgba(38, 101, 51, 0.15);
-    }
-
-    &::placeholder { color: #bbb; }
+    &:focus { border-color: $basil; }
   }
-
   .add-item-btn {
     width: 48px;
     height: 48px;
-    flex-shrink: 0;
     background: $basil;
-    border: none;
     border-radius: 12px;
     color: white;
     font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1;
-    cursor: pointer;
-
-    &:hover { background: $dark-green; }
   }
 }
 
-// Accordion items
+// ── ACCORDION ITEMS ──
 .show-accordion-item {
   background: white;
   border-radius: 16px;
@@ -432,296 +332,19 @@
   overflow: hidden;
 }
 
-.show-accordion-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.9rem 1rem;
-  background: white;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-
-  &:focus { outline: none; }
-
-  .item-row-left {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    min-width: 0;
-  }
-
-  .item-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: $green;
-    flex-shrink: 0;
-  }
-
-  .item-name {
-    font-family: $headers-font;
-    font-weight: 600;
-    font-size: 1rem;
-    color: $gray;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 140px;
-  }
-
-  .item-row-right {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .item-qty {
-    font-size: 0.8rem;
-    color: #aaa;
-  }
-
-  .item-price {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: $green;
-    min-width: 44px;
-    text-align: right;
-  }
-
-  .item-delete-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background: #fff5f5;
-    border: none;
-    border-radius: 50%;
-    color: #e55;
-    font-size: 0.7rem;
-    cursor: pointer;
-    padding: 0;
-
-    &:hover {
-      background: #e55;
-      color: white;
-    }
-  }
-
-  .item-chevron {
-    font-size: 0.7rem;
-    color: #ccc;
-    transition: transform 0.2s;
-  }
-
-  &:not(.collapsed) .item-chevron {
-    transform: rotate(180deg);
-  }
-}
-
-// Product price cards
-.show-accordion-body {
-  background: #f4fbf5;
-  border-top: 1px solid #e8f5ec;
-  padding: 0.75rem 0;
-}
-
-/* store groups box*/
-.store-scroll {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  padding: 0 1rem 12px 1rem;
-  width: 100%;
-  scroll-snap-type: x mandatory;
-}
-
-.store-group-box {
-  flex-shrink: 0;
-  width: 280px;
-  max-width: 85%;
-  scroll-snap-align: start;
-
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px;
-  background-color: #fafafa;
-  margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-/* store group header */
-.store-group-header {
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.product-scroll {
-  display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  width: 100%;
-
-  &::-webkit-scrollbar { height: 4px; }
-  &::-webkit-scrollbar-thumb { background: #cce8d4; border-radius: 4px; }
-}
-
-.product-price-card {
-  flex-shrink: 0;
-  width: 130px;
-  background: white;
-  border-radius: 12px;
-  border: 1.5px solid #cce8d4;
-  padding: 0.65rem;
-  text-align: center;
-  position: relative;
-
-  .product-image-placeholder {
-    font-size: 1.8rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .product-store {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 0.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .product-desc {
-    font-size: 0.7rem;
-    color: #aaa;
-    margin-bottom: 0.25rem;
-  }
-
-  .product-price-tag {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #266533;
-    margin-bottom: 0.4rem;
-  }
-
-  .btn-select-price {
-    width: 100%;
-    background: #339551;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.3rem 0;
-    cursor: pointer;
-
-    &:hover { background: #266533; }
-  }
-
-  .btn-select-price.selected {
-  background-color: #266533 !important;
-  color: white !important;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-}
-
-
-.product-price-card.best-price-card {
-  border: 2px solid #f16838;
-}
-
-.best-price-label {
-  position: absolute;
-  top: 6px;
-  left: 8px;
-  color: #f16838;
-  font-size: 0.65rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.product-price-card.selected-border {
-  border: 2px solid #266533;
-  box-shadow: 0 4px 12px rgba(241, 104, 56, 0.15);
-  position: relative;
-}
-
-.no-products-msg {
-  font-size: 0.85rem;
-  color: #aaa;
-  text-align: center;
-  margin: 0;
-}
-
-// ── EMPTY STATE ─────────────────────────────────────
-.lists-empty {
-  .empty-icon {
-    font-size: 4rem;
-  }
-
-  p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-}
-
-// ── MAP CARD ─────────────────────────────────────
-.map-card {
-  background: white;
-  border-radius: 16px;
-  border: 3px solid $basil;
-  box-shadow: 0 4px 16px rgba(51, 149, 81, 0.12);
-  overflow: hidden;
-}
-
-.map-card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #f4fbf5 0%, #edf8f0 100%);
-  border-bottom: 1.5px solid $basil;
-
-  .map-card-title {
-    font-family: $headers-font;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: $gray;
-    flex: 1;
-  }
-
-  .map-card-badge {
-    background: $basil;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.2rem 0.55rem;
-    border-radius: 20px;
-  }
-}
-
-//total price----------------------------------
+// ── TOTAL PRICE ──
 .list-total-card {
   background: #266533;
   color: white;
   box-shadow: 0 4px 12px rgba(6, 63, 24, 0.2);
   border-radius: 16px;
+  .total-label { font-weight: 600; font-size: 1.1rem; }
+  .total-price { font-weight: 800; font-size: 1.4rem; }
+}
 
-  .total-label {
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  .total-price {
-    font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: 0.5px;
-  }
+// ── MAP CARD ──
+.map-card {
+  background: white;
+  border-radius: 16px;
+  border: 3px solid $basil;
 }

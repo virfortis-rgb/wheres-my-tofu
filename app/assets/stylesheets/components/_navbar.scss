@@ -1,6 +1,4 @@
-/* app/assets/stylesheets/components/_navbar.scss */
 
-/* ========== Mobile default: fixed bottom tabs ========== */
 .bottom-tabs {
   position: fixed;
   left: 0;
@@ -19,12 +17,10 @@
   z-index: 1000;
 }
 
-/* Brand hidden on mobile */
 .nav-brand {
   display: none;
 }
 
-/* Tabs row (mobile: full width) */
 .nav-links {
   display: flex;
   width: 100%;
@@ -32,7 +28,6 @@
   align-items: center;
 }
 
-/* Each tab (mobile) */
 .nav-links .bottom-tab {
   flex: 1;
   min-width: 64px;
@@ -72,12 +67,10 @@
   }
 }
 
-/* Keep content above the fixed bottom tabs */
 .app-content {
   padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
-/* ========== Desktop: top navbar layout (fixed overlap/jumble) ========== */
 @media (min-width: 768px) {
   .bottom-tabs {
     position: relative;
@@ -88,7 +81,7 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Pushes brand left, links right */
+    justify-content: space-between;
 
     border-top: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -132,31 +125,30 @@
 
     width: auto;
     margin-left: auto;
-    flex-wrap: nowrap; /* Forces links to stay in one line */
+    flex-wrap: nowrap;
   }
 
   .nav-links .bottom-tab {
-    /* Critical Fix: Stop shrinking and force width to content */
     flex: 0 0 auto;
     width: max-content;
     min-width: 0;
 
     display: flex;
-    flex-direction: row; /* Icon next to text */
+    flex-direction: row;
     align-items: center;
 
     padding: 8px 12px;
-    margin-left: 16px; /* Clean spacing between links */
+    margin-left: 16px;
 
     font-size: 0.9rem;
     white-space: nowrap;
   }
 
-  /* Space out icon from text */
+
   .nav-links .bottom-tab i {
     font-size: 1.1rem;
     margin-right: 8px;
-    margin-bottom: 0; /* Reset mobile vertical centering */
+    margin-bottom: 0;
   }
 
   .app-content {
