@@ -1,43 +1,49 @@
 <% grouped_prices = item.prices_grouped_by_store %>
-  <% if grouped_prices.any? %>
-    <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
-    <div class="store-scroll">
-      <% grouped_prices.each do |store, prices| %>
-        <div class="store-group-box">
-          <div class="store-group-header">
-            <strong><%= store.name %></strong>
-          </div>
-          <div class="product-scroll">
-            <% prices.each do |price| %>
-              <% is_best_price = price.price_with_tax == lowest_price_val %>
-              <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
-                <% if is_best_price %>
-                  <span class="best-price-label">Best Price</span>
+<% if grouped_prices.any? %>
+  <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
+  <div class="store-scroll">
+    <% grouped_prices.each do |store, prices| %>
+      <div class="store-group-box">
+        <div class="store-group-header">
+          <strong><%= store.name %></strong>
+        </div>
+        <div class="product-scroll">
+          <% prices.each do |price| %>
+            <% is_best_price = price.price_with_tax == lowest_price_val %>
+            <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
+              <% if is_best_price %>
+                <span class="best-price-label">Best Price</span>
+              <% end %>
+              <div class="product-image-placeholder">
+                <% if price.product.image_url %>
+                  <img src="<%= price.product.image_url  %>" alt="<%= price.product.keyword %>">
+                <% else %>
+                  <div class="product-image-placeholder">🥬</div>
                 <% end %>
-                <div class="product-image-placeholder">🥬</div>
-                <p class="product-desc"><%= price.product.description %></p>
-                <p class="product-price-tag">¥<%= price.price_with_tax %></p>
-                <% potential_saving = item.savings_if_cheapest %>
-                <% if item.price_id == price.id %>
-                  <button class="btn-select-price selected" disabled>Selected</button>
-                    <% if potential_saving > 0 %>
-                      <span>
-                        <div class="potential-saving-label">
-                          <b> ¥<%= "%.1f" % potential_saving %> </b> to min
-                        </div>
-                      </span>
-                    <% end %>
-                  <% else %>
+              </div>
+              <p class="product-desc"><%= price.product.description %></p>
+              <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+              <% potential_saving = item.savings_if_cheapest %>
+              <% if item.price_id == price.id %>
+                <button class="btn-select-price selected" disabled>Selected</button>
+                <% if potential_saving > 0 %>
+                  <span>
+                    <div class="potential-saving-label">
+                      <b> ¥<%= "%.1f" % potential_saving %> </b> to min
+                    </div>
+                  </span>
+                <% end %>
+              <% else %>
                 <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
                     method: :patch,
                     class: "btn-select-price" %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-  <% else %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
   <p class="no-products-msg">No products found.</p>
 <% end %>
