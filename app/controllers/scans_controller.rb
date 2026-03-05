@@ -8,7 +8,7 @@ class ScansController < ApplicationController
   end
 
   def show
-    @prices = @scan.store.prices
+    @prices = @scan.store.prices # shows all the prices for that store TODO only for this scan
   end
 
   def create

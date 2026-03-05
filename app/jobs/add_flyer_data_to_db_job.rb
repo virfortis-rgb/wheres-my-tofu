@@ -5,6 +5,7 @@ class AddFlyerDataToDbJob < ApplicationJob
 
   def perform(scan)
       process_scan(scan) if scan.flyer.attached?
+      # add_image_url() # how to find the products for this scan
   end
 
     private
@@ -30,4 +31,7 @@ class AddFlyerDataToDbJob < ApplicationJob
       puts "processing scan ..."
     end
   end
+
+  # def add_image_url(product)
+  # end
 end

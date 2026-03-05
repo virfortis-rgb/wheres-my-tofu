@@ -3,6 +3,7 @@ class FlyerReaderTool < RubyLLM::Tool
               商品または価格が既にデータベースに存在しない場合は、新しく作成してください。
               該当する情報が見つからない場合は、空欄のままにしてください。"
 
+  # "Use this tool to extract products and prices from a flyer and add it to the DB. If the product or price does not already exist in the DB, create them If you can't find any information, leave it blank."
   param :product_name, desc: "商品名"
   param :product_description, desc: "商品説明文"
   param :product_keyword, desc: "One keyword to define this product in English"
