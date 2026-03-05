@@ -1,0 +1,23 @@
+<div class="container mt-3">
+  <h2>Upload a Flyer</h2>
+  <div class="container mb-5">
+    <%= simple_form_for @scan do |f| %>
+      <%= f.input :store_id, collection: @stores, label_method: :name %>
+      <%= f.input :flyer, as: :file, label: "Upload a file (pdf or image): " %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+  <div class="container mb-3">
+    <h3>Recently Uploaded Flyers</h3>
+    <ul class="list-group">
+      <% @scans.each_with_index do |scan, index| %>
+        <li class="list-group-item d-flex justify-content-between">
+          <%= link_to "#{index + 1}. Flyer for #{scan.store.name}", scan_path(scan) %>
+          <%= button_to scan, method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Delete this flyer?" } } do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
