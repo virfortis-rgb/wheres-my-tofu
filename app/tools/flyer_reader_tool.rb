@@ -1,12 +1,10 @@
 class FlyerReaderTool < RubyLLM::Tool
-  description "Use this tool to extract products and prices from a flyer and add it to the DB.
-              If the product or price does not already exist in the DB, create them
-              If you can't find any information, leave it blank.
-              Keep the product name and product description in Japanese."
+  description "このツールは、チラシから商品名と価格を抽出してデータベースに追加するために使用します。
+              商品または価格が既にデータベースに存在しない場合は、新しく作成してください。
+              該当する情報が見つからない場合は、空欄のままにしてください。"
 
   param :product_name, desc: "商品名"
   param :product_description, desc: "商品説明文"
-  # param :product_image_url, desc: "Crop this image to show only this product. Upload the cropped image to Cloudinary and save that url here."
   param :product_keyword, desc: "One keyword to define this product in English"
 
   param :price_store_id, desc: "The store_id of the store"
@@ -14,11 +12,10 @@ class FlyerReaderTool < RubyLLM::Tool
   param :price_with_tax, desc: "The price with tax (税込)"
 
 
-  def execute(product_name:, product_description:, product_image_url:, product_keyword:, price_store_id:, price_without_tax:, price_with_tax:)
+  def execute(product_name:, product_description:, product_keyword:, price_store_id:, price_without_tax:, price_with_tax:)
     product = Product.find_or_create_by(
       name: product_name,
       description: product_description,
-      # image_url: product_image_url,
       keyword: product_keyword
     )
     if product.save

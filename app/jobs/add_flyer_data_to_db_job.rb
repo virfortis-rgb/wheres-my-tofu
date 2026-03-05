@@ -1,6 +1,8 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
+  SYSTEM_PROMPT = "この画像またはPDFを使用して、商品名と価格を抽出してください。"
+
   def perform(scan)
       process_scan(scan) if scan.flyer.attached?
   end
