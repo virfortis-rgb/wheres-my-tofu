@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
 
   def attach
     @item = @list.items.new(name: params[:query], keyword: params[:query].downcase, quantity: 1)
-    # @item.quantity = 1
     if @item.save!
       respond_to do |format|
         format.turbo_stream
