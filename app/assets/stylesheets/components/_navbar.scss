@@ -37,12 +37,19 @@
   &:hover { color: $dark-green; }
 }
 
+// Right-side group: nav links + user icon pushed to the far right together
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 // Desktop nav links — hidden on mobile, shown via media query below
 .header-links {
   display: none;
   align-items: center;
   gap: 4px;
-  margin-left: 24px;
 }
 
 .header-tab {
@@ -74,7 +81,6 @@
 // ── USER ICON + DROPDOWN ──────────────────────────────────────────────────────
 .user-menu {
   position: relative;
-  margin-left: auto; // Pin to the right edge of the header
 }
 
 .user-btn {
@@ -248,7 +254,7 @@
 }
 
 // ── CONTENT SPACING ───────────────────────────────────────────────────────────
-// Mobile: clear the fixed top header above AND fixed bottom tabs below
+// Mobile: clear the fixed top header above AND the fixed bottom tabs below.
 .app-content {
   padding-top: 56px;
   padding-bottom: calc(72px + env(safe-area-inset-bottom));

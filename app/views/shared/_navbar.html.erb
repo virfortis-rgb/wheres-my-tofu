@@ -8,29 +8,30 @@
     <% end %>
   </div>
 
-  <%# Desktop-only nav links (hidden on mobile, shown ≥ 768 px) %>
-  <nav class="header-links" aria-label="Primary navigation">
-    <%= link_to root_path,
-        class: "header-tab #{'active' if current_page?(root_path)}" do %>
-      <i class="fa-solid fa-house"></i>
-      <span>Home</span>
-    <% end %>
-    <% if user_signed_in? %>
-      <%= link_to lists_index_path,
-          class: "header-tab #{'active' if current_page?(lists_index_path)}" do %>
-        <i class="fa-solid fa-list"></i>
-        <span>Lists</span>
+  <%# Right side: nav links (desktop only) + user icon grouped together %>
+  <div class="header-right">
+    <nav class="header-links" aria-label="Primary navigation">
+      <%= link_to root_path,
+          class: "header-tab #{'active' if current_page?(root_path)}" do %>
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
       <% end %>
-      <%= link_to new_scan_path,
-          class: "header-tab #{'active' if current_page?(new_scan_path)}" do %>
-        <i class="fa-solid fa-plus"></i>
-        <span>Add a Flyer</span>
+      <% if user_signed_in? %>
+        <%= link_to lists_index_path,
+            class: "header-tab #{'active' if current_page?(lists_index_path)}" do %>
+          <i class="fa-solid fa-list"></i>
+          <span>Lists</span>
+        <% end %>
+        <%= link_to new_scan_path,
+            class: "header-tab #{'active' if current_page?(new_scan_path)}" do %>
+          <i class="fa-solid fa-plus"></i>
+          <span>Add a Flyer</span>
+        <% end %>
       <% end %>
-    <% end %>
-  </nav>
+    </nav>
 
-  <%# User icon + dropdown (top right, always visible on all screen sizes) %>
-  <div class="user-menu" data-controller="dropdown">
+    <%# User icon + dropdown (always visible) %>
+    <div class="user-menu" data-controller="dropdown">
     <button class="user-btn"
             data-action="click->dropdown#toggle"
             aria-label="Account menu"
@@ -57,6 +58,8 @@
       <% end %>
     </div>
   </div>
+
+  </div><%# /header-right %>
 
 </header>
 
