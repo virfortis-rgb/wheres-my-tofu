@@ -1,0 +1,14 @@
+<%# update grouped items %>
+<%= turbo_stream.replace "grouped-items-container" do %>
+  <div class="list-grouped-card mb-4" id="grouped-items-container">
+    <%= render "items/grouped_items", items: @list.items, list: @list %>
+  </div>
+<% end %>
+
+<%# update total  %>
+<%= turbo_stream.replace "list_total_card", partial: "lists/total", locals: { list: @list, items: @list.items } %>
+
+<%# 3. update map %>
+<%= turbo_stream.replace "map-container" do %>
+  <%= render partial: "lists/map", locals: { list: @list } %>
+<% end %>

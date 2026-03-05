@@ -39,6 +39,7 @@
 
 // ── LIST CARDS ──────────────────────────────────────
 .list-card {
+  position:relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -258,24 +259,34 @@
   }
 }
 
-// Outer row: toggle button + delete side by side
+// ── TWO-LINE LAYOUT START ──
+
+// Outer wrapper becomes a vertical column
 .show-item-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
-// Accordion toggle — three-column grid, takes all remaining space
+// Line 1: Top Bar
+.item-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+// Accordion toggle button (Line 1 Clickable area)
 .show-item-btn {
   flex: 1;
   min-width: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem 0.75rem 1rem 1.1rem;
+  padding: 0.25rem 0.25rem 0 1rem; // Less bottom padding to keep Line 2 close
   background: transparent;
   border: none;
   cursor: pointer;
-  text-align: left;
 
   &:focus { outline: none; }
 
@@ -284,31 +295,29 @@
   }
 }
 
-// Delete button sits outside the toggle button
-.item-delete {
-  flex-shrink: 0;
-  margin-right: 0.75rem;
-}
-
-.item-col-left {
+// Use flex: 1 to evenly distribute 3 sections: Left, Center, Right
+.item-label-container {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  min-width: 0;
   justify-content: flex-start;
+  min-width: 0; // Essential for text truncation
 }
 
-.item-col-mid {
-  text-align: center;
-  padding: 0 0.5rem;
-}
-
-.item-col-price {
+.item-qty-container {
+  flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
 }
 
+.price-dropdown-group {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// Text styling for Top Bar
 .item-label {
   font-family: $headers-font;
   font-size: 1rem;
@@ -317,6 +326,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.item-quantity {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
 }
 
 .item-price-label {
@@ -333,6 +349,38 @@
   color: $green;
   transition: transform 0.2s;
 }
+
+// Delete Button Area
+.item-delete-wrapper {
+  flex-shrink: 0;
+  padding: 0.5rem 0.75rem 0 0;
+}
+
+.item-delete {
+  flex-shrink: 0;
+}
+
+// Line 2: Bottom Bar (Description)
+.item-bottom-line {
+  width: 100%;
+  padding: 0 0.5rem 1rem 1.1rem; // Only bottom/side paddings
+  cursor: pointer;
+  text-align: left;
+
+  &:focus { outline: none; }
+}
+
+.item-product-name {
+  display: block; // Ensures the text ellipsis applies to full width
+  font-size: 0.75rem;
+  color: #bebebe;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+// ── TWO-LINE LAYOUT END ──
 
 // Add item form
 .add-item-form {
@@ -482,6 +530,18 @@
   padding: 0.75rem 0;
 }
 
+.potential-saving-outside{
+  background: #f16838;
+  color: $white;
+  border-radius: 25px;
+  position:absolute;
+  padding: 2px 10px;
+  right: 50px;
+  top: 50px;
+  display: inline-block;
+  font-size: 8px;
+}
+
 /* store groups box*/
 .store-scroll {
   display: flex;
@@ -494,7 +554,7 @@
 
 .store-group-box {
   flex-shrink: 0;
-  width: 280px;
+  width: auto;
   max-width: 85%;
   scroll-snap-align: start;
 
@@ -528,12 +588,17 @@
 .product-price-card {
   flex-shrink: 0;
   width: 130px;
+  height: 200px;
   background: white;
   border-radius: 12px;
   border: 1.5px solid #cce8d4;
   padding: 0.65rem;
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   .product-image-placeholder {
     font-size: 1.8rem;
@@ -563,8 +628,12 @@
     margin-bottom: 0.4rem;
   }
 
-  .btn-select-price {
+  .button_to {
     width: 100%;
+  }
+
+  .btn-select-price {
+    width: 100% !important;
     background: #339551;
     border: none;
     border-radius: 8px;
@@ -576,7 +645,15 @@
 
     &:hover { background: #266533; }
   }
+
+  .btn-select-price.selected {
+    background-color: #266533 !important;
+    color: white !important;
+    cursor: not-allowed;
+    pointer-events: none;
 }
+}
+
 
 .product-price-card.best-price-card {
   border: 2px solid #f16838;
@@ -591,10 +668,21 @@
   font-weight: 800;
   line-height: 1;
 }
+.potential-saving-label{
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  color: #266533;
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1;
+
+}
+
 
 .product-price-card.selected-border {
-  border: 2px solid #266533;
-  box-shadow: 0 4px 12px rgba(241, 104, 56, 0.15);
+  border: 0.2rem solid #266533;
+  box-shadow: 0 0.4rem 0.8rem rgba(241, 104, 56, 0.15);
   position: relative;
 }
 

@@ -1,5 +1,4 @@
 <div class="new-list-page">
-
   <div class="new-list-header px-4 pt-4 pb-2">
     <%= link_to lists_path, class: "back-link" do %>
       <i class="fa-solid fa-chevron-left me-1"></i>Back
@@ -7,11 +6,9 @@
     <h1 class="new-list-title mt-3">New List</h1>
     <p class="new-list-subtitle">Give your list a name to get started.</p>
   </div>
-
   <div class="new-list-body px-4 pt-2">
     <div class="new-list-card">
       <div class="new-list-icon">📋</div>
-
       <%= form_with model: @list, local: true do |f| %>
         <div class="mb-4">
           <%= f.label :name, "List Name", class: "new-list-label" %>
@@ -19,7 +16,6 @@
               class: "new-list-input",
               placeholder: "e.g. Weekly Groceries" %>
         </div>
-
         <div class="d-grid gap-3">
           <%= f.submit "Save List", class: "btn btn-primary btn-save-list" %>
           <%= link_to "Cancel", lists_path, class: "btn btn-cancel-list" %>
@@ -27,5 +23,4 @@
       <% end %>
     </div>
   </div>
-
 </div>
