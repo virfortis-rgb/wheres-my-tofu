@@ -20,9 +20,13 @@ class ItemsController < ApplicationController
 def update
     if @item.update(item_params)
       respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
+      #   format.turbo_stream
+      #   format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
+        format.turbo_stream do
+          render partial: "items/prices_body", locals: { item: @item, list: @list}
+         end
       end
+      # render partial: "items/prices_body", locals: { item: @item, list: @list}
     else
       redirect_to list_path(@list), alert: 'Failed to update item.'
     end
