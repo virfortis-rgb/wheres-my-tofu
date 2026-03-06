@@ -1,4 +1,5 @@
 class ScansController < ApplicationController
+  include ActiveStorage::SetCurrent
   before_action :set_scan, only: [:show, :destroy]
 
   def new
