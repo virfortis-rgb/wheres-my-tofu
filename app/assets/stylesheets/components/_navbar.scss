@@ -151,105 +151,40 @@
   right: 0;
   bottom: 0;
   height: 72px;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
   background: white;
   border-top: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
   z-index: 1000;
-  overflow: visible; // let the active bubble float above the bar
 
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 .bottom-tab {
   flex: 1;
-  position: relative;
-  height: 100%;
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 4px;
+  padding: 4px 8px;
   text-decoration: none;
+  color: #888;
+  font-weight: 600;
+  font-size: 0.72rem;
+  line-height: 1;
+  white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
 
-  // ── Icon circle ──────────────────────────────────────────────
-  .tab-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    color: #aaa;
-    position: relative;
-    z-index: 2;
-    transition:
-      width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-      height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-      background-color 0.2s ease,
-      box-shadow 0.25s ease,
-      color 0.2s ease;
+  i { font-size: 1.25rem; }
 
-    i { font-size: 1.25rem; transition: font-size 0.2s ease; }
-  }
+  &:hover { color: $dark-green; }
 
-  // ── Label — hidden for inactive tabs ─────────────────────────
-  .tab-label {
-    position: absolute;
-    bottom: 7px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: $basil;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-  }
-
-  &:hover:not(.active) .tab-icon { color: $dark-green; }
-
-  // ── Active state: bubble floats up ───────────────────────────
   &.active {
-
-    // Elevated icon circle
-    .tab-icon {
-      width: 56px;
-      height: 56px;
-      background: $basil;
-      color: white;
-      transform: translateY(-20px);
-      box-shadow: 0 6px 22px rgba(38, 101, 51, 0.42);
-
-      i { font-size: 1.3rem; }
-    }
-
-    // Label fades in under the bubble
-    .tab-label { opacity: 1; }
-
-    // ── Concave wave: two curved "ears" that bridge the bubble to the flat bar.
-    // Each ear is a white square with one rounded inner corner; together they
-    // make the top edge of the navbar appear to curve inward under the bubble.
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: white;
-    }
-
-    // Left ear — rounded bottom-right corner faces the notch
-    &::before {
-      right: calc(50% + 28px);
-      border-bottom-right-radius: 24px;
-    }
-
-    // Right ear — rounded bottom-left corner faces the notch
-    &::after {
-      left: calc(50% + 28px);
-      border-bottom-left-radius: 24px;
-    }
+    color: $basil;
+    i { transform: translateY(-1px); }
   }
 }
 

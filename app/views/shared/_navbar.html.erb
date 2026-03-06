@@ -67,19 +67,19 @@
 <nav class="bottom-tabs" aria-label="Mobile navigation">
   <%= link_to root_path,
       class: "bottom-tab #{'active' if current_page?(root_path)}" do %>
-    <span class="tab-icon"><i class="fa-solid fa-house"></i></span>
-    <span class="tab-label">Home</span>
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
   <% end %>
   <% if user_signed_in? %>
     <%= link_to lists_index_path,
         class: "bottom-tab #{'active' if current_page?(lists_index_path)}" do %>
-      <span class="tab-icon"><i class="fa-solid fa-list"></i></span>
-      <span class="tab-label">Lists</span>
+      <i class="fa-solid fa-list"></i>
+      <span>Lists</span>
     <% end %>
     <%= link_to new_scan_path,
         class: "bottom-tab #{'active' if current_page?(new_scan_path)}" do %>
-      <span class="tab-icon"><i class="fa-solid fa-plus"></i></span>
-      <span class="tab-label">Add a Flyer</span>
+      <i class="fa-solid fa-plus"></i>
+      <span>Add a Flyer</span>
     <% end %>
   <% end %>
 </nav>
