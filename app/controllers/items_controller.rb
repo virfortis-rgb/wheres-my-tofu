@@ -15,17 +15,20 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @items = @list.items.order(id: :asc)
   end
 
 def update
-    if @item.update(item_params)
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
-      end
-    else
-      redirect_to list_path(@list), alert: 'Failed to update item.'
+  if @item.update(item_params)
+    @items = @list.items.includes(price: [:store, :product]).order(id: :asc)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to list_path(@list), notice: 'Item was successfully updated.' }
     end
+  else
+    redirect_to list_path(@list), alert: 'Failed to update item.'
+  end
 end
 
   def destroy
