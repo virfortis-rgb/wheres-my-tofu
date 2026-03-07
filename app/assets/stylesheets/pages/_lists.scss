@@ -447,6 +447,47 @@
   }
 }
 
+.favorite-stores-card {
+  background: #f4fbf5;
+  border: 1.5px solid #cce8d4;
+  border-radius: 12px;
+  padding: 0.85rem 0.9rem;
+}
+
+.favorite-stores-label {
+  font-size: 0.8rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.favorite-stores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 0.8rem;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.favorite-store-option {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+.favorite-stores-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.favorite-store-clear-btn {
+  width: 31px;
+  height: 31px;
+  font-size: 0.75rem;
+}
+
 // Accordion items
 .show-accordion-item {
   background: white;
