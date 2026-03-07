@@ -15,7 +15,9 @@
                 <% if is_best_price %>
                   <span class="best-price-label">Best Price</span>
                 <% end %>
-                <div class="product-image-placeholder">🥬</div>
+                <div class="product-image-placeholder">
+                  <%= grocery_icon_tag(price.product.keyword, size: 40) %>
+                </div>
                 <p class="product-desc"><%= price.product.description %></p>
                 <p class="product-price-tag">¥<%= price.price_with_tax %></p>
                 <% potential_saving = item.savings_if_cheapest(store_ids: store_filter_ids) %>
