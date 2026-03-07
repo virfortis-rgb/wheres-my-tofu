@@ -6,7 +6,10 @@
     <% end %>
   </div>
   <div class="container bg-white border border-success-subtle rounded-5 mb-5">
-    <h1 class="show-list-title my-3">🛒 <%= @list.name.capitalize %></h1>
+    <h1 class="show-list-title-row my-3">
+      <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "show-list-title-logo" %>
+      <span class="show-list-title-text"><%= @list.name.capitalize %></span>
+    </h1>
     <%# ── ADD ITEM FORM ── %>
     <div class="px-4 mb-3">
       <%= form_with url: attach_list_items_path(@list),
@@ -24,22 +27,41 @@
           class: "add-item-btn" %>
       <% end %>
     </div>
+    <div class="favorite-stores-card mx-4 mb-3">
+      <%= form_with model: @list, url: favorite_stores_list_path(@list), method: :patch, class: "favorite-stores-form" do %>
+        <p class="favorite-stores-label mb-2">Show items available in these stores:</p>
+        <%= hidden_field_tag "list[favorite_store_ids][]", "" %>
+        <div class="favorite-stores-grid mb-3">
+          <% @stores.each do |store| %>
+            <label class="favorite-store-option">
+              <%= check_box_tag "list[favorite_store_ids][]", store.id, @list.favorite_store_ids.include?(store.id) %>
+              <span><%= store.name %></span>
+            </label>
+          <% end %>
+        </div>
+        <div class="favorite-stores-actions">
+          <%= submit_tag "Apply Stores", class: "btn btn-primary btn-sm" %>
+          <% if @list.store_filter_active? %>
+            <%= button_tag type: "submit", name: "clear_filter", value: "1", class: "btn-delete favorite-store-clear-btn", title: "Clear store filter" do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <%# ── ITEMS ── %>
     <div class="lists-body px-4 pb-5">
       <div class="list-grouped-card mb-4" id="grouped-items-container"> <%#  we can add some style here%>
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>
           <div id="empty-state" class="lists-empty text-center py-5">
-            <div class="empty-icon">TODO add WMT logo</div>
+          <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", width: 100, class: "brand-logo" %>
             <p class="mt-3 text-muted">You haven't added anything yet.<br>
               Add your first one above!</p>
           </div>
         <% end %>
       </div>
-      <div class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-center">
-        <span class="total-label">Total</span>
-        <% list_total = @items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
-        <span id="list_total" class="total-price">¥<%= list_total %></span>
+        <%= render "lists/total", list: @list, items: @items %>
       </div>
     </div>
   </div>

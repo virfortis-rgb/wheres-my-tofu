@@ -1,4 +1,5 @@
-<% grouped_prices = item.prices_grouped_by_store %>
+<% store_filter_ids = list.favorite_store_ids.presence %>
+<% grouped_prices = item.prices_grouped_by_store(store_ids: store_filter_ids) %>
   <% if grouped_prices.any? %>
     <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
     <div class="store-scroll">
@@ -17,7 +18,7 @@
                 <div class="product-image-placeholder">🥬</div>
                 <p class="product-desc"><%= price.product.description %></p>
                 <p class="product-price-tag">¥<%= price.price_with_tax %></p>
-                <% potential_saving = item.savings_if_cheapest %>
+                <% potential_saving = item.savings_if_cheapest(store_ids: store_filter_ids) %>
                 <% if item.price_id == price.id %>
                   <button class="btn-select-price selected" disabled>Selected</button>
                     <% if potential_saving > 0 %>

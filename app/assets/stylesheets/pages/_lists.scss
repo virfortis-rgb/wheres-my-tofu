@@ -238,6 +238,27 @@
 .show-list-page {
   min-height: 100svh;
   background: #F2EEE3;
+
+  .show-list-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .show-list-title-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .show-list-title-text {
+    font-family: $headers-font;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $gray;
+    line-height: 1;
+  }
 }
 
 .show-list-header {
@@ -340,11 +361,23 @@
   text-overflow: ellipsis;
 }
 
-.item-quantity {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #555;
-  white-space: nowrap;
+.custom-qty-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+
+  width: 45px;
+  padding: 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.custom-qty-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
 }
 
 .item-price-label {
@@ -433,6 +466,47 @@
 
     &:hover { background: $dark-green; }
   }
+}
+
+.favorite-stores-card {
+  background: #f4fbf5;
+  border: 1.5px solid #cce8d4;
+  border-radius: 12px;
+  padding: 0.85rem 0.9rem;
+}
+
+.favorite-stores-label {
+  font-size: 0.8rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.favorite-stores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 0.8rem;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.favorite-store-option {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+.favorite-stores-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.favorite-store-clear-btn {
+  width: 31px;
+  height: 31px;
+  font-size: 0.75rem;
 }
 
 // Accordion items
