@@ -24,7 +24,7 @@ class AddFlyerDataToDbJob < ApplicationJob
       chat.ask(prompt, with: { pdf: flyer.url})
       puts "processing scan ..."
     elsif flyer.image?
-      chat = RubyLLM.chat(model: 'gpt-5').with_tool(FlyerReaderTool)
+      chat = RubyLLM.chat(model: 'openai/gpt-5-nano', provider: :openai, assume_model_exists: true).with_tool(FlyerReaderTool)
       chat.ask(prompt, with: { image: flyer.url})
       puts "processing scan ..."
     end
