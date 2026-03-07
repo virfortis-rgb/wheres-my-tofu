@@ -9,7 +9,8 @@ class ScansController < ApplicationController
   end
 
   def show
-    @prices = @scan.prices
+  scan_prices = @scan.scan_prices
+  @prices = scan_prices.map  { |scan_price| scan_price.price }
   end
 
   def create
