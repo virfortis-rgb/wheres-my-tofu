@@ -1,165 +1,215 @@
 /* app/assets/stylesheets/components/_navbar.scss */
 
-/* ========== Mobile default: fixed bottom tabs ========== */
-.bottom-tabs {
+// ── TOP HEADER ────────────────────────────────────────────────────────────────
+.top-header {
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-
-  height: 72px;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  height: 56px;
   background: white;
-
-  display: flex;
-  align-items: center;
-
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   z-index: 1000;
-}
 
-/* Brand hidden on mobile */
-.nav-brand {
-  display: none;
-}
-
-/* Tabs row (mobile: full width) */
-.nav-links {
   display: flex;
-  width: 100%;
-  justify-content: space-around;
   align-items: center;
+  padding: 0 16px;
+  gap: 8px;
 }
 
-/* Each tab (mobile) */
-.nav-links .bottom-tab {
-  flex: 1;
-  min-width: 64px;
+// Brand
+.nav-brand {
+  flex-shrink: 0;
+}
 
+.brand-link {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-
-  padding: 6px 8px;
-
+  gap: 6px;
   text-decoration: none;
-  color: $gray;
-
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1;
-
+  font-weight: 700;
+  font-family: $headers-font;
+  color: $basil;
+  font-size: 1rem;
   white-space: nowrap;
 
-  i {
-    font-size: 1.25rem;
-    line-height: 1;
-  }
+  &:hover { color: $dark-green; }
+}
+
+// Right-side group: nav links + user icon pushed to the far right together
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// Desktop nav links — hidden on mobile, shown via media query below
+.header-links {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: $gray;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+
+  i { font-size: 1rem; }
 
   &:hover {
+    background: rgba(38, 101, 51, 0.07);
     color: $dark-green;
   }
 
   &.active {
     color: $basil;
-
-    i {
-      transform: translateY(-1px);
-    }
+    background: rgba(38, 101, 51, 0.1);
   }
 }
 
-/* Keep content above the fixed bottom tabs */
+// ── USER ICON + DROPDOWN ──────────────────────────────────────────────────────
+.user-menu {
+  position: relative;
+}
+
+.user-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $basil;
+  font-size: 1.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(38, 101, 51, 0.1);
+    outline: none;
+  }
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 150px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+  z-index: 1010;
+
+  &.open { display: block; }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  text-decoration: none;
+  color: $gray;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.12s;
+
+  i {
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+  }
+
+  &:hover {
+    background: rgba(38, 101, 51, 0.07);
+    color: $basil;
+  }
+}
+
+// ── MOBILE BOTTOM TABS ────────────────────────────────────────────────────────
+.bottom-tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-tab {
+  flex: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: #888;
+  font-weight: 600;
+  font-size: 0.72rem;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+
+  i { font-size: 1.25rem; }
+
+  &:hover { color: $dark-green; }
+
+  &.active {
+    color: $basil;
+    i { transform: translateY(-1px); }
+  }
+}
+
+// ── CONTENT SPACING ───────────────────────────────────────────────────────────
+// Mobile: clear the fixed top header above AND the fixed bottom tabs below.
 .app-content {
+  padding-top: 56px;
   padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
-/* ========== Desktop: top navbar layout (fixed overlap/jumble) ========== */
+// ── DESKTOP (≥ 768 px) ────────────────────────────────────────────────────────
 @media (min-width: 768px) {
-  .bottom-tabs {
-    position: relative;
-    bottom: auto;
-
+  .top-header {
     height: 64px;
     padding: 0 32px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Pushes brand left, links right */
-
-    border-top: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-    &::before {
-      top: auto;
-      bottom: 0;
-      height: 8px;
-      background: linear-gradient(to bottom, rgba(38, 101, 51, 0.18), #F2EEE3);
-    }
   }
 
-  .nav-brand {
-    display: block;
-    flex-shrink: 0;
-  }
+  .brand-link { font-size: 1.1rem; }
 
-  .brand-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  .header-links { display: flex; } // Reveal desktop nav links
 
-    white-space: nowrap;
-    text-decoration: none;
-
-    font-weight: 700;
-    font-family: $headers-font;
-    color: $basil;
-    font-size: 1.1rem;
-
-    &:hover {
-      color: $dark-green;
-    }
-  }
-
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-
-    width: auto;
-    margin-left: auto;
-    flex-wrap: nowrap; /* Forces links to stay in one line */
-  }
-
-  .nav-links .bottom-tab {
-    /* Critical Fix: Stop shrinking and force width to content */
-    flex: 0 0 auto;
-    width: max-content;
-    min-width: 0;
-
-    display: flex;
-    flex-direction: row; /* Icon next to text */
-    align-items: center;
-
-    padding: 8px 12px;
-    margin-left: 16px; /* Clean spacing between links */
-
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-
-  /* Space out icon from text */
-  .nav-links .bottom-tab i {
-    font-size: 1.1rem;
-    margin-right: 8px;
-    margin-bottom: 0; /* Reset mobile vertical centering */
-  }
+  .bottom-tabs { display: none; }  // Hide mobile tabs entirely
 
   .app-content {
+    padding-top: 64px;
     padding-bottom: 0;
   }
 }

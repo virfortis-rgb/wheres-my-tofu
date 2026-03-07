@@ -14,4 +14,14 @@
 
 body {
   background-color: #F2EEE3;
+  // Sticky footer: stretch body to full viewport so footer stays at the bottom
+  // even on short pages. The fixed navbars are out of flow, so app-content
+  // (flex: 1) fills the remaining space and pushes the footer down naturally.
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app-content {
+  flex: 1; // grows to fill all space between navbars and footer
 }
