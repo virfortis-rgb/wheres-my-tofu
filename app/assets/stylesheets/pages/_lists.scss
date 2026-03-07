@@ -282,10 +282,11 @@
 
 
 .store-group-container {
-  border: 0.1rem solid #266533;
+  // border: 0.1rem solid #266533;
+  box-shadow: 4px 4px 4px rgba(169, 183, 169, 0.2);
   border-radius: 12px;
   padding: 0.5rem;
-  background-color: #F2EEE3;
+  background-color: #FAF9F6;
 }
 
 .store-group-title {
@@ -470,7 +471,7 @@
 
 .favorite-stores-card {
   background: #f4fbf5;
-  border: 1.5px solid #cce8d4;
+  box-shadow: 4px 4px 4px rgba(169, 183, 169, 0.2);
   border-radius: 12px;
   padding: 0.85rem 0.9rem;
 }
@@ -716,6 +717,7 @@
 
   .button_to {
     width: 100%;
+    margin-top: auto;
   }
 
   .btn-select-price {
@@ -737,12 +739,22 @@
     color: white !important;
     cursor: not-allowed;
     pointer-events: none;
-}
+  }
+
+  .product-price-card.selected-border {
+  border: 1.5px solid #266533;
+  box-shadow: inset 0 0 0 1.5px #266533, 0 0.4rem 0.8rem rgba(241, 104, 56, 0.15);
+  position: relative;
+  }
 }
 
 
 .product-price-card.best-price-card {
   border: 2px solid #f16838;
+
+  .product-image-placeholder {
+    padding-top: 14px;
+  }
 }
 
 .best-price-label {
@@ -768,8 +780,12 @@
 
 .product-price-card.selected-border {
   border: 0.2rem solid #266533;
-  box-shadow: 0 0.4rem 0.8rem rgba(241, 104, 56, 0.15);
+  box-shadow: 0 0.2rem 0,2rem rgba(241, 104, 56, 0.15);
   position: relative;
+
+  .product-image-placeholder {
+    padding-top: 14px;
+  }
 }
 
 .no-products-msg {
@@ -830,7 +846,7 @@
 .list-total-card {
   background: #266533;
   color: white;
-  box-shadow: 0 4px 12px rgba(6, 63, 24, 0.2);
+  box-shadow: 4px 4px 4px rgba(18, 28, 18, 0.2);
   border-radius: 16px;
 
   .total-label {
@@ -843,4 +859,24 @@
     font-size: 1.4rem;
     letter-spacing: 0.5px;
   }
+}
+
+// ── Grocery icons ──────────────────────────────────────────────────────────────
+.grocery-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+// Icon sits inline with the item name text
+.item-label-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Icon centred inside the price card placeholder
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

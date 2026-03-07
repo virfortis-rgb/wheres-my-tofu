@@ -1,3 +1,9 @@
+<% is_expanded = defined?(expanded_item_id) && expanded_item_id == item.id %>
+<% btn_collapse_class = is_expanded ? "" : "collapsed" %>
+<% aria_expanded = is_expanded ? "true" : "false" %>
+<% body_show_class = is_expanded ? "show" : "" %>
+
+
 <div class="list-card flex-column align-items-stretch p-0 overflow-hidden">
   <%# Row Wrapper for 2-line layout %>
   <div class="show-item-row">
@@ -6,15 +12,16 @@
     <div class="item-top-line">
 
       <%# Clickable Button Area (Takes up remaining space) %>
-      <div class="show-item-btn collapsed">
+      <div class="show-item-btn <%= btn_collapse_class %>">
 
         <%# Left: Name %>
         <div class="item-label-container"
               role="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapse<%= item.id %>"
-              aria-expanded="false"
+              aria-expanded="<%= aria_expanded %>"
               aria-controls="collapse<%= item.id %>">
+          <%= grocery_icon_tag(item.keyword.presence || item.name, size: 22) %>
           <span class="item-label"><%= item.name.capitalize %></span>
         </div>
 
@@ -36,7 +43,7 @@
               role="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapse<%= item.id %>"
-              aria-expanded="false"
+              aria-expanded="<%= aria_expanded %>"
               aria-controls="collapse<%= item.id %>">
           <span id="item_<%= item.id %>_price" class="item-price-label">
             <%= item.display_total_price %>
@@ -58,10 +65,10 @@
 
     <%# ── LINE 2: Bottom Bar (Description) ── %>
     <%# Made clickable to expand accordion as well %>
-    <div class="item-bottom-line collapsed"
+      <div class="item-bottom-line <%= btn_collapse_class %>"
         data-bs-toggle="collapse"
         data-bs-target="#collapse<%= item.id %>"
-        aria-expanded="false"
+        aria-expanded="<%= aria_expanded %>"
         aria-controls="collapse<%= item.id %>"
         role="button"
         tabindex="0">
@@ -81,8 +88,8 @@
   </div>
 
   <%# Accordion body — product price cards %>
-  <div id="collapse<%= item.id %>"
-      class="accordion-collapse collapse"
+    <div id="collapse<%= item.id %>"
+      class="accordion-collapse collapse <%= body_show_class %>"
       data-bs-parent="#itemsAccordion">
     <div id="item_<%= item.id %>_prices_body" class="show-accordion-body">
       <%= render "items/prices_body", item: item, list: @list %>
