@@ -9,7 +9,7 @@ class ScansController < ApplicationController
   end
 
   def show
-    @prices = @scan.store.prices
+    @prices = @scan.prices
   end
 
   def create
