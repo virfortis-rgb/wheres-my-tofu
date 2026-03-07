@@ -29,6 +29,7 @@ class AddFlyerDataToDbJob < ApplicationJob
                     .with_tool(FlyerReaderTool)
                     .on_tool_result do |result|
                       # create instances of scan_price out of result (array of prices)
+                      # add store.id
                       puts "Tool call: #{result}"
                     end
       chat.ask(prompt, with: { image: flyer.url })

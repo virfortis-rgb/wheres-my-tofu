@@ -12,10 +12,8 @@ class FlyerReaderTool < RubyLLM::Tool
     end
   end
 
-  param :store_id, desc: "The store_id of the store"
-
   # Todo update arguments, receive array of products
-  def execute(scanned_products:, store_id:)
+  def execute(scanned_products:)
     prices = []
     scanned_products.each do |p|
       product = Product.find_or_create_by(
@@ -30,7 +28,7 @@ class FlyerReaderTool < RubyLLM::Tool
       end
 
       price = Price.new(
-        store_id: store_id,
+        # store_id: store_id,
         product_id: product.id,
         price_without_tax: :price_without_tax,
         price_with_tax: :price_with_tax
