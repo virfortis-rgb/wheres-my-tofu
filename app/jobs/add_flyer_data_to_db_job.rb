@@ -17,13 +17,13 @@ class AddFlyerDataToDbJob < ApplicationJob
     media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
     llm = { gemini: { model: 'gemini-2.0-flash', provider: :azure }, gpt: { model: 'gpt-4.1-nano', provider: :openai } }
     if flyer.content_type == "application/pdf"
-      generate_prices_with_llm(llm[:gemini], media[:pdf], tool)
+      generate_prices_with_llm(llm[:gemini], media[:pdf], tool, scan)
     elsif flyer.image?
-      generate_prices_with_llm(llm[:gpt], media[:image], tool)
+      generate_prices_with_llm(llm[:gpt], media[:image], tool, scan)
     end
   end
 
-  def generate_prices_with_llm(llm, media, tool)
+  def generate_prices_with_llm(llm, media, tool, scan)
     chat = RubyLLM.chat(model: llm[:model], provider: llm[:provider], assume_model_exists: true)
                   # .with_schema(FlyerSchema)
                   .with_tool(tool).on_tool_result do |result|
