@@ -35,6 +35,17 @@
   white-space: nowrap;
 
   &:hover { color: $dark-green; }
+
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+    display: block;
+    object-fit: contain;
+  }
+
+  span {
+    line-height: 1;
+  }
 }
 
 // Right-side group: nav links + user icon pushed to the far right together

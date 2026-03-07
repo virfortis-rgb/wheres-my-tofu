@@ -238,6 +238,27 @@
 .show-list-page {
   min-height: 100svh;
   background: #F2EEE3;
+
+  .show-list-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .show-list-title-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .show-list-title-text {
+    font-family: $headers-font;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $gray;
+    line-height: 1;
+  }
 }
 
 .show-list-header {
