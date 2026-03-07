@@ -3,10 +3,10 @@ class AddFlyerDataToDbJob < ApplicationJob
 
   SYSTEM_PROMPT = "Take this image\pdf, read all the products and related prices from this image/pdf and add it to the DB"
   def perform(scan)
-      process_scan(scan) if scan.flyer.attached?
+    process_scan(scan) if scan.flyer.attached?
   end
 
-    private
+  private
 
   def process_scan(scan)
     store = scan.store
@@ -21,11 +21,17 @@ class AddFlyerDataToDbJob < ApplicationJob
       "
     if flyer.content_type == "application/pdf"
       chat = RubyLLM.chat(model: "gemini-2.0-flash").with_tool(FlyerReaderTool)
-      chat.ask(prompt, with: { pdf: flyer.url})
+      chat.ask(prompt, with: { pdf: flyer.url })
       puts "processing scan ..."
     elsif flyer.image?
-      chat = RubyLLM.chat(model: 'openai/gpt-5-nano', provider: :openai, assume_model_exists: true).with_tool(FlyerReaderTool)
-      chat.ask(prompt, with: { image: flyer.url})
+      chat = RubyLLM.chat(model: 'gpt-4.1-nano', provider: :openai, assume_model_exists: true)
+                    .with_tool(FlyerReaderTool)
+                    .on_tool_result do |result|
+                      # create instances of scan_price out of result (array of prices)
+                      puts "Tool call: #{result}"
+                    end
+      chat.ask(prompt, with: { image: flyer.url })
+      #
       puts "processing scan ..."
     end
   end
