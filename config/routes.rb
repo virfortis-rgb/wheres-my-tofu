@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :lists, only: [:index, :new, :create, :show, :destroy] do
+    member do
+      patch :favorite_stores
+    end
+
     resources :items, only: [:show, :update, :destroy] do
       # Change create to attach since I think it’s more intuitive to say “attach an exist item in our database to a list”
       # rather than “create an new item in a list” when we’re just linking an existing item to the list.
