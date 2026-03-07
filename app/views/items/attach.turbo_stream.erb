@@ -1,13 +1,13 @@
 <%# update whole list %>
 <%= turbo_stream.replace "grouped-items-container" do %>
   <div class="list-grouped-card mb-4" id="grouped-items-container">
-    <%= render "items/grouped_items", items: @list.items, list: @list %>
+    <%= render "items/grouped_items", items: @list.filtered_items, list: @list %>
   </div>
 <% end %>
 
 <%# update total  %>
 <%= turbo_stream.replace "list_total" do %>
-  <% list_total = @list.items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
+  <% list_total = @list.filtered_items.select(&:price).sum { |i| i.price.price_with_tax * i.quantity } %>
   <span id="list_total" class="total-price">¥<%= list_total %></span>
 <% end %>
 

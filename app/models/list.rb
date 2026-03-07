@@ -3,11 +3,27 @@ class List < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :prices, through: :items
   has_many :stores, through: :prices
+  has_many :list_favorite_stores, dependent: :destroy
+  has_many :favorite_stores, through: :list_favorite_stores, source: :store
 
   validates :name, presence: :true
 
   def active_stores
-    stores.distinct
+    scoped_stores = stores.distinct
+    return scoped_stores unless store_filter_active?
+
+    scoped_stores.where(id: favorite_store_ids)
+  end
+
+  def filtered_items
+    scoped_items = items.includes(price: :store)
+    return scoped_items unless store_filter_active?
+
+    scoped_items.select { |item| item.available_in_stores?(favorite_store_ids) }
+  end
+
+  def store_filter_active?
+    favorite_store_ids.any?
   end
 
   def all_items_selected?
@@ -15,7 +31,7 @@ class List < ApplicationRecord
   end
 
   def total_potential_savings
-    items.sum { |item| item.savings_if_cheapest || 0 }
+    filtered_items.sum { |item| item.savings_if_cheapest(store_ids: favorite_store_ids.presence) || 0 }
   end
 
   # Nearest-neighbour sort: reorders active stores so the total walking/driving
