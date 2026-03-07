@@ -657,6 +657,10 @@
 
 .product-price-card.best-price-card {
   border: 2px solid #f16838;
+
+  .product-image-placeholder {
+    padding-top: 14px;
+  }
 }
 
 .best-price-label {
@@ -684,6 +688,10 @@
   border: 0.2rem solid #266533;
   box-shadow: 0 0.4rem 0.8rem rgba(241, 104, 56, 0.15);
   position: relative;
+
+  .product-image-placeholder {
+    padding-top: 14px;
+  }
 }
 
 .no-products-msg {
@@ -757,4 +765,24 @@
     font-size: 1.4rem;
     letter-spacing: 0.5px;
   }
+}
+
+// ── Grocery icons ──────────────────────────────────────────────────────────────
+.grocery-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+// Icon sits inline with the item name text
+.item-label-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Icon centred inside the price card placeholder
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

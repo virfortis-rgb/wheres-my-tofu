@@ -13,8 +13,9 @@
               aria-expanded="false"
               aria-controls="collapse<%= item.id %>">
 
-        <%# Left: Name %>
+        <%# Left: Icon + Name %>
         <div class="item-label-container">
+          <%= grocery_icon_tag(item.keyword.presence || item.name, size: 22) %>
           <span class="item-label"><%= item.name.capitalize %></span>
         </div>
 
