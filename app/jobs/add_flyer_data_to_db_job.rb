@@ -24,7 +24,7 @@ class AddFlyerDataToDbJob < ApplicationJob
       puts "processing scan ..."
     elsif flyer.image?
       chat = RubyLLM.chat(model: 'gpt-4.1-nano', provider: :openai, assume_model_exists: true)
-                    .with_schema(FlyerSchema)
+                    # .with_schema(FlyerSchema)
                     .with_tool(tool)
                     .on_tool_result do |result|
                       # create instances of scan_price out of result (array of prices)
