@@ -340,11 +340,23 @@
   text-overflow: ellipsis;
 }
 
-.item-quantity {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #555;
-  white-space: nowrap;
+.custom-qty-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+
+  width: 45px;
+  padding: 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.custom-qty-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
 }
 
 .item-price-label {

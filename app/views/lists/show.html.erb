@@ -58,10 +58,7 @@
           </div>
         <% end %>
       </div>
-      <div class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-center">
-        <span class="total-label">Total</span>
-        <% list_total = @items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
-        <span id="list_total" class="total-price">¥<%= list_total %></span>
+        <%= render "lists/total", list: @list, items: @items %>
       </div>
     </div>
   </div>
