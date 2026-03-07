@@ -18,7 +18,7 @@ class ScansController < ApplicationController
     if @scan.save
       flash[:notice] = "Retrieving informtion from the flyer."
       AddFlyerDataToDbJob.perform_later(@scan)
-      redirect_to @scan, notice: "Added products to the DB. Please double check!"
+      redirect_to @scan, notice: "Adding products to the DB. This could take a moment!"
     else
       render :new, status: :unprocessable_entity
     end

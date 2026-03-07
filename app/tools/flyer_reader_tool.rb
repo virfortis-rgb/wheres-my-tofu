@@ -1,5 +1,5 @@
 class FlyerReaderTool < RubyLLM::Tool
-  description "Use this tool to extract products and prices from a flyer and add create an array of prices.
+  description "Use this tool to extract products and prices from a flyer and create an array of prices.
               Keep the product name and description in Japanese."
   def initialize(store)
     @store = store
@@ -16,7 +16,7 @@ class FlyerReaderTool < RubyLLM::Tool
     end
   end
 
-  # Todo update arguments, receive array of products
+  # Todo update arguments, receive array? of products => array gives a NoMethodError
   def execute(scanned_products:)
     prices = []
     scanned_products.each do |p|
