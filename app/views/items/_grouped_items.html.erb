@@ -5,7 +5,7 @@
         <%= store&.name || "No Store Available" %>
       </h5>
       <% items.each do |item| %>
-        <%= render "items/item", item: item, list: @list %>
+        <%= render "items/item", item: item, list: @list, expanded_item_id: local_assigns[:expanded_item_id] %>
       <% end %>
     </div>
   <% end %>

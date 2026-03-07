@@ -1,7 +1,7 @@
 <%# update grouped items %>
 <%= turbo_stream.replace "grouped-items-container" do %>
   <div class="list-grouped-card mb-4" id="grouped-items-container">
-    <%= render "items/grouped_items", items: @items, list: @list %>
+    <%= render "items/grouped_items", items: @items, list: @list, expanded_item_id: @item.id %>
   </div>
 <% end %>
 
