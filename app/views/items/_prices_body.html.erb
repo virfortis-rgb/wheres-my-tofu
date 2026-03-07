@@ -32,11 +32,9 @@
                     <button class="btn-select-price selected" disabled>Selected</button>
                   </div>
                     <% if potential_saving > 0 %>
-                      <span>
                         <div class="potential-saving-label">
                           <b> ¥<%= "%.1f" % potential_saving %> </b> to min
                         </div>
-                      </span>
                     <% end %>
                 <% else %>
                   <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
