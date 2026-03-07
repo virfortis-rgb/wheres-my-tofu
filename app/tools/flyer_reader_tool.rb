@@ -1,13 +1,23 @@
 class FlyerReaderTool < RubyLLM::Tool
   description "Use this tool to extract products and prices from a flyer and add create an array of prices.
               Keep the product name and description in Japanese."
-  schema FlyerSchema
+
+  params do
+    object :scanned_products do
+      string :name, description: "商品名"
+      string :description, description: "商品説明文"
+      string :keyword, description: "One keyword to define this product"
+      string :price_without_tax, description: "The price without tax"
+      string :price_with_tax, description: "The price with tax (税込)"
+    end
+  end
+
   param :store_id, desc: "The store_id of the store"
 
   # Todo update arguments, receive array of products
   def execute(scanned_products:, store_id:)
     prices = []
-    products.each do |p|
+    scanned_products.each do |p|
       product = Product.find_or_create_by(
         name: p[:name],
         description: :description,
