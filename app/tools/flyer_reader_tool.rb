@@ -6,10 +6,14 @@ class FlyerReaderTool < RubyLLM::Tool
               If the product or price does not already exist in the DB, create them.
               Keep the product name and description in Japanese."
   # refactor to follow runby LLm schema gem structure
-  param :product_name, desc: "商品名"
-  param :product_description, desc: "商品説明文"
-  param :product_keyword, desc: "One keyword to define this product"
 
+  array :products do
+    object do
+      string :name, desc: "商品名"
+      string :description, desc: "商品説明文"
+      string :keyword,  desc: "One keyword to define this product"
+    end
+  end
 
   param :price_store_id, desc: "The store_id of the store"
   param :price_without_tax, desc: "The price without tax"
