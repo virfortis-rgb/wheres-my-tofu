@@ -17,7 +17,7 @@ class AddFlyerDataToDbJob < ApplicationJob
       the store_longitude is #{store.longitude},
       the store_latitude is #{store.latitude},
       the store_id is #{store.id}
-      IMPORTANT: use the store id for price_store_id param!
+      IMPORTANT: use the store id for store_id param!
       "
     if flyer.content_type == "application/pdf"
       chat = RubyLLM.chat(model: "gemini-2.0-flash").with_tool(FlyerReaderTool)
