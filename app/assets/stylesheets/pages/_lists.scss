@@ -283,7 +283,7 @@
 
 .store-group-container {
   // border: 0.1rem solid #266533;
-  box-shadow: 10px 5px 5px rgba(130, 159, 130, 0.2);
+  box-shadow: 4px 4px 4px rgba(169, 183, 169, 0.2);
   border-radius: 12px;
   padding: 0.5rem;
   background-color: #FAF9F6;
@@ -471,7 +471,7 @@
 
 .favorite-stores-card {
   background: #f4fbf5;
-  box-shadow: 10px 5px 5px rgba(130, 159, 130, 0.2);
+  box-shadow: 4px 4px 4px rgba(169, 183, 169, 0.2);
   border-radius: 12px;
   padding: 0.85rem 0.9rem;
 }
@@ -780,7 +780,7 @@
 
 .product-price-card.selected-border {
   border: 0.2rem solid #266533;
-  box-shadow: 0 0.4rem 0.8rem rgba(241, 104, 56, 0.15);
+  box-shadow: 0 0.2rem 0,2rem rgba(241, 104, 56, 0.15);
   position: relative;
 
   .product-image-placeholder {
@@ -846,7 +846,7 @@
 .list-total-card {
   background: #266533;
   color: white;
-  box-shadow: 10px 5px 5px rgba(130, 159, 130, 0.5);
+  box-shadow: 4px 4px 4px rgba(18, 28, 18, 0.2);
   border-radius: 16px;
 
   .total-label {
