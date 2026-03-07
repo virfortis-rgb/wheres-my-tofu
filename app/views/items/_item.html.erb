@@ -22,6 +22,7 @@
               data-bs-target="#collapse<%= item.id %>"
               aria-expanded="<%= aria_expanded %>"
               aria-controls="collapse<%= item.id %>">
+          <%= grocery_icon_tag(item.keyword.presence || item.name, size: 22) %>
           <span class="item-label"><%= item.name.capitalize %></span>
         </div>
 
