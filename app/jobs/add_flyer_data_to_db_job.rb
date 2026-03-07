@@ -1,6 +1,7 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
+  SYSTEM_PROMPT = "Take this image\pdf, read all the products and related prices from this image/pdf and add it to the DB"
   def perform(scan)
       process_scan(scan) if scan.flyer.attached?
   end
@@ -23,7 +24,7 @@ class AddFlyerDataToDbJob < ApplicationJob
       chat.ask(prompt, with: { pdf: flyer.url})
       puts "processing scan ..."
     elsif flyer.image?
-      chat = RubyLLM.chat(model: 'gpt-4o').with_tool(FlyerReaderTool)
+      chat = RubyLLM.chat(model: 'gpt-5').with_tool(FlyerReaderTool)
       chat.ask(prompt, with: { image: flyer.url})
       puts "processing scan ..."
     end
