@@ -6,32 +6,44 @@
     <div class="item-top-line">
 
       <%# Clickable Button Area (Takes up remaining space) %>
-      <button class="show-item-btn collapsed"
-              type="button"
+      <div class="show-item-btn collapsed">
+
+        <%# Left: Name %>
+        <div class="item-label-container"
+              role="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapse<%= item.id %>"
               aria-expanded="false"
               aria-controls="collapse<%= item.id %>">
-
-        <%# Left: Icon + Name %>
-        <div class="item-label-container">
-          <%= grocery_icon_tag(item.keyword.presence || item.name, size: 22) %>
           <span class="item-label"><%= item.name.capitalize %></span>
         </div>
 
         <%# Center: Quantity %>
-        <div class="item-qty-container">
-          <span class="item-quantity">x <%= item.quantity %></span>
+        <div class="item-qty-container mx-2">
+          <%= form_with model: [@list, item], data: { turbo: true }, class: "d-inline-flex align-items-center" do |f| %>
+            <span class="text-muted" style="font-size: 0.9em; margin-right: 2px;">x</span>
+            <%= f.number_field :quantity,
+                          id: "item_#{item.id}_quantity",
+                          min: 1,
+                          step: 1,
+                          class: "custom-qty-input",
+                          onchange: "this.form.requestSubmit();" %>
+          <% end %>
         </div>
 
         <%# Right: Price & Chevron %>
-        <div class="price-dropdown-group">
+        <div class="price-dropdown-group"
+              role="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse<%= item.id %>"
+              aria-expanded="false"
+              aria-controls="collapse<%= item.id %>">
           <span id="item_<%= item.id %>_price" class="item-price-label">
             <%= item.display_total_price %>
           </span>
           <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
         </div>
-      </button>
+      </div>
 
       <%# Delete Form (Outside button) %>
       <div class="item-delete-wrapper">
@@ -57,7 +69,7 @@
         <%= item.price&.product&.description %>
       </span>
       <span>
-        <% potential_saving = item.savings_if_cheapest %>
+        <% potential_saving = item.savings_if_cheapest(store_ids: list.favorite_store_ids.presence) %>
         <% if potential_saving > 0 %>
           <div class="potential-saving-outside">
             Save up to <b> ¥<%= "%.1f" % potential_saving %> </b>
