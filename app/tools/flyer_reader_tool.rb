@@ -10,14 +10,15 @@ class FlyerReaderTool < RubyLLM::Tool
       string :name, description: "商品名"
       string :description, description: "商品説明文"
       string :keyword, description: "One keyword to define this product"
-      number :price_without_tax, description: "The price without tax"
-      number :price_with_tax, description: "The price with tax (税込)"
+      number :price_without_tax, description: "税抜き価格"
+      number :price_with_tax, description: "税込価格"
       # string :store_id, description: @store.id
     end
   end
 
   # Todo update arguments, receive array? of products => array gives a NoMethodError
   def execute(scanned_products:)
+    pp scanned_products
     prices = []
     scanned_products.each do |p|
       product = Product.find_or_create_by(

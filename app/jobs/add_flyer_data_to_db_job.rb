@@ -1,9 +1,9 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
-  SYSTEM_PROMPT = "Take this image or pdf,
-                  read all the products and related prices from this image or pdf
-                  and add it to the DB"
+  SYSTEM_PROMPT = "Extract all products and prices from this flyer.
+                  Use the tool to return an array of products with their prices.
+                  If a product or price cannot be found, leave the field blank."
   def perform(scan)
     process_scan(scan) if scan.flyer.attached?
   end
@@ -16,7 +16,7 @@ class AddFlyerDataToDbJob < ApplicationJob
     tool = FlyerReaderTool.new(store)
     media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
     llm = { gemini: { model: 'gemini-2.0-flash', provider: :azure }, gpt: { model: 'gpt-4.1-nano', provider: :openai } }
-    if flyer.content_type == "application/pdf"
+    if flyer.blob.content_type == "application/pdf"
       generate_prices_with_llm(llm[:gemini], media[:pdf], tool, scan)
     elsif flyer.image?
       generate_prices_with_llm(llm[:gpt], media[:image], tool, scan)
@@ -29,7 +29,7 @@ class AddFlyerDataToDbJob < ApplicationJob
                   .with_tool(tool).on_tool_result do |prices|
                     pp prices
                     prices.each do |price|
-                      ScanPrice.create(price: price, scan: scan)
+                      ScanPrice.create(price_id: price.id, scan: scan)
                       puts "🎴 ScanPrice instance created ..."
                     end
                   end
@@ -37,31 +37,3 @@ class AddFlyerDataToDbJob < ApplicationJob
     puts "processing scan ..."
   end
 end
-
-
-
-
-# chat = RubyLLM.chat(model: "gemini-2.0-flash")
-#               .with_tool(tool)
-#               .on_tool_result do |result|
-#                 pp result
-#                 result.each do |price|
-#                   ScanPrice.create(price: price, scan: scan)
-#                   puts "🎴 ScanPrice instance created ..."
-#                 end
-#               end
-# chat.ask(SYSTEM_PROMPT, with: { pdf: flyer.url })
-# puts "processing scan ..."
-
-# chat = RubyLLM.chat(model: 'gpt-4.1-nano', provider: :openai, assume_model_exists: true)
-#               # .with_schema(FlyerSchema)
-#               .with_tool(tool)
-#               .on_tool_result do |result|
-#                 pp result
-#                 result.each do |price|
-#                   ScanPrice.create(price: price, scan: scan)
-#                   puts "🎴 ScanPrice instance created ..."
-#                 end
-#               end
-# chat.ask(SYSTEM_PROMPT, with: { image: flyer.url })
-# puts "processing scan ..."
