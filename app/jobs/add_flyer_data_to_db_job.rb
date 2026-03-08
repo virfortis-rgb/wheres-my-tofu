@@ -26,8 +26,9 @@ class AddFlyerDataToDbJob < ApplicationJob
                   # .with_schema(FlyerSchema)
                   .with_tool(tool).on_tool_result do |prices|
                     pp prices
+                    scan.update(llm_raw_output: prices)
                     prices.each do |price|
-                      ScanPrice.create(price_id: price.id, scan: scan)
+                      ScanPrice.create(price: price, scan: scan)
                       puts "🎴 ScanPrice instance created ..."
                     end
                   end
