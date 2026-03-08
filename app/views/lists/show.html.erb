@@ -1,3 +1,4 @@
+<% content_for :meta_title, "#{@list.name.capitalize} is on #{DEFAULT_META["meta_product_name"]}" %>
 <div class="show-list-page">
   <%# ── HEADER ── %>
   <div class="show-list-header px-4 pt-4 pb-3">
@@ -55,18 +56,18 @@
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>
           <div id="empty-state" class="lists-empty text-center py-5">
-          <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", width: 100, class: "brand-logo" %>
+            <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", width: 100, class: "brand-logo" %>
             <p class="mt-3 text-muted">You haven't added anything yet.<br>
               Add your first one above!</p>
           </div>
         <% end %>
       </div>
-        <%= render "lists/total", list: @list, items: @items %>
-      </div>
+      <%= render "lists/total", list: @list, items: @items %>
     </div>
   </div>
-  <%# ── MAP ── %>
-  <div class="px-4 mb-5">
-    <%= render partial: "lists/map", locals: { list: @list } %>
-  </div>
+</div>
+<%# ── MAP ── %>
+<div class="px-4 mb-5">
+  <%= render partial: "lists/map", locals: { list: @list } %>
+</div>
 </div>
