@@ -1,3 +1,5 @@
+<% content_for :meta_title, "#{@scan.store.name} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_image, cl_image_path(@scan.flyer.url) %>
 <div class="container mt-3">
   <%= link_to new_scan_path, class: "back-link" do %>
     <i class="fa-solid fa-chevron-left me-1"></i>Back
