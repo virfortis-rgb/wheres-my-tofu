@@ -1,9 +1,7 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
-  SYSTEM_PROMPT = "Extract all products and prices from this flyer.
-                  Use the tool to return an array of products with their prices.
-                  If a product or price cannot be found, leave the field blank."
+  SYSTEM_PROMPT = "Extract all products and prices from this flyer. Use the tool to return an array of products with their prices. If a product or price cannot be found, leave the field blank."
   def perform(scan)
     process_scan(scan) if scan.flyer.attached?
   end
