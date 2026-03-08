@@ -1,17 +1,11 @@
 class AddFlyerDataToDbJob < ApplicationJob
   queue_as :default
 
-  SYSTEM_PROMPT = SYSTEM_PROMPT = <<~PROMPT
+  SYSTEM_PROMPT = <<~PROMPT
     Extract all products and their prices from this flyer.
     You MUST return the results using the provided tool.
     Do not respond with text.
     Only call the tool.
-    Each product must contain:
-    - name
-    - description
-    - keyword
-    - price_without_tax
-    - price_with_tax
 
     Example tool output:
     {
@@ -42,14 +36,13 @@ class AddFlyerDataToDbJob < ApplicationJob
     if flyer.blob.content_type == "application/pdf"
       generate_prices_with_llm(llm[:gemini], media[:pdf], tool, scan)
     elsif flyer.image?
-      generate_prices_with_llm(llm[:gpt], media[:image], tool, scan)
+      generate_prices_with_llm(llm[:gemini], media[:image], tool, scan)
     end
   end
 
   def generate_prices_with_llm(llm, media, tool, scan)
-    chat = RubyLLM.chat(model: llm[:model], provider: llm[:provider], assume_model_exists: true)
-                  # .with_schema(FlyerSchema)
-                  .with_tool(tool).on_tool_result do |products|
+    chat = RubyLLM.chat(model: llm[:model]).with_tool(tool)
+                  .on_tool_result do |products|
                     scan.update(llm_raw_output: products)
                     products.each do |p|
                       # p = p.with_indifferent_access
