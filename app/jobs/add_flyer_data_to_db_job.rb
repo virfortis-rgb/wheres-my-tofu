@@ -26,9 +26,9 @@ class AddFlyerDataToDbJob < ApplicationJob
   def generate_prices_with_llm(llm, media, tool, scan)
     chat = RubyLLM.chat(model: llm[:model], provider: llm[:provider], assume_model_exists: true)
                   # .with_schema(FlyerSchema)
-                  .with_tool(tool).on_tool_result do |result|
-                    pp result
-                    result.each do |price|
+                  .with_tool(tool).on_tool_result do |prices|
+                    pp prices
+                    prices.each do |price|
                       ScanPrice.create(price: price, scan: scan)
                       puts "🎴 ScanPrice instance created ..."
                     end
@@ -37,6 +37,9 @@ class AddFlyerDataToDbJob < ApplicationJob
     puts "processing scan ..."
   end
 end
+
+
+
 
 # chat = RubyLLM.chat(model: "gemini-2.0-flash")
 #               .with_tool(tool)

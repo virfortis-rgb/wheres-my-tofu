@@ -6,7 +6,7 @@ class FlyerReaderTool < RubyLLM::Tool
   end
 
   params do
-    object :scanned_products do
+    array :scanned_products do
       string :name, description: "商品名"
       string :description, description: "商品説明文"
       string :keyword, description: "One keyword to define this product"
