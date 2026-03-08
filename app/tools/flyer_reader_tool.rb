@@ -18,34 +18,6 @@ class FlyerReaderTool < RubyLLM::Tool
 
   # Todo update arguments, receive array? of products => array gives a NoMethodError
   def execute(scanned_products:)
-    pp scanned_products
-    prices = []
-    scanned_products.each do |p|
-      p = p.with_indifferent_access
-      product = Product.find_or_create_by(
-        name: p[:name],
-        description: p[:description],
-        keyword: p[:keyword]
-      )
-      if product.save
-        { success: true, product_id: product.id }
-      else
-        { success: false, errors: product.errors.full_messages }
-      end
-
-      price = Price.new(
-        store_id: @store.id,
-        product_id: product.id,
-        price_without_tax: p[:price_without_tax],
-        price_with_tax: p[:price_with_tax]
-      )
-      if price.save
-        { success: true, price_id: price.id, product_id: product.id }
-        prices << price
-      else
-        { success: false, errors: price.errors.full_messages }
-      end
-    end
-    prices
+    scanned_products
   end
 end
