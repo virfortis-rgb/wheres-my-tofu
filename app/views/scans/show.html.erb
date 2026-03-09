@@ -3,21 +3,33 @@
   <%= link_to new_scan_path, class: "back-link" do %>
     <i class="fa-solid fa-chevron-left me-1"></i>Back
   <% end %>
-  <p>You just scanned this flyer:</p>
-  <div class="container mb-3">
-    <%= link_to 'Check it out here', @scan.flyer.url, target: "_blank" %>
+  <div class="container bg-white rounded-4 py-3 my-3">
+    <div class="container mb-3">
+      <p>You just scanned this flyer:</p>
+      <%= link_to 'Check it out here', @scan.flyer.url, target: "_blank" %>
+    </div>
+    <div class="container mb-3 d-flex justify-content-center">
+      <%= cl_image_tag(@scan.flyer.key, width: 320) %>
+    </div>
   </div>
-  <div class="container mb-3">
-    <%= cl_image_tag @scan.flyer.key, height: 300, width: 400, crop: :fill %>
-  </div>
-  <div class="container">
-    <%= @scan.store.name %>
-    <ul class="list-group list-group-flush ">
+  <div class="container bg-white rounded-4 py-3 mb-3">
+    <div class="my-3 fs-4">
+      <%= @scan.store.name %>
+    </div>
+    <ul class="lists-body ps-0">
       <% @prices.each do |price| %>
-        <li class="list-group-item d-flex justify-content-between">
-          <%= "#{price.product.name} ￥#{price.price_with_tax}" %>
-          <div class="d-flex gap-2">
-            <%= link_to "Edit", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
+        <li class="list-card d-flex flex-column align-items-start text-truncate">
+          <%= "#{price.product.name}" %>
+          <div class="d-flex gap-1">
+            <div class="pt-2">
+              <strong>
+                <%= "￥#{price.price_without_tax} | ￥#{price.price_with_tax}" %>
+              </strong>
+              <span>（税込）</span>
+            </div>
+          </div>
+          <div class="d-flex align-self-end gap-3 pt-2">
+            <%= link_to "Edit", "#", class: "btn btn-primary rounded-4", data: { bs_toggle: "modal", bs_target: "#editModal#{price.id}"} %>
             <%= render "prices/edit", price: price, scan_id: @scan.id %>
             <%= button_to price, method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Delete this product?" } } do %>
               <i class="fa-solid fa-trash"></i>
