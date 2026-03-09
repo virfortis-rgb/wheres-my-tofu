@@ -37,17 +37,3 @@ class FlyerReaderTool < RubyLLM::Tool
     return prices
   end
 end
-
-
-  # if product.save
-    #   { success: true, product_id: product.id }
-    # else
-    #   { success: false, errors: product.errors.full_messages }
-    # end
-
-       # if price.save
-    #   { success: true, price_id: price.id, product_id: product.id }
-    #   prices << price
-    # else
-    #   { success: false, errors: price.errors.full_messages }
-    # end

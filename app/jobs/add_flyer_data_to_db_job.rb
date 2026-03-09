@@ -34,7 +34,6 @@ class AddFlyerDataToDbJob < ApplicationJob
                     scan.update(llm_raw_output: prices)
                     prices.each do |price|
                       ScanPrice.create(price: price, scan: scan)
-                      puts "🎴 ScanPrice instance created ..."
                     end
                   end
     chat.ask(SYSTEM_PROMPT, with: media)
