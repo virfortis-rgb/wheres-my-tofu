@@ -41,18 +41,3 @@ class AddFlyerDataToDbJob < ApplicationJob
     Rails.logger.info("Processing scan #{scan.id}")
   end
 end
-
-
-
-    # Example tool output:
-    # {
-    #   "scanned_products": [
-    #     {
-    #       "name": "キャベツ",
-    #       "description": "群馬県産",
-    #       "keyword": "野菜",
-    #       "price_without_tax": 198,
-    #       "price_with_tax": 213
-    #     }
-    #   ]
-    # }
