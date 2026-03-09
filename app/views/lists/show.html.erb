@@ -1,3 +1,4 @@
+<% content_for :meta_title, "#{@list.name.capitalize} is on #{DEFAULT_META["meta_product_name"]}" %>
 <div class="show-list-page">
   <%# ── HEADER ── %>
   <div class="show-list-header px-4 pt-4 pb-3">
@@ -5,13 +6,13 @@
       <i class="fa-solid fa-chevron-left me-1"></i>Back
     <% end %>
   </div>
-  <div class="container bg-white border border-success-subtle rounded-5 mb-5">
+  <div class="bg-white border border-success-subtle rounded-5 p-2 mb-5 mx-2">
     <h1 class="show-list-title-row my-3">
       <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "show-list-title-logo" %>
       <span class="show-list-title-text"><%= @list.name.capitalize %></span>
     </h1>
     <%# ── ADD ITEM FORM ── %>
-    <div class="px-4 mb-3">
+    <div class="px-2 mb-3">
       <%= form_with url: attach_list_items_path(@list),
                   scope: :item,
                   method: :post,
@@ -29,7 +30,7 @@
     </div>
     <div class="favorite-stores-card mx-4 mb-3">
       <%= form_with model: @list, url: favorite_stores_list_path(@list), method: :patch, class: "favorite-stores-form" do %>
-        <p class="favorite-stores-label mb-2">Show items available in these stores:</p>
+        <p class="favorite-stores-label mb-2">What stores you want to go to today?</p>
         <%= hidden_field_tag "list[favorite_store_ids][]", "" %>
         <div class="favorite-stores-grid mb-3">
           <% @stores.each do |store| %>
@@ -40,7 +41,7 @@
           <% end %>
         </div>
         <div class="favorite-stores-actions">
-          <%= submit_tag "Apply Stores", class: "btn btn-primary btn-sm" %>
+          <%= submit_tag "Slect these stores", class: "btn btn-primary btn-sm rounded-4" %>
           <% if @list.store_filter_active? %>
             <%= button_tag type: "submit", name: "clear_filter", value: "1", class: "btn-delete favorite-store-clear-btn", title: "Clear store filter" do %>
               <i class="fa-solid fa-trash"></i>
@@ -55,18 +56,18 @@
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>
           <div id="empty-state" class="lists-empty text-center py-5">
-          <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", width: 100, class: "brand-logo" %>
+            <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", width: 100, class: "brand-logo" %>
             <p class="mt-3 text-muted">You haven't added anything yet.<br>
               Add your first one above!</p>
           </div>
         <% end %>
       </div>
-        <%= render "lists/total", list: @list, items: @items %>
-      </div>
+      <%= render "lists/total", list: @list, items: @items %>
     </div>
   </div>
-  <%# ── MAP ── %>
-  <div class="px-4 mb-5">
-    <%= render partial: "lists/map", locals: { list: @list } %>
-  </div>
+</div>
+<%# ── MAP ── %>
+<div class="px-2 mb-5">
+  <%= render partial: "lists/map", locals: { list: @list } %>
+</div>
 </div>

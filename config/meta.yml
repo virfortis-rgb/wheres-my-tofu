@@ -1,0 +1,6 @@
+# config/meta.yml
+meta_product_name: "Where'S My Tofu?"
+meta_title: "Where'S My Tofu? - Because every yennie counts."
+meta_description: "A web application that allows to its user to filter their grocery lists by stores in a set location. They can compare prices and choose the option that offers the best value for money."
+meta_image: "Tofu Logo.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account" # required for Twitter Cards
