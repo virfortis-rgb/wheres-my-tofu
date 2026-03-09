@@ -55,6 +55,7 @@ gem "cloudinary"
 gem "image_processing"
 gem "solid_queue"
 gem "ruby_llm"
+gem "ruby_llm-schema"
 
 group :development, :test do
   gem "dotenv-rails"

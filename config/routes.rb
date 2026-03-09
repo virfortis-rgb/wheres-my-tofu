@@ -12,8 +12,6 @@ Rails.application.routes.draw do
     end
 
     resources :items, only: [:show, :update, :destroy] do
-      # Change create to attach since I think it’s more intuitive to say “attach an exist item in our database to a list”
-      # rather than “create an new item in a list” when we’re just linking an existing item to the list.
       collection do
         post :attach
       end
