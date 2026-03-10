@@ -1,0 +1,20 @@
+<div class="error-page error-page--500 d-flex align-items-center">
+  <div class="container py-5">
+    <div class="error-page__body">
+      <section class="error-card">
+        <%= image_tag "Tofu Logo.png", alt: "Where's My Tofu", class: "error-logo" %>
+        <div class="error-chip">500 error</div>
+        <div class="error-code">500</div>
+        <h1 class="error-title">Something went wrong on our side.</h1>
+        <p class="error-copy">We could not finish loading this page. Trying again in a moment may work.</p>
+
+        <div class="error-actions">
+          <%= link_to "Home", root_path, class: "btn error-btn-primary" %>
+          <%= link_to "Login", new_user_session_path, class: "btn error-btn-secondary" %>
+        </div>
+
+        <p class="error-note">Everything you need at the store starts from the homepage.</p>
+      </section>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   get 'lists/new'
   get 'scans/show'
   devise_for :users
+
+  get "/errors/404", to: "errors#not_found"
+  get "/errors/500", to: "errors#internal_server_error"
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
 
