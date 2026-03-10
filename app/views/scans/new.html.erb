@@ -4,7 +4,7 @@
     <%= simple_form_for @scan do |f| %>
       <%= f.input :store_id, collection: @stores, label_method: :name %>
       <%= f.input :flyer, as: :file, label: "Upload a file (pdf or image): " %>
-      <%= f.button :submit, class: "btn btn-primary rounded-4" %>
+      <%= f.submit "Upload a flyer", class: "btn btn-primary rounded-4" %>
     <% end %>
   </div>
   <% if @scans.any? %>
