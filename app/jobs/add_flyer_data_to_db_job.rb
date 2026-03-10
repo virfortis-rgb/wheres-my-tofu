@@ -24,7 +24,7 @@ class AddFlyerDataToDbJob < ApplicationJob
   end
 
   def generate_prices_with_llm(llm, media, tool, scan)
-    chat = RubyLLM.chat(model: llm[:model]).with_tool(tool)
+    chat = RubyLLM.chat(model: llm[:model], provider: :openai, assume_model_exists: true).with_tool(tool)
                   .on_tool_result do |prices|
                     pp prices
                     scan.update(llm_raw_output: prices)
