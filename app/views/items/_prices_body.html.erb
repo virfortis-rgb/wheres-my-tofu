@@ -3,13 +3,19 @@
   <% if grouped_prices.any? %>
     <% lowest_price_val = grouped_prices.values.flatten.map(&:price_with_tax).min %>
     <div class="store-scroll">
-      <% grouped_prices.each do |store, prices| %>
+      <% sorted_grouped_prices = grouped_prices.sort_by do |store, prices| %>
+      <% prices.any? { |p| p.id == item.price_id } ? 0 : 1 %>
+      <% end %>
+
+      <% sorted_grouped_prices.each do |store, prices| %>
         <div class="store-group-box">
           <div class="store-group-header">
             <%= render "stores/store_badge", store: store %>
           </div>
           <div class="product-scroll">
-            <% prices.each do |price| %>
+            <% sorted_prices = prices.sort_by { |p| p.id == item.price_id ? 0 : 1 } %>
+
+            <% sorted_prices.each do |price| %>
               <% is_best_price = price.price_with_tax == lowest_price_val %>
               <div class="product-price-card <%= 'selected-border' if item.price_id == price.id %> <%= 'best-price-card' if is_best_price %>" >
                 <% if is_best_price %>
@@ -20,20 +26,22 @@
                 </div>
                 <p class="product-desc"><%= price.product.description %></p>
                 <p class="product-price-tag">¥<%= price.price_with_tax %></p>
+
                 <% potential_saving = item.savings_if_cheapest(store_ids: store_filter_ids) %>
+
                 <% if item.price_id == price.id %>
-                  <button class="btn-select-price selected" disabled>Selected</button>
+                  <div class="button_to">
+                    <button class="btn-select-price selected" disabled>Selected</button>
+                  </div>
                     <% if potential_saving > 0 %>
-                      <span>
                         <div class="potential-saving-label">
                           <b> ¥<%= "%.1f" % potential_saving %> </b> to min
                         </div>
-                      </span>
                     <% end %>
-                  <% else %>
-                <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
-                    method: :patch,
-                    class: "btn-select-price" %>
+                <% else %>
+                  <%= button_to "Select", list_item_path(@list, item, item: { price_id: price.id }),
+                      method: :patch,
+                      class: "btn-select-price" %>
                 <% end %>
               </div>
             <% end %>
@@ -42,5 +50,5 @@
       <% end %>
     </div>
   <% else %>
-  <p class="no-products-msg">No products found.</p>
+    <p class="no-products-msg">No products found.</p>
 <% end %>

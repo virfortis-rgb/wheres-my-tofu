@@ -11,12 +11,14 @@
       <% @lists.each do |list| %>
         <div class="list-card">
           <div class="list-card-left">
-            <div class="list-emoji">🛒</div>
+            <div class="list-emoji">
+              <%= image_tag 'Tofu Logo.png', size: "40x40" %>
+            </div>
             <div>
               <%= link_to list.name.capitalize, list_path(list), class: "list-name" %>
               <div class="list-meta">
                 <i class="fa-regular fa-clock me-1"></i>
-                <%= list.created_at.strftime("%b %d, %Y") %>
+                <%= list.created_at.strftime("%d %B %Y") %>
               </div>
             </div>
           </div>
@@ -24,7 +26,7 @@
             <%= link_to list_path(list), class: "btn-go" do %>
               <i class="fa-solid fa-chevron-right"></i>
             <% end %>
-            <%= button_to list_path(list), method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Delete this list?" } } do %>
+            <%= button_to list_path(list), method: :delete, class: "btn-delete", form: { data: { turbo_confirm: "Do you want to delete this list?" } } do %>
               <i class="fa-solid fa-trash"></i>
             <% end %>
           </div>
