@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_07_070000) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_08_113329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -92,10 +92,20 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_07_070000) do
     t.string "image_url"
   end
 
+  create_table "scan_prices", force: :cascade do |t|
+    t.bigint "price_id", null: false
+    t.bigint "scan_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["price_id"], name: "index_scan_prices_on_price_id"
+    t.index ["scan_id"], name: "index_scan_prices_on_scan_id"
+  end
+
   create_table "scans", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_id", null: false
+    t.jsonb "llm_raw_output"
     t.index ["store_id"], name: "index_scans_on_store_id"
   end
 
@@ -250,6 +260,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_07_070000) do
   add_foreign_key "lists", "users"
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "stores"
+  add_foreign_key "scan_prices", "prices"
+  add_foreign_key "scan_prices", "scans"
   add_foreign_key "scans", "stores"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
