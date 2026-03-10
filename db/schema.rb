@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_113329) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "favorite_stores", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_favorite_stores_on_store_id"
+    t.index ["user_id"], name: "index_favorite_stores_on_user_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
@@ -69,6 +78,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_113329) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_lists_on_store_id"
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
@@ -79,6 +90,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_113329) do
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "item_id"
+    t.index ["item_id"], name: "index_prices_on_item_id"
     t.index ["product_id"], name: "index_prices_on_product_id"
     t.index ["store_id"], name: "index_prices_on_store_id"
   end
@@ -253,11 +266,15 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_113329) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorite_stores", "stores"
+  add_foreign_key "favorite_stores", "users"
   add_foreign_key "items", "lists"
   add_foreign_key "items", "prices"
   add_foreign_key "list_favorite_stores", "lists"
   add_foreign_key "list_favorite_stores", "stores"
+  add_foreign_key "lists", "stores"
   add_foreign_key "lists", "users"
+  add_foreign_key "prices", "items"
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "stores"
   add_foreign_key "scan_prices", "prices"
