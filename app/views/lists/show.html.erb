@@ -5,7 +5,7 @@
       <i class="fa-solid fa-chevron-left me-1"></i>Back
     <% end %>
   </div>
-  <div class="container bg-white border border-success-subtle rounded-5 mb-5">
+  <div class="container bg-white border border-success-subtle rounded-5 mb-3">
     <h1 class="show-list-title-row my-3">
       <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "show-list-title-logo" %>
       <span class="show-list-title-text"><%= @list.name.capitalize %></span>
@@ -35,6 +35,7 @@
           <% @stores.each do |store| %>
             <label class="favorite-store-option">
               <%= check_box_tag "list[favorite_store_ids][]", store.id, @list.favorite_store_ids.include?(store.id) %>
+              <%= store_logo_tag(store.name, size: 20) %>
               <span><%= store.name %></span>
             </label>
           <% end %>
@@ -42,16 +43,14 @@
         <div class="favorite-stores-actions">
           <%= submit_tag "Apply Stores", class: "btn btn-primary btn-sm" %>
           <% if @list.store_filter_active? %>
-            <%= button_tag type: "submit", name: "clear_filter", value: "1", class: "btn-delete favorite-store-clear-btn", title: "Clear store filter" do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
+            <%= button_tag "Reset", type: "submit", name: "clear_filter", value: "1", class: "btn btn-outline-secondary btn-sm" %>
           <% end %>
         </div>
       <% end %>
     </div>
     <%# ── ITEMS ── %>
     <div class="lists-body px-4 pb-5">
-      <div class="list-grouped-card mb-4" id="grouped-items-container"> <%#  we can add some style here%>
+      <div class="list-grouped-card mb-4" id="grouped-items-container">
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>
           <div id="empty-state" class="lists-empty text-center py-5">
@@ -63,10 +62,9 @@
       </div>
         <%= render "lists/total", list: @list, items: @items %>
       </div>
-    </div>
   </div>
   <%# ── MAP ── %>
-  <div class="px-4 mb-5">
+  <div class="px-4 mb-3">
     <%= render partial: "lists/map", locals: { list: @list } %>
   </div>
 </div>

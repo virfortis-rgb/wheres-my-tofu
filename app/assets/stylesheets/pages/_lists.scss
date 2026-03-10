@@ -475,6 +475,7 @@
   padding: 0.85rem 0.9rem;
 }
 
+
 .favorite-stores-label {
   font-size: 0.8rem;
   color: #555;
@@ -482,10 +483,10 @@
 }
 
 .favorite-stores-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem 0.8rem;
-  max-height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 200px;
   overflow-y: auto;
 }
 
@@ -666,6 +667,11 @@
   overflow-x: auto;
   padding-bottom: 0.5rem;
   width: 100%;
+
+  // Center the card when it's the only one
+  > .product-price-card:only-child {
+    margin: 0 auto;
+  }
 
   &::-webkit-scrollbar { height: 4px; }
   &::-webkit-scrollbar-thumb { background: #cce8d4; border-radius: 4px; }
