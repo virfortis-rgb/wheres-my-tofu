@@ -508,6 +508,28 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+    .btn-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #ffecec;
+    border: none;
+    border-radius: 50%;
+    @supports (corner-shape: squircle) {
+      corner-shape: squircle;
+    }
+    color: rgb(134, 14, 14);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      background: rgb(134, 14, 14);
+      color: white;
+    }
+  }
 }
 
 .favorite-store-clear-btn {
