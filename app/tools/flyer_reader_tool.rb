@@ -27,8 +27,8 @@ class FlyerReaderTool < RubyLLM::Tool
         keyword: p[:keyword]
       )
       price = Price.create!(
-        store_id: @store.id,
-        product_id: product.id,
+        store: @store,
+        product: product,
         price_without_tax: p[:price_without_tax],
         price_with_tax: p[:price_with_tax]
       )
