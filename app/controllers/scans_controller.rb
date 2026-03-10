@@ -9,7 +9,8 @@ class ScansController < ApplicationController
   end
 
   def show
-    @prices = @scan.store.prices
+  scan_prices = @scan.scan_prices
+  @prices = scan_prices.map  { |scan_price| scan_price.price }
   end
 
   def create
@@ -17,7 +18,7 @@ class ScansController < ApplicationController
     if @scan.save
       flash[:notice] = "Retrieving informtion from the flyer."
       AddFlyerDataToDbJob.perform_later(@scan)
-      redirect_to @scan, notice: "Added products to the DB. Please double check!"
+      redirect_to @scan, allow_other_host: true, notice: "Adding products to the DB. This could take a moment!"
     else
       render :new, status: :unprocessable_entity
     end
