@@ -6,11 +6,8 @@
       <i class="fa-solid fa-chevron-left me-1"></i>Back
     <% end %>
   </div>
-<<<<<<< HEAD
-  <div class="container bg-white border border-success-subtle rounded-5 mb-3">
-=======
-  <div class="bg-white border border-success-subtle rounded-5 p-2 mb-5 mx-2">
->>>>>>> master
+
+  <div class="bg-white border border-success-subtle rounded-5 p-2 mb-3 mx-2">
     <h1 class="show-list-title-row my-3">
       <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "show-list-title-logo" %>
       <span class="show-list-title-text"><%= @list.name.capitalize %></span>
@@ -48,9 +45,6 @@
         <div class="favorite-stores-actions">
           <%= submit_tag "Slect these stores", class: "btn btn-primary btn-sm rounded-4" %>
           <% if @list.store_filter_active? %>
-<<<<<<< HEAD
-            <%= button_tag "Reset", type: "submit", name: "clear_filter", value: "1", class: "btn btn-outline-secondary btn-sm" %>
-=======
             <%= button_tag type: "submit",
                           name: "clear_filter",
                           value: "1",
@@ -58,14 +52,13 @@
                           title: "Clear store filter" do %>
               <i class="fa-solid fa-trash"></i>
             <% end %>
->>>>>>> master
           <% end %>
         </div>
       <% end %>
     </div>
     <%# ── ITEMS ── %>
     <div class="lists-body px-4 pb-5">
-      <div class="list-grouped-card mb-4" id="grouped-items-container">
+      <div class="list-grouped-card mb-4" id="grouped-items-container"> <%#  we can add some style here%>
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>
           <div id="empty-state" class="lists-empty text-center py-5">
@@ -75,22 +68,11 @@
           </div>
         <% end %>
       </div>
-<<<<<<< HEAD
-        <%= render "lists/total", list: @list, items: @items %>
-      </div>
-  </div>
-  <%# ── MAP ── %>
-  <div class="px-4 mb-3">
-    <%= render partial: "lists/map", locals: { list: @list } %>
-  </div>
-=======
       <%= render "lists/total", list: @list, items: @items %>
     </div>
   </div>
-</div>
-<%# ── MAP ── %>
-<div class="px-2 mb-5">
-  <%= render partial: "lists/map", locals: { list: @list } %>
-</div>
->>>>>>> master
+  <%# ── MAP ── %>
+  <div class="px-2 mb-3">
+    <%= render partial: "lists/map", locals: { list: @list } %>
+  </div>
 </div>
