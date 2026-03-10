@@ -19,7 +19,7 @@ class AddFlyerDataToDbJob < ApplicationJob
     flyer = scan.flyer
     tool = FlyerReaderTool.new(store)
     media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
-    llm = { gemini: { model: 'gemini-2.5-flash-lite', provider: :azure }, gpt: { model: 'gpt-4.1-nano', provider: :openai } }
+    llm = { gemini: { model: 'gemini-2.5-flash-lite' }, gpt: { model: 'gpt-4.1-nano' } }
     if flyer.blob.content_type == "application/pdf"
       generate_prices_with_llm(llm[:gemini], media[:pdf], tool, scan)
     elsif flyer.image?
