@@ -19,7 +19,7 @@ class AddFlyerDataToDbJob < ApplicationJob
     flyer = scan.flyer
     tool = FlyerReaderTool.new(store)
     media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
-    llm = { gpt: { model: 'gpt-4.1-nano' }, groq: {model: 'meta-llama/llama-4-scout-17b-16e-instruct'} }
+    llm = { gpt: { model: 'gpt-4.1-nano' }, groq: {model: 'meta-llama/llama-4-scout-17b-16e-instruct'}, gemini: {model: "gemini-2.5-flash-lite"} }
     generate_prices_with_llm(llm[:groq], media[:image], tool, scan)
   end
 
