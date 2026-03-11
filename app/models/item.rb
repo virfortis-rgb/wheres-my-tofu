@@ -50,7 +50,7 @@ class Item < ApplicationRecord
   end
 
   def matching_product_ids
-    @matching_product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q", q: "%#{keyword}%").pluck(:id)
+    @matching_product_ids = Product.where("keyword ILIKE :q OR name ILIKE :q OR description ILIKE :q", q: "%#{keyword}%").pluck(:id)
   end
 
   def lowest_available_price(store_ids: nil)

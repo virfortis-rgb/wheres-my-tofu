@@ -1,15 +1,17 @@
-<div id="list_total_card" class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-center">
+<div id="list_total_card" class="list-total-card mt-4 p-3 d-flex justify-content-between align-items-start">
   <span class="total-label">Total</span>
-  <% total_savings = list.total_potential_savings %>
-  <% if total_savings > 0 %>
-    <span style="font-size: 0.75rem; color: #fff; margin-top: 2px;">
-      Save up to <b> ¥<%= "%.1f" % total_savings %> </b> more
-    </span>
-  <% else %>
-    <span style="font-size: 0.75rem; color: #fff; margin-top: 2px;">
-      <b> You're a top saver! </b>
-    </span>
-  <% end %>
-  <% list_total = items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
-  <span class="total-price">¥<%= list_total %></span>
+  <div class="total-right-content d-flex flex-column align-items-end">
+    <% list_total = items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
+    <span class="total-price">¥<%= list_total %></span>
+    <% total_savings = list.total_potential_savings %>
+    <% if total_savings > 0 %>
+      <div class="total-save-badge">
+        Save up to <b>¥<%= "%.1f" % total_savings %></b> more
+      </div>
+    <% else %>
+      <div class="total-save-badge success">
+        <b>You're a top saver!</b>
+      </div>
+    <% end %>
+  </div>
 </div>

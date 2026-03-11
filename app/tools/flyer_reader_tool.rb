@@ -26,12 +26,14 @@ class FlyerReaderTool < RubyLLM::Tool
         description: p[:description],
         keyword: p[:keyword]
       )
-      price = Price.new(
-        store_id: @store.id,
-        product_id: product.id,
+      pp product
+      price = Price.find_or_create_by!(
+        store: @store,
+        product: product,
         price_without_tax: p[:price_without_tax],
         price_with_tax: p[:price_with_tax]
       )
+      pp price
       prices << price
     end
     return prices
