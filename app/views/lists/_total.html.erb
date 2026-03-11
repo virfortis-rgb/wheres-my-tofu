@@ -7,7 +7,7 @@
     </span>
   <% else %>
     <span style="font-size: 0.75rem; color: #fff; margin-top: 2px;">
-      <b> Nothing left to cut 🎉 </b>
+      <b> You're a top saver! </b>
     </span>
   <% end %>
   <% list_total = items.select(&:price).sum { |item| item.price.price_with_tax * item.quantity } %>
