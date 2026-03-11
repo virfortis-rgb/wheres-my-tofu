@@ -10,7 +10,7 @@
       <% sorted_grouped_prices.each do |store, prices| %>
         <div class="store-group-box">
           <div class="store-group-header">
-            <strong><%= store.name %></strong>
+            <%= render "stores/store_badge", store: store %>
           </div>
           <div class="product-scroll">
             <% sorted_prices = prices.sort_by { |p| p.id == item.price_id ? 0 : 1 } %>

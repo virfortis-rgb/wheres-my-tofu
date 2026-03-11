@@ -481,6 +481,7 @@
   padding: 0.85rem 0.9rem;
 }
 
+
 .favorite-stores-label {
   font-size: 0.8rem;
   color: #555;
@@ -488,10 +489,10 @@
 }
 
 .favorite-stores-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem 0.8rem;
-  max-height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 200px;
   overflow-y: auto;
 }
 
@@ -694,6 +695,11 @@
   overflow-x: auto;
   padding-bottom: 0.5rem;
   width: 100%;
+
+  // Center the card when it's the only one
+  > .product-price-card:only-child {
+    margin: 0 auto;
+  }
 
   &::-webkit-scrollbar { height: 4px; }
   &::-webkit-scrollbar-thumb { background: #cce8d4; border-radius: 4px; }
@@ -911,6 +917,44 @@
         background: rgba(255, 255, 255, 0.25);
       }
     }
+  }
+}
+
+// ── Store badge ──────────────────────────────────────────────────────────────
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+
+  .store-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .store-logo-initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: $basil;
+    color: white;
+    font-family: $headers-font;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .store-badge-name {
+    font-family: $headers-font;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: $gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
