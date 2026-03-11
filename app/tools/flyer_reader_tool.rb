@@ -27,7 +27,7 @@ class FlyerReaderTool < RubyLLM::Tool
         keyword: p[:keyword]
       )
       pp product
-      price = Price.create!(
+      price = Price.find_or_create_by!(
         store: @store,
         product: product,
         price_without_tax: p[:price_without_tax],
