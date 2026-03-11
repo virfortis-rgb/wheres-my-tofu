@@ -48,7 +48,7 @@ module GroceryIconHelper
     "cheese"      => "cheese",
     "cream"       => "cream",
     "milk"        => "milk",
-    "egg"         => "egg",
+    "eggs"        => "egg",
     # ── Bakery ───────────────────────────────────────────────────
     "bread"       => "bread",
     "cookie"      => "cookie",

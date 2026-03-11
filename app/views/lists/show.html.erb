@@ -43,16 +43,12 @@
           <% end %>
         </div>
         <div class="favorite-stores-actions">
-          <%= submit_tag "Slect these stores", class: "btn btn-primary btn-sm rounded-4" %>
-          <% if @list.store_filter_active? %>
-            <%= button_tag type: "submit",
-                          name: "clear_filter",
-                          value: "1",
-                          class: "btn-delete favorite-store-clear-btn",
-                          title: "Clear store filter" do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
-          <% end %>
+          <%= submit_tag "Apply Stores", class: "btn btn-primary btn-sm rounded-4" %>
+          <%= button_tag "Reset",
+                        type: "submit",
+                        name: "clear_filter",
+                        value: "1",
+                        class: "btn btn-outline-secondary btn-sm rounded-4" %>
         </div>
       <% end %>
     </div>
