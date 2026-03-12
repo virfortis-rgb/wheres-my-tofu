@@ -16,10 +16,18 @@ class AddFlyerDataToDbJob < ApplicationJob
   def process_scan(scan)
     store = scan.store
     tool = FlyerReaderTool.new(store)
+<<<<<<< debug-llm-for-production
     generate_prices_with_llm(tool, scan)
   end
 
   def generate_prices_with_llm(tool, scan)
+=======
+    media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
+    generate_prices_with_llm(media[:image], tool, scan)
+  end
+
+  def generate_prices_with_llm(media, tool, scan)
+>>>>>>> master
     chat = RubyLLM.chat(model: 'meta-llama/llama-4-scout-17b-16e-instruct', provider: :openai, assume_model_exists: true)
                   .with_tool(tool)
                   .on_tool_result do |prices|
