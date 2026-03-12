@@ -3,9 +3,8 @@ class AddFlyerDataToDbJob < ApplicationJob
 
   SYSTEM_PROMPT = <<~PROMPT
     Extract all products and their prices from this flyer.
-    You MUST return the results using the provided tool.
-    Do not respond with text.
-    Only call the tool.
+    You MUST return an array of prices using the provided tool.
+    Only call the tool ONCE.
   PROMPT
 
   def perform(scan)
@@ -16,13 +15,11 @@ class AddFlyerDataToDbJob < ApplicationJob
 
   def process_scan(scan)
     store = scan.store
-    flyer = scan.flyer
     tool = FlyerReaderTool.new(store)
-    media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
-    generate_prices_with_llm(media[:image], tool, scan)
+    generate_prices_with_llm(tool, scan)
   end
 
-  def generate_prices_with_llm(media, tool, scan)
+  def generate_prices_with_llm(tool, scan)
     chat = RubyLLM.chat(model: 'meta-llama/llama-4-scout-17b-16e-instruct', provider: :openai, assume_model_exists: true)
                   .with_tool(tool)
                   .on_tool_result do |prices|
@@ -32,7 +29,7 @@ class AddFlyerDataToDbJob < ApplicationJob
                       ScanPrice.create(price_id: price[:id], scan: scan)
                     end
                   end
-    chat.ask(SYSTEM_PROMPT, with: media)
+    chat.ask(SYSTEM_PROMPT, with: scan.flyer.url)
     Rails.logger.info("Processing scan #{scan.id}")
   end
 end
