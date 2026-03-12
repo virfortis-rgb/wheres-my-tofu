@@ -47,7 +47,7 @@
   border-radius: 16px;
   padding: 1rem 1.1rem;
   margin-bottom: 0.85rem;
-  box-shadow: 4px 4px 5px rgba(172, 213, 172, 0.2);
+  box-shadow: 4px 4px 8px rgba(18, 28, 18, 0.1);
 
   .list-card-left {
     display: flex;
@@ -170,8 +170,7 @@
   background: white;
   border-radius: 20px;
   padding: 1.75rem 1.5rem;
-  border: 1.5px solid #cce8d4;
-  box-shadow: 4px 4px 4px rgba(18, 28, 18, 0.2);
+  box-shadow: 4px 4px 8px rgba(18, 28, 18, 0.1);
 
   .new-list-icon {
     font-size: 2.5rem;
@@ -266,15 +265,16 @@
   }
 }
 
-.show-list-header {
-  .back-link {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: $basil;
-    text-decoration: none;
+.back-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $basil;
+  text-decoration: none;
 
-    &:hover { color: $dark-green; }
-  }
+  &:hover { color: $dark-green; }
+}
+
+.show-list-header {
 
   .show-list-title {
     font-family: $headers-font;

@@ -1,131 +1,132 @@
 /* app/assets/stylesheets/components/_navbar.scss */
 
-// ── TOP HEADER ────────────────────────────────────────────────────────────────
-.top-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
-  background: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-  z-index: 1000;
+// ── TOP HEADER （no need anymore) ────────────────────────────────────────────────────────────────
+// .top-header {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   height: 56px;
+//   background: white;
+//   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+//   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+//   z-index: 1000;
 
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 8px;
-}
+//   display: flex;
+//   align-items: center;
+//   padding: 0 16px;
+//   gap: 8px;
+// }
 
-// Brand
-.nav-brand {
-  flex-shrink: 0;
-}
+// // Brand
+// .nav-brand {
+//   flex-shrink: 0;
+// }
 
-.brand-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  font-weight: 700;
-  font-family: $headers-font;
-  color: $basil;
-  font-size: 1rem;
-  white-space: nowrap;
+// .brand-link {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 6px;
+//   text-decoration: none;
+//   font-weight: 700;
+//   font-family: $headers-font;
+//   color: $basil;
+//   font-size: 1rem;
+//   white-space: nowrap;
 
-  &:hover { color: $dark-green; }
+//   &:hover { color: $dark-green; }
 
-  .brand-logo {
-    width: 34px;
-    height: 34px;
-    display: block;
-    object-fit: contain;
-  }
+//   .brand-logo {
+//     width: 34px;
+//     height: 34px;
+//     display: block;
+//     object-fit: contain;
+//   }
 
-  span {
-    line-height: 1;
-  }
-}
+//   span {
+//     line-height: 1;
+//   }
+// }
 
-// Right-side group: nav links + user icon pushed to the far right together
-.header-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+// // Right-side group: nav links + user icon pushed to the far right together
+// .header-right {
+//   margin-left: auto;
+//   display: flex;
+//   align-items: center;
+//   gap: 4px;
+// }
 
-// Desktop nav links — hidden on mobile, shown via media query below
-.header-links {
-  display: none;
-  align-items: center;
-  gap: 4px;
-}
+// // Desktop nav links — hidden on mobile, shown via media query below
+// .header-links {
+//   display: none;
+//   align-items: center;
+//   gap: 4px;
+// }
 
-.header-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: $gray;
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background 0.15s, color 0.15s;
+// .header-tab {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 7px;
+//   padding: 7px 12px;
+//   border-radius: 8px;
+//   text-decoration: none;
+//   color: $gray;
+//   font-size: 0.9rem;
+//   font-weight: 600;
+//   white-space: nowrap;
+//   transition: background 0.15s, color 0.15s;
 
-  i { font-size: 1rem; }
+//   i { font-size: 1rem; }
 
-  &:hover {
-    background: rgba(38, 101, 51, 0.07);
-    color: $dark-green;
-  }
+//   &:hover {
+//     background: rgba(38, 101, 51, 0.07);
+//     color: $dark-green;
+//   }
 
-  &.active {
-    color: $basil;
-    background: rgba(38, 101, 51, 0.1);
-  }
-}
+//   &.active {
+//     color: $basil;
+//     background: rgba(38, 101, 51, 0.1);
+//   }
+// }
 
 // ── USER ICON + DROPDOWN ──────────────────────────────────────────────────────
 .user-menu {
   position: relative;
 }
 
-.user-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: $basil;
-  font-size: 1.65rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: background 0.15s;
-  -webkit-tap-highlight-color: transparent;
+// .user-btn {
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   color: $basil;
+//   font-size: 1.65rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+//   transition: background 0.15s;
+//   -webkit-tap-highlight-color: transparent;
 
-  &:hover,
-  &:focus-visible {
-    background: rgba(38, 101, 51, 0.1);
-    outline: none;
-  }
-}
+//   &:hover,
+//   &:focus-visible {
+//     background: rgba(38, 101, 51, 0.1);
+//     outline: none;
+//   }
+// }
 
 .user-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: auto;
+  bottom: calc(100% + 6px);
   right: 0;
   min-width: 150px;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.09);
   border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.13);
   overflow: hidden;
   z-index: 1010;
 
@@ -173,6 +174,19 @@
   justify-content: space-around;
 }
 
+.bottom-user-menu {
+  flex: 1;
+  display: flex;
+}
+
+button.bottom-tab {
+  background: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .bottom-tab {
   flex: 1;
   display: inline-flex;
@@ -191,6 +205,13 @@
 
   i { font-size: 1.25rem; }
 
+  .avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
   &:hover { color: $dark-green; }
 
   &.active {
@@ -202,7 +223,7 @@
 // ── CONTENT SPACING ───────────────────────────────────────────────────────────
 // Mobile: clear the fixed top header above AND the fixed bottom tabs below.
 .app-content {
-  padding-top: 56px;
+  padding-top: 0px;
   padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
@@ -220,7 +241,7 @@
   .bottom-tabs { display: none; }  // Hide mobile tabs entirely
 
   .app-content {
-    padding-top: 64px;
+    padding-top: 0px;
     padding-bottom: 0;
   }
 }

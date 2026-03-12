@@ -1,17 +1,16 @@
 <% content_for :meta_title, "#{@list.name.capitalize} is on #{DEFAULT_META["meta_product_name"]}" %>
-<div class="show-list-page">
-  <%# ── HEADER ── %>
-  <div class="show-list-header px-4 pt-4 pb-3">
-    <%= link_to lists_path, class: "back-link" do %>
-      <i class="fa-solid fa-chevron-left me-1"></i>Back
-    <% end %>
-  </div>
+<div class="sticky-top bg-white border-bottom px-3 py-3 d-flex align-items-center" style="z-index: 1020;">
+  <%= link_to lists_path, class: "back-link" do %>
+    <i class="fa-solid fa-chevron-left"></i> Back
+  <% end %>
+  <h1 class="mb-0 ms-4 fs-5 fw-bold text-dark d-flex align-items-center">
+    <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "me-2", style: "width: 24px; height: 24px; object-fit: contain;" %>
+    <%= @list.name.capitalize %>
+  </h1>
 
-  <div class="bg-white border border-success-subtle rounded-5 p-2 mb-3 mx-2">
-    <h1 class="show-list-title-row my-3">
-      <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "show-list-title-logo" %>
-      <span class="show-list-title-text"><%= @list.name.capitalize %></span>
-    </h1>
+</div>
+
+<div class="show-list-page px-3 pt-4 pb-2">
     <%# ── ADD ITEM FORM ── %>
     <div class="px-2 mb-3">
       <%= form_with url: attach_list_items_path(@list),
@@ -29,7 +28,7 @@
           class: "add-item-btn" %>
       <% end %>
     </div>
-    <div class="favorite-stores-card mx-4 mb-3">
+    <div class="favorite-stores-card mb-3">
       <%= form_with model: @list, url: favorite_stores_list_path(@list), method: :patch, class: "favorite-stores-form" do %>
         <p class="favorite-stores-label mb-2">What stores you want to go to today?</p>
         <%= hidden_field_tag "list[favorite_store_ids][]", "" %>
@@ -53,7 +52,7 @@
       <% end %>
     </div>
     <%# ── ITEMS ── %>
-    <div class="lists-body px-4 pb-5">
+    <div class="lists-body pb-5">
       <div class="list-grouped-card mb-4" id="grouped-items-container"> <%#  we can add some style here%>
         <%= render "items/grouped_items", items: @items, list: @list %>
         <% if @items.empty? %>

@@ -1,64 +1,3 @@
-<%# ── TOP HEADER: always visible at the top of every page ── %>
-<header class="top-header">
-  <%# Brand (left) %>
-  <div class="nav-brand">
-    <%= link_to root_path, class: "brand-link" do %>
-      <%= image_tag "Tofu Logo.png", alt: "Tofu Logo", class: "brand-logo" %>
-      <span>Where's My Tofu</span>
-    <% end %>
-  </div>
-  <%# Right side: nav links (desktop only) + user icon grouped together %>
-  <div class="header-right">
-    <nav class="header-links" aria-label="Primary navigation">
-      <%= link_to root_path,
-          class: "header-tab #{'active' if current_page?(root_path)}" do %>
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-      <% end %>
-      <% if user_signed_in? %>
-        <%= link_to lists_index_path,
-            class: "header-tab #{'active' if current_page?(lists_index_path)}" do %>
-          <i class="fa-solid fa-list"></i>
-          <span>Lists</span>
-        <% end %>
-        <%= link_to new_scan_path,
-            class: "header-tab #{'active' if current_page?(new_scan_path)}" do %>
-          <i class="fa-solid fa-plus"></i>
-          <span>Add a Flyer</span>
-        <% end %>
-      <% end %>
-    </nav>
-    <%# User icon + dropdown (always visible) %>
-    <div class="user-menu" data-controller="dropdown">
-      <button class="user-btn"
-            data-action="click->dropdown#toggle"
-        aria-label="Account menu"
-        aria-haspopup="true">
-        <!--i class="fa-solid fa-circle-user"></i-->
-        <%= image_tag 'me.png', class: "avatar" %>
-      </button>
-      <div class="user-dropdown" data-dropdown-target="menu" role="menu">
-        <% if user_signed_in? %>
-          <%= link_to destroy_user_session_path,
-            data: { turbo_method: :delete },
-            class: "dropdown-item",
-            role: "menuitem" do %>
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span>
-          <% end %>
-        <% else %>
-          <%= link_to new_user_session_path,
-            class: "dropdown-item",
-            role: "menuitem" do %>
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>Login</span>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <%# /header-right %>
-</header>
 <%# ── MOBILE BOTTOM TABS: nav links only, hidden on desktop ── %>
 <nav class="bottom-tabs" aria-label="Mobile navigation">
   <%= link_to root_path,
@@ -78,4 +17,34 @@
       <span>Add a Flyer</span>
     <% end %>
   <% end %>
+
+  <%# ──Profile ── %>
+  <div class="user-menu bottom-user-menu" data-controller="dropdown">
+    <button class="bottom-tab"
+            data-action="click->dropdown#toggle"
+            aria-label="Account menu"
+            aria-haspopup="true">
+      <%= image_tag 'me.png', class: "avatar" %>
+      <span>Profile</span>
+    </button>
+
+    <div class="user-dropdown" data-dropdown-target="menu" role="menu">
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path,
+          data: { turbo_method: :delete },
+          class: "dropdown-item",
+          role: "menuitem" do %>
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path,
+          class: "dropdown-item",
+          role: "menuitem" do %>
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </nav>
