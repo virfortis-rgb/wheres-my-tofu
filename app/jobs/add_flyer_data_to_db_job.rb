@@ -19,17 +19,17 @@ class AddFlyerDataToDbJob < ApplicationJob
     flyer = scan.flyer
     tool = FlyerReaderTool.new(store)
     media = { image: { image: flyer.url }, pdf: { pdf: flyer.url } }
-    llm = { gpt: { model: 'gpt-4.1-nano' }, groq: {model: 'meta-llama/llama-4-scout-17b-16e-instruct'}, gemini: {model: "gemini-2.5-flash-lite"} }
-    generate_prices_with_llm(llm[:gemini], media[:image], tool, scan)
+    generate_prices_with_llm(media[:image], tool, scan)
   end
 
-  def generate_prices_with_llm(llm, media, tool, scan)
-    chat = RubyLLM.chat(model: llm[:model]).with_tool(tool)
+  def generate_prices_with_llm(media, tool, scan)
+    chat = RubyLLM.chat(model: 'meta-llama/llama-4-scout-17b-16e-instruct', provider: :openai, assume_model_exists: true)
+                  .with_tool(tool)
                   .on_tool_result do |prices|
                     pp prices
                     scan.update(llm_raw_output: prices)
                     prices.each do |price|
-                      ScanPrice.create(price: price, scan: scan)
+                      ScanPrice.create(price_id: price[:id], scan: scan)
                     end
                   end
     chat.ask(SYSTEM_PROMPT, with: media)

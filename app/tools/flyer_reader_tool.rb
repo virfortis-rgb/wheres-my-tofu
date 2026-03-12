@@ -1,6 +1,7 @@
 class FlyerReaderTool < RubyLLM::Tool
   description "Use this tool to extract products and prices from a flyer and create an array of prices.
-              Keep the product name and description in Japanese."
+  Keep the product name and description in Japanese. All keys are REQUIRED."
+
   def initialize(store)
     @store = store
   end
@@ -9,10 +10,10 @@ class FlyerReaderTool < RubyLLM::Tool
     array :scanned_products do
       object do
         string :name, description: "Product name"
-        string :description, description: "Additional description"
+        string :description, description: "Product description"
         string :keyword, description: "category keyword"
-        number :price_without_tax, description: "Price excluding tac"
-        number :price_with_tax, description: "Price includinfg tax"
+        number :price_without_tax, description: "Price excluding tax"
+        number :price_with_tax, description: "Price including tax"
       end
     end
   end
@@ -21,19 +22,21 @@ class FlyerReaderTool < RubyLLM::Tool
     prices = []
     scanned_products.each do |p|
       p = p.with_indifferent_access
+      next if p[:name].blank?
       product = Product.find_or_create_by(
         name: p[:name],
         description: p[:description],
         keyword: p[:keyword]
       )
       pp product
-      price = Price.find_or_create_by!(
+      price = Price.find_or_initialize_by(
         store: @store,
         product: product,
         price_without_tax: p[:price_without_tax],
         price_with_tax: p[:price_with_tax]
       )
       pp price
+      price.save!
       prices << price
     end
     return prices
