@@ -30,7 +30,7 @@ class Item < ApplicationRecord
 
   def display_total_price
     return "¥ --" unless price
-    "¥%.1f" % (price.price_with_tax * quantity)
+    "¥%.0f" % (price.price_with_tax * quantity)
   end
 
   def savings_if_cheapest(store_ids: nil)
