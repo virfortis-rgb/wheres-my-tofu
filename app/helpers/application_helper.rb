@@ -44,7 +44,7 @@ module ApplicationHelper
     "meat"        => "🥩",
     "fish"        => "🐟",
     "tuna"        => "🐟",
-    "egg"         => "🥚",
+    "eggs"        => "🥚",
     # Dairy — "ice cream" before "cream"
     "ice cream"   => "🍦",
     "yogurt"      => "🥛",

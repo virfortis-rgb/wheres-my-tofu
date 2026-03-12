@@ -1,0 +1,187 @@
+.error-page {
+  min-height: 100svh;
+  background: #F2EEE3;
+  text-align: center;
+
+  .error-page__body {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .error-card {
+    background: white;
+    border-radius: 24px;
+    padding: 1.75rem 1.5rem;
+    border: 1.5px solid #cce8d4;
+    box-shadow: 0 10px 28px rgba(51, 149, 81, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-card::before,
+  .error-card::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    background: rgba(38, 101, 51, 0.08);
+  }
+
+  .error-card::before {
+    width: 170px;
+    height: 170px;
+    top: -72px;
+    right: -52px;
+  }
+
+  .error-card::after {
+    width: 110px;
+    height: 110px;
+    bottom: -38px;
+    left: -28px;
+  }
+
+  .error-chip,
+  .error-logo,
+  .error-code,
+  .error-title,
+  .error-copy,
+  .error-support,
+  .error-actions,
+  .error-note {
+    position: relative;
+    z-index: 1;
+  }
+
+  .error-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    background: #F4FBF5;
+    color: $basil;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .error-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+  }
+
+  .error-code {
+    margin-top: 1rem;
+    font-family: $headers-font;
+    font-size: clamp(3.2rem, 16vw, 5rem);
+    line-height: 0.95;
+    color: $basil;
+    font-weight: 800;
+  }
+
+  .error-title {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-family: $headers-font;
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+    line-height: 1.1;
+    color: $gray;
+    font-weight: 800;
+  }
+
+  .error-copy {
+    margin-top: 0.9rem;
+    margin-bottom: 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .error-support {
+    margin-top: 1rem;
+    padding: 0.95rem 1rem;
+    border-radius: 18px;
+    background: #FAF9F6;
+    border: 1px solid #EEE7D9;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .error-actions {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1.25rem;
+  }
+
+  .error-btn-primary {
+    background-color: $basil;
+    border-color: $basil;
+    color: white;
+    font-weight: 700;
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+
+    &:hover,
+    &:active {
+      background-color: $dark-green;
+      border-color: $dark-green;
+      color: white;
+    }
+  }
+
+  .error-btn-secondary {
+    background: #F4FBF5;
+    border: 1px solid #CCE8D4;
+    color: $basil;
+    font-weight: 700;
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+
+    &:hover,
+    &:active {
+      background: #EAF7ED;
+      color: $dark-green;
+    }
+  }
+
+  .error-note {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #707070;
+  }
+}
+
+.error-page--500 {
+  .error-chip {
+    background: #FFF5E8;
+    border: 1px solid #F0D9B5;
+    color: #8B5A17;
+  }
+
+  .error-code {
+    color: $dark-green;
+  }
+
+  .error-card::after {
+    background: rgba(240, 217, 181, 0.5);
+  }
+}
+
+@media (min-width: 768px) {
+  .error-page {
+    .error-card {
+      padding: 2.2rem 2rem;
+    }
+
+    .error-actions {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
