@@ -1,10 +1,8 @@
 Where’s my Tofu? (WMT)
 
-![alt text](<Tofu Logo.png>)
-
 What is WMT?
 
-WMT is a shopping list web application that lets you compare the prices of your groceries, so that you can choose the best price for your groceries. WMT allows you to compare prices from different stores in the #{TODO} area.
+WMT is a shopping list web application that lets you compare the prices of your groceries, so that you can choose the best price for your groceries. WMT allows you to compare prices from different stores in the Osaka, Nishi-ku area.
 
 Who is it for?
 WMT is a shopping list app for those who have a need to shop economically. The idea is to simplify comparative shopping. Although there are many applications that do this for online shopping, there are very few that do so for in-person shopping.
