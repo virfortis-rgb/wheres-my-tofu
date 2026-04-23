@@ -2,6 +2,10 @@
 
 .landing-page {
   background: #F2EEE3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 // ── HERO ──────────────────────────────────────────
