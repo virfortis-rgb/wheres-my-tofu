@@ -2,18 +2,13 @@
 <% btn_collapse_class = is_expanded ? "" : "collapsed" %>
 <% aria_expanded = is_expanded ? "true" : "false" %>
 <% body_show_class = is_expanded ? "show" : "" %>
-
-
 <div class="list-card flex-column align-items-stretch p-0 overflow-hidden">
   <%# Row Wrapper for 2-line layout %>
   <div class="show-item-row">
-
     <%# ── LINE 1: Top Bar (Name, Qty, Price, Delete) ── %>
     <div class="item-top-line">
-
       <%# Clickable Button Area (Takes up remaining space) %>
       <div class="show-item-btn <%= btn_collapse_class %>">
-
         <%# Left: Name %>
         <div class="item-label-container"
               role="button"
@@ -24,7 +19,6 @@
           <%= grocery_icon_tag(item.keyword.presence || item.name, size: 22) %>
           <span class="item-label"><%= item.name.capitalize %></span>
         </div>
-
         <%# Center: Quantity %>
         <div class="item-qty-container mx-2">
           <%= form_with model: [@list, item], data: { turbo: true }, class: "d-inline-flex align-items-center" do |f| %>
@@ -37,7 +31,6 @@
                           onchange: "this.form.requestSubmit();" %>
           <% end %>
         </div>
-
         <%# Right: Price & Chevron %>
         <div class="price-dropdown-group"
               role="button"
@@ -51,7 +44,6 @@
           <i class="fa-solid fa-chevron-down show-chevron ms-2"></i>
         </div>
       </div>
-
       <%# Delete Form (Outside button) %>
       <div class="item-delete-wrapper">
         <%= button_to list_item_path(@list, item),
@@ -62,10 +54,9 @@
         <% end %>
       </div>
     </div>
-
     <%# ── LINE 2: Bottom Bar (Description) ── %>
     <%# Made clickable to expand accordion as well %>
-      <div class="item-bottom-line <%= btn_collapse_class %>"
+    <div class="item-bottom-line <%= btn_collapse_class %>"
         data-bs-toggle="collapse"
         data-bs-target="#collapse<%= item.id %>"
         aria-expanded="<%= aria_expanded %>"
@@ -84,11 +75,9 @@
         <% end %>
       </span>
     </div>
-
   </div>
-
   <%# Accordion body — product price cards %>
-    <div id="collapse<%= item.id %>"
+  <div id="collapse<%= item.id %>"
       class="accordion-collapse collapse <%= body_show_class %>"
       data-bs-parent="#itemsAccordion">
     <div id="item_<%= item.id %>_prices_body" class="show-accordion-body">
