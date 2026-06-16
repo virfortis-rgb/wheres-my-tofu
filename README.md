@@ -2,6 +2,20 @@
 
 **Where’s My Tofu?** is a grocery price comparison web application designed for budget-conscious shoppers. It helps users find the best deals across local stores by leveraging AI to scan flyers and optimize shopping routes.
 
+<div style="display: flex;">
+  <img src="./app/assets/images/readme/home.png" alt="Sales chart" width="240">
+  <img src="./app/assets/images/readme/home_2.png" alt="Sales chart" width="240">
+  <img src="./app/assets/images/readme/list.png" alt="Sales chart" width="240">
+</div>
+<div style="display: flex;">
+  <img src="./app/assets/images/readme/map.png" alt="Sales chart" width="240">
+  <img src="./app/assets/images/readme/flyer.png" alt="Sales chart" width="240">
+  <img src="./app/assets/images/readme/flyer_2.png" alt="Sales chart" width="240">
+</div>
+<div style="display: flex;">
+  <img src="./app/assets/images/readme/flyer_3.png" alt="Sales chart" width="240">
+</div>
+
 ## Key Features
 
 - **AI-Powered Flyer Scanner:** Automatically extract product names and prices from store flyers (チラシ) using Groq (Llama 3/4) and Google Gemini.
